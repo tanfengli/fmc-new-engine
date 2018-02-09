@@ -1,0 +1,75 @@
+<meta charset="utf-8">
+<style>
+table{
+  table-layout:fixed;
+}
+td{
+	overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+</style>
+
+<table class="table table-bordered table-hover"  >
+	<thead>
+		<tr>
+			<th width="9%">主题</th>
+			<th width="12%">单据编号</th>
+			<th width="15%">异常原因</th>
+			<th width="13%">异常时间</th>
+			<th width="6%">报账人</th>
+			<th width="6%">单据状态</th>
+			<th width="6%">当前节点</th>
+			<th width="7%">当前处理人</th>
+			<th width="8%">流程模板</th>
+			<th width="8%">业务系统</th>
+			<th width="10%">操作</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: {data: data.content, as: 'sysException'}">
+		<tr>
+			<input type="hidden" data-bind="value: fdId">
+			<td data-bind="text: fdTitle"></td>
+			<td data-bind="text: fdApplyCode,click: toDetail"></td>
+			<td><a data-bind="text: fdReason,click: toReasonDetail"></a></td>
+			<td data-bind="html: fdCreateTime"></td>
+			<td data-bind="text: fdDocCreatorName"></td>
+			<td>
+			<!-- ko if: fdStatus()=='00' -->
+			<span>[[#{abandon}]]</span>
+			<!-- /ko -->
+			<!-- ko if: fdStatus()=='10' -->
+			<span>[[#{draft}]]</span>
+			<!-- /ko -->
+			<!-- ko if: fdStatus()=='11' -->
+			<span>[[#{reject}]]</span>
+			<!-- /ko -->
+			<!-- ko if: fdStatus()=='20' -->
+			<span>[[#{pending}]]</span>
+			<!-- /ko -->
+			<!-- ko if: fdStatus()=='30' -->
+			<span>[[#{finish}]]</span>
+			<!-- /ko -->
+			<!-- ko if: fdStatus()=='40' -->
+			<span>[[#{expired}]]</span>
+			<!-- /ko -->
+			</td>
+			<td data-bind="text: fdFactNodeName"></td>
+			<td data-bind="html: fdHandlerName"></td>
+			<td data-bind="text: fdTemplateName"></td>
+			<td data-bind="text: fdBusiSysName"></td>
+			<td><div class="btn-group"> 
+						<button type="button" class="btn btn-default" data-bind="click: toDetail">
+							<i class="fa fa-server"></i>[[#{detail}]]
+						</button>
+						<button type="button" class="btn btn-default" data-bind="click: toReasonDetail">
+							<i class="fa fa-bug"></i>[[#{reason}]]
+						</button>
+					</div>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot data-bind="visible:!data.content().length>0">
+		<tr><td colspan="11">[[#{nodata}]]</td></tr>
+	</tfoot>
+</table>
+
+<div data-bind='visible:data.content().length>0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>

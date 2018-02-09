@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<betwixt-config>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAProcessDetail">
+		<element name="process">
+			<element name="nodes">
+				<element
+					property="nodes"
+					updater="addNode" />
+			</element>
+			<element name="lines">
+				<element
+					property="lines"
+					updater="addLine" />
+			</element>
+			<addDefaults
+				add-properties="true"
+				add-adders="false" />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OALineDetail">
+		<element name="line">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAStartNodeDetail">
+		<element name="startNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAEndNodeDetail">
+		<element name="endNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OADraftNodeDetail">
+		<element name="draftNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAReviewNodeDetail">
+		<element name="reviewNode">
+			<element name="variants">
+				<element
+					property="variants"
+					updater="addVariant" />
+			</element>
+			<addDefaults
+				add-properties="true"
+				add-adders="false" />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OASignNodeDetail">
+		<element name="signNode">
+			<element name="variants">
+				<element
+					property="variants"
+					updater="addVariant" />
+			</element>
+			<addDefaults
+				add-properties="true"
+				add-adders="false" />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OASendNodeDetail">
+		<element name="sendNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAManualBranchNodeDetail">
+		<element name="manualBranchNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.Operations">
+		<element name="operations">
+			<element
+				name="creatorOperation"
+				property="creatorOperations" />
+			<element
+				name="handlerOperation"
+				property="handlerOperations" />
+			<addDefaults />
+		</element>
+	</class>
+	
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.Variables">
+		<element name="variables">
+			<element
+				name="variableDefined"
+				property="variableDefined" />
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAAutoBranchNodeDetail">
+		<element name="autoBranchNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OARobotNodeDetail">
+		<element name="robotNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAStartSubProcessNodeDetail">
+		<element name="startSubProcessNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OARecoverSubProcessNodeDetail">
+		<element name="recoverSubProcessNode">
+			<addDefaults />
+		</element>
+	</class>
+	
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAVariant">
+		<element name="variant">
+			<addDefaults />
+		</element>
+	</class>
+	
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OASplitNodeDetail">
+		<element name="splitNode">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAJoinNodeDetail">
+		<element name="joinNode">
+			<addDefaults />
+		</element>
+	</class>
+	
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.support.detail.Advice">
+		<element name="advice">
+			<element name="before">
+				<element property="before" updater="addBefore"/>
+			</element>
+			<element name="after">
+				<element property="after" updater="addAfter"/>
+			</element>
+			<addDefaults
+				add-properties="true"
+				add-adders="false" />
+		</element>
+	</class>
+	
+</betwixt-config>

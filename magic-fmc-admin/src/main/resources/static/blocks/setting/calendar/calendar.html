@@ -1,0 +1,168 @@
+<meta charset="UTF-8">
+<style>
+<!--
+.dayClass{
+	font-weight: bold;
+	text-align: center;
+}
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+#menu {
+	border: 1px solid grey;
+	font-size: 15;
+	padding-left: 35px;
+}
+#menu .menu-sep {
+	border-top: 1px solid grey;
+}
+#menu .item {
+	border-left: 1px solid grey;
+}
+-->
+</style>
+
+<div class="col-xs-12">
+	<span class="col-xs-12" style="margin-left: 40%;">
+	<i style="color: blue" data-bind="click: function(){changeYear('last')}">&lt;&lt;</i>
+	&nbsp;<span style="color: red" data-bind="text: selectYear"></span>&nbsp;
+	<i style="color: blue" data-bind="click: function(){changeYear('next')}">&gt;&gt;</i></span>
+	<div id="calendarTable" >
+		<!-- ko foreach: {data:calendarList}-->
+			<div class="col-xs-4">
+				<table  class="table table-bordered" border="1">
+					<thead>
+						<tr>
+							<th colspan="99" style="text-align: center;" ><span style="text-align: center;" data-bind="text: $index()+1"></span>月</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>日</td>
+							<td>一</td>
+							<td>二</td>
+							<td>三</td>
+							<td>四</td>
+							<td>五</td>
+							<td>六</td>
+						</tr>
+						<!-- ko foreach: {data: $parent.countWeek($index())}-->
+						<tr>
+							<td>
+								<!-- ko if: $parents[1].checkHasDay($index(),$parentContext.$index(),0) -->
+								<!-- ko with: $parents[1].getCurrentDay($index(),$parentContext.$index(),0,$element) -->
+								<span class="dayClass" data-bind="text: fdDay,
+										attr: {'id': ($parentContext.$parentContext.$index()+1)+'_'+fdDay},
+										style: {color: $parents[2].dayColor($data)}">
+								</span>
+								<!-- /ko -->
+								<!-- /ko -->
+								<!-- ko ifnot: $parents[1].checkHasDay($index(),$parentContext.$index(),0) -->
+								<span class="dayClass" >
+								&nbsp;&nbsp;
+								</span>
+								<!-- /ko -->
+							</td>
+							<td >
+								<!-- ko if: $parents[1].checkHasDay($index(),$parentContext.$index(),1) -->
+								<!-- ko with: $parents[1].getCurrentDay($index(),$parentContext.$index(),1,$element) -->
+								<span class="dayClass" data-bind="text: fdDay,
+										attr: {'id': ($parentContext.$parentContext.$index()+1)+'_'+fdDay},
+										style: {color: $parents[2].dayColor($data)}"></span>
+								<!-- /ko -->
+								<!-- /ko -->
+								<!-- ko ifnot: $parents[1].checkHasDay($index(),$parentContext.$index(),1) -->
+								<span class="dayClass" >
+								&nbsp;&nbsp;
+								</span>
+								<!-- /ko -->
+							</td>
+							<td>
+								<!-- ko if: $parents[1].checkHasDay($index(),$parentContext.$index(),2) -->
+								<!-- ko with: $parents[1].getCurrentDay($index(),$parentContext.$index(),2,$element) -->
+								<span class="dayClass" data-bind="text: fdDay,
+										attr: {'id': ($parentContext.$parentContext.$index()+1)+'_'+fdDay},
+										style: {color: $parents[2].dayColor($data)}"></span>
+								<!-- /ko -->
+								<!-- /ko -->
+								<!-- ko ifnot: $parents[1].checkHasDay($index(),$parentContext.$index(),2) -->
+								<span class="dayClass" >
+								&nbsp;&nbsp;
+								</span>
+								<!-- /ko -->
+							</td>
+							<td >
+								<!-- ko if: $parents[1].checkHasDay($index(),$parentContext.$index(),3) -->
+								<!-- ko with: $parents[1].getCurrentDay($index(),$parentContext.$index(),3,$element) -->
+								<span class="dayClass" data-bind="text: fdDay,
+										attr: {'id': ($parentContext.$parentContext.$index()+1)+'_'+fdDay},
+										style: {color: $parents[2].dayColor($data)}"></span>
+								<!-- /ko -->
+								<!-- /ko -->
+								<!-- ko ifnot: $parents[1].checkHasDay($index(),$parentContext.$index(),3) -->
+								<span class="dayClass" >
+								&nbsp;&nbsp;
+								</span>
+								<!-- /ko -->
+							</td>
+							<td >
+								<!-- ko if: $parents[1].checkHasDay($index(),$parentContext.$index(),4) -->
+								<!-- ko with: $parents[1].getCurrentDay($index(),$parentContext.$index(),4,$element) -->
+								<span class="dayClass" data-bind="text: fdDay,
+										attr: {'id': ($parentContext.$parentContext.$index()+1)+'_'+fdDay},
+										style: {color: $parents[2].dayColor($data)}"></span>
+								<!-- /ko -->
+								<!-- /ko -->
+								<!-- ko ifnot: $parents[1].checkHasDay($index(),$parentContext.$index(),4) -->
+								<span class="dayClass" >
+								&nbsp;&nbsp;
+								</span>
+								<!-- /ko -->
+							</td>
+							<td >
+								<!-- ko if: $parents[1].checkHasDay($index(),$parentContext.$index(),5) -->
+								<!-- ko with: $parents[1].getCurrentDay($index(),$parentContext.$index(),5,$element) -->
+								<span class="dayClass" data-bind="text: fdDay,
+									attr: {'id': ($parentContext.$parentContext.$index()+1)+'_'+fdDay},
+									style: {color: $parents[2].dayColor($data)}"></span>
+								<!-- /ko -->
+								<!-- /ko -->
+								<!-- ko ifnot: $parents[1].checkHasDay($index(),$parentContext.$index(),5) -->
+								<span class="dayClass" >
+								&nbsp;&nbsp;
+								</span>
+								<!-- /ko -->
+							</td>
+							<td >
+								<!-- ko if: $parents[1].checkHasDay($index(),$parentContext.$index(),6) -->
+								<!-- ko with: $parents[1].getCurrentDay($index(),$parentContext.$index(),6,$element) -->
+								<span class="dayClass" data-bind="text: fdDay,
+										attr: {'id': ($parentContext.$parentContext.$index()+1)+'_'+fdDay},
+										style: {color: $parents[2].dayColor($data)}"></span>
+								<!-- /ko -->
+								<!-- /ko -->
+								<!-- ko ifnot: $parents[1].checkHasDay($index(),$parentContext.$index(),6) -->
+								<span class="dayClass" >
+								&nbsp;&nbsp;
+								</span>
+								<!-- /ko -->
+							</td>
+						</tr>
+						<!-- /ko -->
+					</tbody>
+				</table>
+			</div>
+		<!-- /ko -->
+	</div>
+</div>
+	
+	<!-- 这里用来定义需要显示的右键菜单 -->
+<div id="menu" style="width:100px;display: none;background-color: white;">
+	<div class="item" id="m-refresh" data-bind="click: function(){changeDay('1')}">工作日</div>
+	<div class="menu-sep"></div>
+	<div class="item" id="m-closeall" data-bind="click: function(){changeDay('2')}">休息日</div>
+	<div class="menu-sep"></div>
+	<div class="item" id="m-close" data-bind="click: function(){changeDay('3')}">节假日</div>
+</div>

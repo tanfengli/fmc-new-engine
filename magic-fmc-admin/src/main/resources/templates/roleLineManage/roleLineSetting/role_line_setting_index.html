@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	
+	<div data-bind="component: {name: 'page-title'}">[[#{roleLineSetting}]]</div>
+
+		<div data-bind="visible: choosenView()=='list'">
+			<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+				<div data-bind="template:{name:'roleLineManage_roleLineSetting_searchForm_html', data: searchForm}"></div>
+			</div>
+
+			<div
+				data-bind="template:{name:'roleLineManage_roleLineSetting_gridToolbar_html'}"></div>
+			<div id="rolelinesettingId"
+				data-bind="template:{name:'roleLineManage_roleLineSetting_datagrid_html', data: roleLineSettingId}"></div>
+		</div>
+
+		<div data-bind='component: {name: "groupMember", params:{data: elementForm, callFunc: selectNewElement, width: "200px", height: "280px"}}'></div>
+		
+	
+		<!-- 角色关系start -->
+		<div data-bind="visible: choosenView()=='set'">
+			<div id='rolesetId'
+				data-bind="template:{name:'roleLineManage_roleLineSetting_settingView_html', data: roleSetId}"></div>
+		</div>
+
+		<div id='rolesetForm'
+			data-bind="template:{name:'roleLineManage_roleLineSetting_roleEditWindow_html', data: roleSetForm}"></div>
+		<!-- 角色关系end -->
+
+		<div id="rolelinesettingForm"
+			data-bind="template:{name:'roleLineManage_roleLineSetting_editWindow_html', data: roleLineSettingForm}"></div>
+
+
+	<script type="text/javascript" th:src="@{/js/roleLineManage/roleLineSetting/main.js}"
+		src="/js/roleLineManage/roleLineSetting/main.js"></script>
+</body>
+</html>

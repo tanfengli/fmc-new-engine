@@ -1,0 +1,77 @@
+<meta charset="utf-8">
+<div class="modal fade" id="treeSelectPerWindow" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:1111">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height:500px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">组织架构选择</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="col-xs-4">
+            		<div id="orgCommonTree" class="ztree" style="background: #FFFFFF;float: left; height:422px;overflow-y:scroll;overflow-x:auto;"></div>
+	            </div>
+	            <div  class="col-xs-8" style="float: left; height: 400px;">
+					<div style="height:60px;">
+						<div class="col-xs-12">
+							<label class="col-xs-2 control-label text-left">关建字</label>
+							<div class="col-xs-6">
+								<input type="text" class="form-control" data-bind="value: filterName">
+							</div>
+							<div class="col-xs-4 text-right">
+								<button type="submit" class="btn btn-base btn-sm" data-bind="click: search">搜索</button>
+								<button type="button" class="btn btn-base btn-sm" data-bind="click: reset">清除</button>
+							</div>
+					 	</div>
+						<div class="col-xs-12">
+							<div class="checkbox margin-0">
+								<div>
+									<!-- ko foreach:{data:orgTypeArr,as:'orgType'} -->
+									<label class="margin-right-sm"> 
+										<input type="checkbox" data-bind="checkedValue:orgType,checked:$parent.elementSelected">
+										<!-- ko if: orgType==1 -->
+										<span>机构</span>
+										<!-- /ko -->
+										<!-- ko if: orgType==2 -->
+										<span>部门</span>
+										<!-- /ko -->
+										<!-- ko if: orgType==4 -->
+										<span>岗位</span>
+										<!-- /ko -->
+										<!-- ko if: orgType==8 -->
+										<span>个人</span>
+										<!-- /ko -->
+									</label> 
+									<!-- /ko -->
+									<label class="margin-right-sm"> 
+										<input type="checkbox" data-bind="checked:$parent.searchMode">精确搜索
+									</label>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<div style="border:1px solid #000000;padding:2px;">			
+						<div style="height:30px;border:1px solid #000000;text-align:center;">
+						    <label style="margin:5px;">待选列表</label> 
+						</div>
+						<div style="height:220px;border:1px solid #000000;margin-top:2px;">
+					        <select id="sel" multiple class="form-control" data-bind="foreach:{data:context,as:'sysEle'}" style="height:215px;">
+						 		<option data-bind="text:fdName,click:function(sysEle){$parent.selectOnchang(sysEle)}"></option>   
+						    </select>  
+						</div>
+						<div style="height:40px;border:1px solid #000000;margin-top:2px;">
+				            <div style="padding:5px;text-align:center;">
+				           		<button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click:passSelectNode">确定</button>
+				                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click:cancelSelectNode">取消选定</button> 
+				                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>                
+				            </div>
+						</div>
+						<div style="height:50px;border:1px solid #000000;margin-top:2px;">  
+						    <p>描述：<span id="fdName_info"></span></p>
+						</div>
+					</div>
+					<div><p>当前选定：<span id="chosen_element"></span></p></div>
+				</div>  
+            </div>  
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

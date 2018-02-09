@@ -1,0 +1,48 @@
+<style>
+<!--
+/* .table tbody tr td{
+      overflow: hidden; 
+      text-overflow:ellipsis;  
+      white-space: nowrap; 
+ } */
+-->
+</style>
+
+<div class="col-xs-12">
+<div class="input-group input-group-xs">
+	<input type="text" class="form-control" data-bind="value: $parent.filterName" th:attr="placeholder=#{elementSearch}">
+	<span class="input-group-btn">
+		<button class="btn btn-default" type="button">
+			<i class="fa fa-search"></i>
+		</button>
+	</span>
+</div>
+<table class="table table-bordered table-hover table-striped" style="table-layout:fixed;">
+	<thead>
+		<tr>
+			<th width="10%"></th>
+			<th width="10%"></th>
+			<th width="40%">姓名</th>
+			<th width="40%">账号</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach:{data:data.content,as:'sysUser'}">
+		<tr data-bind="click: function(){$parents[1].userClick(sysUser,$index()); return true;}">
+			<td data-bind="text:$index()+1"></td>
+			<td>
+				<input type="radio" name="userFdId" data-bind="attr:{'id': 'user_'+$index()}">
+				<input type="hidden" data-bind="value: fdId">
+			</td>
+			<td><span data-bind="text:fdName"></span></td>
+			<td><span data-bind="text:fdNo"></span></td>
+		</tr>
+	</tbody>
+	<tfoot data-bind="visible:!data.content().length > 0">
+		<tr>
+			<td colspan="11">[[#{nodata}]]</td>
+		</tr>
+	</tfoot>
+</table>
+</div>
+
+<div data-bind='visible:data.content().length>0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>

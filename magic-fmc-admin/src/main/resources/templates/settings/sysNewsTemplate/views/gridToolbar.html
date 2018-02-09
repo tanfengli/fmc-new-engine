@@ -1,0 +1,20 @@
+<meta charset="UTF-8">
+<div class="padding-left-sm">
+	<div class="btn-group">
+		<button type="button" class="btn btn-default" data-bind="click:toAdd">
+			<i class="fa fa-plus" aria-hidden="true"></i>[[#{add}]]
+		</button>
+		<button type="button" class="btn btn-default" data-bind="click:function(){toUse('1')}">
+			<i class="fa fa-check" aria-hidden="true"></i>[[#{enable}]]
+		</button>
+		<button type="button" class="btn btn-default" data-bind="click:function(){toUse('0')}">
+			<i class="fa fa-close" aria-hidden="true"></i>[[#{disable}]]
+		</button>
+		<button type="button" class="btn btn-default" data-bind="click:function(){toImport()}">
+			<i class="fa fa-upload" aria-hidden="true"></i>[[#{import}]]
+		</button>
+		<button type="button" class="btn btn-default" data-bind="click:function(){toExport()}">
+			<i class="fa fa-download" aria-hidden="true"></i>[[#{export}]]
+		</button>
+	</div>
+</div>

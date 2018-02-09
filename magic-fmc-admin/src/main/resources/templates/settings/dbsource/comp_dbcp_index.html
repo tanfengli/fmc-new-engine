@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+
+	<div data-bind="component: {name: 'page-title'}">[[#{dbSource}]]</div>
+
+	<div data-bind="visible: choosenView()=='list'">
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'settings_dbsource_searchForm_html', data: searchForm}"></div>
+		</div>
+		<div data-bind="template:{name:'settings_dbsource_list_html', data: compDbcpId}"></div>
+	</div>
+
+
+	<div
+		data-bind="template:{name:'settings_dbsource_detail_html', data:compDbcpForm}"></div>
+
+
+
+	<div data-bind="template:{name:'settings_dbsource_add_html', data:compDbcpForm}"></div>
+
+	<script type="text/javascript" th:src="@{/js/setting/dbsource/main.js}"
+		 src="/js/setting/dbsource/main.js"></script>
+
+</body>
+</html>

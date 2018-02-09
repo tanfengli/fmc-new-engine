@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+	<body>
+	
+		<div data-bind="component:{name:'page-title'}">员工权限查询</div>
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'authority_userAuthoritySearch_searchForm_html', data: searchForm}"></div>
+		</div>
+		
+		<div class="col-xs-12">
+				<div data-bind="template:{name:'authority_userAuthoritySearch_datagrid_html',data: userGrid}"></div>
+				<div data-bind="template:{name:'authority_userAuthoritySearch_authorityWindow_html',data: authorityGrid}"></div>
+		</div>
+		
+		<script type="text/javascript" th:src="@{/js/authority/userAuthoritySearch/main.js}"
+			 src="/js/authority/userAuthoritySearch/main.js"></script>
+	</body>
+</html>

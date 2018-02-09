@@ -1,0 +1,101 @@
+<meta charset="UTF-8">
+
+<div style="margin-left: 15%" class="col-xs-8">
+	<div class="search-box">
+		<div class="search-title">
+			<h3>
+				<i class="fa fa-search"></i>角色关系管理
+			</h3>
+			<a href="#" class="search-expand"></a>
+		</div>
+	</div>
+
+
+
+	<table class="table table-bordered table-striped"
+		data-bind="with: lineMes">
+		<tr>
+			<th class="col-xs-2">名称</th>
+			<td data-bind="text: $data.fdName"></td>
+		</tr>
+		<tr>
+			<th>是否有效</th>
+			<td data-bind="text: fdIsAvailable=='1'?'是':'否'"></td>
+		</tr>
+		<tr>
+			<th>可维护者</th>
+			<td rowspan="4"><p data-bind="text: editorName"></p> <p>
+				<p>说明：可维护者可以修改角色线成员，若可维护者同时还拥有“组织架构与账号管理_修改角色线配置”的权限，则他可以修改本角色线配置以及维护本角色线对应的角色关系</p></td>
+		</tr>
+	</table>
+
+
+
+
+	<div class="col-xs-12 padding-top-sm btn-toolbar" role="toolbar">
+		<div class="btn-group">
+			<button id="btn_add" type="button" class="btn btn-default"
+				data-bind="click: toAddRole">
+				<i class="fa fa-plus" aria-hidden="true"></i>[[#{add}]]
+			</button>
+			<button id="btn_add" type="button" class="btn btn-default"
+				data-bind="click: toSetRefresh">
+				<i class="fa fa-star-o" aria-hidden="true"></i>刷新
+			</button>
+		</div>
+	</div>
+
+
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th>[[#{name}]]</th>
+				<th>[[#{whetherEffective}]]</th>
+				<th>[[#{describe}]]</th>
+				<th>[[#{operation}]]</th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: {data: data.content, as: 'sysUser'}">
+			<tr>
+				<td data-bind="text: fdName"></td>
+				<td data-bind="text: (fdIsAvailable()==1)?'是':'否'"></td>
+				<td data-bind="text: fdMemo"></td>
+				<td>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){$parent.editOne(sysUser)}">
+							<i class="fa fa-pencil" aria-hidden="true"></i>[[#{edit}]]
+						</button>
+						<button type="button" class="btn btn-default btn-xs"
+						data-bind="click: function(){$parent.deleteOne(sysUser)}">
+						<i class="fa fa-trash-o" aria-hidden="true"></i>[[#{delete}]]
+					</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot data-bind="visible: !data.content().length > 0">
+			<tr>
+				<td colspan="10">[[#{nodata}]]</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div
+		data-bind='visible: data.content().length > 10,
+				component: {name: "grid-pagination", params:{data: data, toPage: toPage}}'></div>
+
+	<div class="fti-xs-12 text-right">
+		<button class="btn btn-default btn-sm" data-bind="click: toList">
+			返回</button>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+

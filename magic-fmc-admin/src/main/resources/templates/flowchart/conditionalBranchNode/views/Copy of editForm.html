@@ -1,0 +1,82 @@
+<meta charset="utf-8" />   
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+ .left_td{
+     background: #f5f5f5;
+     text-align: left;
+     width:15%
+ }   
+</style>
+<div> 
+	<form class="form-horizontal" role="form"  >
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">条件分支节点  节点ID：N4</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>节点名</label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control"> 
+                   </td> 
+              </tr>  
+           </tbody>
+        </table>
+        
+        <table class="table table-bordered table-hover"> 
+	       <tbody> 
+              <tr>
+                   <th>
+                                                                                下一节点 
+                   </th>
+                   <th>
+                                                                               连线信息 
+                   </th> 
+                    <th>
+                                                                                条件公式 
+                   </th> 
+              </tr> 
+              <tr>
+                   <td class="left_td">
+                       <label>审批节点（审核）【N5】</label>  
+                   </td>
+                   <td>
+                      <input type="text" class="form-control"> 
+                   </td> 
+                    <td>
+                       <input type="text" class="class_input"> 
+                       <input type="button" value="公式定义器">
+                       <a>上移</a>
+                       <a>下移</a>
+                   </td> 
+               </tr>   
+                <tr>
+                   <td class="left_td">
+                       <label>审批节点（审核）【N6】</label>  
+                   </td>
+                   <td>
+                      <input type="text" class="form-control"> 
+                   </td> 
+                    <td>
+                       <input type="text" class="class_input"> 
+                       <input type="button" value="公式定义器">
+                       <a>上移</a>
+                       <a>下移</a>
+                   </td> 
+               </tr>   
+               <tr>
+                   <td class="left_td">
+                       <label>节点帮助</label>  
+                   </td>
+                   <td colspan="3">
+                       <span>在流程流转过程中，若定义的条件计算出错，或计算满足条件的结果不是唯一的时候，流程将通知起草人、当前处理和特权人进行错误处理，此时必须由特权人对流程进行干预，才能继续往下走</span>    
+                   </td> 
+               </tr>   
+	       </tbody>
+	   </table>   
+	</form>
+</div>

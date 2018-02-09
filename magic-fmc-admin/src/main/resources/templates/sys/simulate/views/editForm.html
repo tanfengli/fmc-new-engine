@@ -1,0 +1,76 @@
+<meta charset="utf-8" />   
+<style>
+.left_td{
+     background: #f5f5f5;
+     text-align: left;
+ } 
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+</style>
+<div>  
+	<form class="form-horizontal" role="form" data-bind="with: formItem"> 
+		 <table id="tbUser" class="table table-bordered table-hover"> 
+		           <tbody> 
+		               <tr>
+		                  <td class="left_td">
+		                       <label for="http"> 服务器地址</label>  
+		                   </td>
+		                   <td colspan="4">
+		                       <input type="text" data-bind="textInput: http" class="form-control"> 
+		                       <input type="hidden" data-bind="textInput: flag" class="form-control"> 
+		                   </td>
+		               </tr>
+		               <tr>
+		                  <td class="left_td">
+		                       <label for="templateId"> 流程模板ID</label>  
+		                   </td>
+		                   <td colspan="4">
+		                       <input type="text" data-bind="textInput: templateId" class="form-control"> 
+		                   </td>
+		               </tr>
+		                <tr>
+		                  <td class="left_td">
+		                       <label for="approvers">审批人</label>  
+		                   </td>
+		                   <td colspan="4">
+		                       <input type="hidden" id="handlerIds"  data-bind="textInput: handlerIds" style="margin-top:5px;margin-bottom:5px;">   
+					  		   <input type="text" id="handlerNames"  class="class_input" data-bind="textInput: handlerNames" style="margin-top:5px;margin-bottom:5px;width:400px" readonly="readonly">   
+		                  	<button  type="button" class="btn btn-default"
+									data-bind="click: function() {$('#memberSelectWindow').modal();}">
+									<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+								</button>
+		                   </td>
+		               </tr>
+		                <tr>
+		                  <td class="left_td">
+		                       <label for="threadNum">流程启动并发数</label>  
+		                   </td>
+		                   <td colspan="4">
+		                       <input type="text" data-bind="textInput: threadNum" class="form-control"> 
+		                   </td>
+		               </tr>
+		               <tr>
+		                  <td class="left_td">
+		                       <label for="maxNum">流程启动次数</label>  
+		                   </td>
+		                   <td colspan="4">
+		                       <input type="text" data-bind="textInput: maxNum" class="form-control"> 
+		                   </td>
+		               </tr>
+		               <tr>
+		                  <td class="left_td">
+		                       <label for="isApprove">是否启动不审批</label>  
+		                   </td>
+		                   <td colspan="4">
+		                   		<input type="checkbox"  data-bind="checked:isApprove"  value="true" >
+		                   </td>
+		               </tr>
+		           </tbody>
+		      </table>   
+		</form>
+	   <div class="modal-footer text-center">
+            <button type="submit" id="btn_submit" data-bind="click:function(){ $parent.simulate(true)}" class="btn btn-primary"> 启动</button>
+            <button type="submit" id="btn_submit" data-bind="click:function(){ $parent.simulate(false)}" class="btn btn-primary"> 停止</button>
+       </div>
+</div>

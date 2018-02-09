@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+	
+	<div data-bind="component: {name: 'page-title'}">[[#{groupCate}]]</div>
+
+		<div data-bind="template:{name:'settings_groupcate_treeToolbar_html',data: groupCateTree}"></div>
+
+		<div class="panel panel-default col-xs-3">
+    		<div class="panel-heading">群组分类</div>
+		   	<div id="groupCateTree" class="ztree" style="background: #FFFFFF; width: 100%;height:480px;overflow-y:scroll;overflow-x:auto;"></div>
+		</div>
+		
+		<div class="col-xs-9 padding-left-sm" style="margin-top: -2px">
+			<!-- <div data-bind="template:{name:'settings_groupcate_orgElementGrid_html', data: gridViewModel }"></div> -->
+			<div data-bind="template:{name:'settings_groupcate_editForm_html',data: editForm}"></div>
+		</div>
+
+	<div id="add_Form" data-bind="template:{name:'settings_groupcate_editWindow_html', data:　addForm　}"></div>
+
+	<script type="text/javascript" th:src="@{/js/setting/groupcate/main.js}"
+			 src="/js/setting/groupcate/main.js"></script>
+
+</body>
+</html>

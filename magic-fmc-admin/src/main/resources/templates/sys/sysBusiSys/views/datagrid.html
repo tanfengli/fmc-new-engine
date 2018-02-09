@@ -1,0 +1,63 @@
+<div class="col-xs-12 padding-top-sm">
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr> 
+				<th>[[#{serialNumber}]]</th>
+				<th hidden="true">ID</th>
+				<th>系统名称</th>
+				<th>系统编码</th>
+				<th>是否启用</th> 
+				<th>[[#{creator}]]</th>  
+				<th>[[#{createTime}]]</th> 
+				<th>[[#{operation}]]</th>
+			</tr>
+		</thead> 
+		<tbody data-bind="foreach:{data:data.content,as:'sysWfVarInfo'}">
+			<tr>
+				<td data-bind="text:$index()+1"></td>
+				<td hidden="true" data-bind="text:fdId"></td>  
+				<td data-bind="text: fdName"></td> 
+				<td data-bind="text: fdCode"></td> 
+				<td>
+					<!-- ko if: fdEnabled()==1 -->
+					[[#{yes}]]
+					<!-- /ko -->
+					<!-- ko if: fdEnabled()==0 -->
+					 [[#{no}]]
+					<!-- /ko -->
+				</td> 
+				<td data-bind="text: createdName"></td> 
+				<td data-bind="dateConvert: fdCreatedDate"></td> 
+				<td> 
+					<div class="btn-group"> 
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-tty"></i>[[#{operation}]]
+						</button>
+						<ul class="dropdown-menu">
+							<li data-bind="click:function(){$root.toGrantInterface(sysWfVarInfo)}">
+							   <a href="#"><i class="fa fa-users" aria-hidden="true"></i>接口授权</a>
+							</li>
+							<li data-bind="click:function(){$root.toGrantCallback(sysWfVarInfo)}">
+							   <a href="#"><i class="fa fa-university" aria-hidden="true"></i>回调授权</a>
+							</li>
+						</ul>
+	
+						<button type="button" class="btn btn-default" data-bind="click:function(){$parent.editOne(sysWfVarInfo)}">
+							<i class="fa fa-pencil"></i>[[#{edit}]]
+						</button>
+						<button type="button" class="btn btn-default" data-bind="click:function(){$parent.deleteOne(sysWfVarInfo)}">
+							<i class="fa fa-trash-o"></i>[[#{delete}]]
+						</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot data-bind="visible: !data.content().length > 0">
+			<tr>
+				<td colspan="9">[[#{nodata}]]</td>
+			</tr>
+		</tfoot>
+	</table>
+	
+	<div data-bind='visible:data.content().length > 0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>
+</div>

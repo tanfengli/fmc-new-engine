@@ -1,0 +1,236 @@
+<meta charset="UTF-8">
+
+<!--角色关系 弹窗-->
+<div id="roleModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel" aria-hidden="false" style="display:;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4 class="modal-title">角色关系</h4>
+			</div>
+			<div class="modal-body">
+				<form data-bind="with: $data.formItem">
+					<table class="table table-bordered margin-bottom-sm">
+						<tr>
+							<th style="width: 78px">角色线成员</th>
+							<td data-bind="text: cateName"></td>
+						</tr>
+						<tr>
+							<th>名称<span style="color: red">*</span></th>
+							<td><input type="text" class="form-control"
+								data-bind="value: fdName"></td>
+						</tr>
+						<tr>
+							<th>是否有效</th>
+							<td>
+								<div class="checkbox margin-0">
+									<label style="padding-left: 0;"> 
+									<input type="radio" value="1" name="fdIsAvailable"
+										data-bind="checked: fdIsAvailable" checked="checked"/>是
+									</label>
+									<label> 
+									<input type="radio" value="0"
+										name="fdIsAvailable" data-bind="checked: fdIsAvailable" />否
+									</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>定义模式</th>
+							<td>
+								<div class="checkbox margin-0">
+									<label style="padding-left: 0;"> 
+									<input type="radio" name="model" value="0" 
+									data-bind="click: function(){changeCommonModel(); return true;}" checked="checked">常用模式
+									<span hidden="hidden" id="compute" onclick="compute()"></span>
+									</label> 
+									<label> 
+									<input type="radio" name="model" data-bind="click: changeCodeModel"value="1">编程模式
+									</label>
+								</div>
+							</td>
+						</tr>
+							<tr data-bind="visible: modeShow()=='commonModel'">
+								<th>计算逻辑</th>
+								<td>
+									<div class="form-inline" role="form">
+										<div class="form-group">类型：</div>
+										<div class="form-group">
+											<select class="form-control" data-bind="textInput: type" onchange="compute()">
+											<option value="0" selected="selected">单一领导</option>
+											<option value="1">多个领导</option>
+											<option value="2">直接下属</option>
+											<option value="3">所有下属</option>
+											</select>
+										</div>
+										<div class="form-group padding-left-sm">领导位置：</div>
+										<div class="form-group" data-bind="visible: type()=='1'">
+											从 
+											<select class="form-control" data-bind="textInput: level" onchange="compute()">
+												<option value="0" selected="selected">我</option>
+												<option value="-1">上1级</option>
+												<option value="-2">上2级</option>
+												<option value="-3">上3级</option>
+												<option value="-4">上4级</option>
+												<option value="-5">上5级</option>
+												<option value="1">第1级</option>
+												<option value="2">第2级</option>
+												<option value="3">第3级</option>
+												<option value="4">第4级</option>
+												<option value="5">第5级</option>
+											</select> 到 
+											<select class="form-control" data-bind="textInput: end" onchange="compute()">
+												<option value="0" selected="selected">我</option>
+												<option value="-1">上1级</option>
+												<option value="-2">上2级</option>
+												<option value="-3">上3级</option>
+												<option value="-4">上4级</option>
+												<option value="-5">上5级</option>
+												<option value="1">第1级</option>
+												<option value="2">第2级</option>
+												<option value="3">第3级</option>
+												<option value="4">第4级</option>
+												<option value="5">第5级</option>
+											</select>
+										</div>
+										<div class="form-group" data-bind="visible: type()=='0'||type()=='2'||type()=='3'">
+											<select class="form-control" data-bind="textInput: level" onchange="compute()">
+												<option value="0" selected="selected">我</option>
+												<option value="-1">上1级</option>
+												<option value="-2">上2级</option>
+												<option value="-3">上3级</option>
+												<option value="-4">上4级</option>
+												<option value="-5">上5级</option>
+												<option value="1">第1级</option>
+												<option value="2">第2级</option>
+												<option value="3">第3级</option>
+												<option value="4">第4级</option>
+												<option value="5">第5级</option>
+											</select>
+										</div>
+										
+										
+									</div>
+								</td>
+							</tr>
+							<tr data-bind="visible: modeShow()=='commonModel'">
+								<th>计算结果</th>
+								<td>
+									<div class="people-list">
+										<ul class="list-unstyled clearfix">
+											<li><i class=""></i>
+											<i id="img_leader_0" class="fa fa-street-view"></i>
+												<p>第1级</p></li>
+											<li><i id="img_colleague_1" class="fa fa-street-view"></i> 
+											<i id="img_leader_1"
+												class="fa fa-street-view"></i>
+												<p>第2级</p></li>
+											<li><i id="img_colleague_2" class="fa fa-street-view"></i> 
+											<i id="img_leader_2"
+												class="fa fa-street-view"></i>
+												<p>第3级</p></li>
+											<li><i id="img_colleague_3" class="fa fa-street-view"></i> 
+											<i id="img_leader_3"
+												class="fa fa-street-view"></i>
+												<p>第4级</p></li>
+											<li><i id="img_colleague_4" class="fa fa-street-view"></i> 
+											<i id="img_leader_4"
+												class="fa fa-street-view"></i>
+												<p>第5级</p></li>
+											<li><i id="img_colleague_5" class="fa fa-street-view"></i> 
+											<i id="img_leader_5"
+												class="fa fa-street-view"></i>
+												<p>上5级</p></li>
+											<li><i id="img_colleague_6" class="fa fa-street-view"></i> 
+											<i id="img_leader_6"
+												class="fa fa-street-view"></i>
+												<p>上4级</p></li>
+											<li><i id="img_colleague_7" class="fa fa-street-view"></i> 
+											<i id="img_leader_7"
+												class="fa fa-street-view"></i>
+												<p>上3级</p></li>
+											<li><i id="img_colleague_8" class="fa fa-street-view"></i> 
+											<i id="img_leader_8"
+												class="fa fa-street-view"></i>
+												<p>上2级</p></li>
+											<li><i id="img_colleague_9" class="fa fa-street-view"></i> 
+											<i id="img_leader_9"
+												class="fa fa-street-view"></i>
+												<p>上1级</p></li>
+											<li class="active-border">
+											<i id="img_colleague_10" class="fa fa-street-view"></i>
+											<i id="img_leader_10"
+												class="fa fa-street-view text-base"></i>
+												<p class="text-base">我</p></li>
+											<li><i id="img_colleague_11" class="fa fa-street-view"></i> 
+											<i  id="img_leader_11"
+												class="fa fa-street-view"></i>
+												<p>我的下属</p></li>
+											<li><i  id="img_colleague_12" class="fa fa-street-view"></i> 
+											<i id="img_leader_12"
+												class="fa fa-street-view"></i>
+												<p></p></li>
+										</ul>
+									</div>
+									<div>
+										上图描述的是一条上下级的关系链，<span class="text-red">红色的图标</span>表示该关系的返回值，而您处于蓝色边框的位置，蓝色框中，上面的图标表示您的同级同事，下面的图标表示您自己，左边是您的上级，右边是您的下属
+									</div>
+								</td>
+							</tr>
+							<tr data-bind="visible: modeShow()=='commonModel'">
+								<th>是否包括提交人自己</th>
+								<td>
+									<div class="checkbox margin-0">
+										<label> <input type="checkbox" data-bind="checked: includeme">是
+										</label> （仅查找上级时生效）
+									</div>
+								</td>
+							</tr>
+
+						
+							<tr  data-bind="visible: modeShow()=='codeModel'">
+								<th>程序名</th>
+								<td><input type="text" disabled="disabled" class="form-control"
+								data-bind="textInput: fdPlugin"></td>
+							</tr>
+							<tr data-bind="visible: modeShow()=='codeModel'">
+								<th>参数</th>
+								<td><input type="text" class="form-control"
+								data-bind="textInput: fdParameter"></td>
+							</tr>
+							<tr data-bind="visible: modeShow()=='codeModel'">
+								<th>返回值</th>
+								<td><label><input type="checkbox" data-bind="checked: fdIsMultiple">多值</label>
+									<label><input type="checkbox" data-bind="checked: fdOrg">机构</label>
+									<label><input type="checkbox" data-bind="checked: fdDept">部门</label>
+									<label><input type="checkbox" data-bind="checked: fdPost">岗位</label>
+									<label><input type="checkbox" data-bind="checked: fdPerson">员工</label>
+								</td>
+							</tr> 
+						
+						<tr>
+							<th>描述</th>
+							<td><textarea class="form-control" rows="2"
+									data-bind="textInput: fdMemo"></textarea></td>
+						</tr>
+
+					</table>
+					<div class="text-center">
+						<button type="submit" class="btn btn-primary" data-bind="click: submit">
+							<span aria-hidden="true">[[#{save}]]</span>
+						</button>
+						<input id="submit" type="hidden" data-bind="click: $parent.saveOrUpdateList">
+						<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+

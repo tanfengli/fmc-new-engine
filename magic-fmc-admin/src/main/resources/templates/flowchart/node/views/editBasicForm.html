@@ -1,0 +1,231 @@
+<meta charset="utf-8" />
+<style>
+	.class_input {
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		height: 25px;
+	}
+	
+	.left_td {
+		background: #f5f5f5;
+		text-align: left;
+		width: 15%
+	}
+</style>
+<div>
+	<form class="form-horizontal" role="form">
+		<!-- 编辑内容 -->
+		<table id="tbUser" class="table table-bordered table-hover" data-bind="if:$parent.editFlag">
+			<tbody>
+				<tr>
+					<td class="left_td">
+						<label>节点名<span style="color: red">*</span></label>
+					</td>
+					<td>
+						<input type="text" class="class_input" id="name" data-bind="textInput:name" style="width:250px;"> 
+						<select id="selectNodes" data-bind="options:nodeNames,optionsValue:'name',optionsText:'name',
+				        	optionsCaption:'--请选择--',value:selectNodes,event:{change:function(){selectNodeName()}}">
+				        </select>
+					</td>
+				</tr>
+				<tr>
+					<td class="left_td">
+						<label>默认处理人</label>
+					</td>
+					<td>
+						<input type="radio" name="handlerSelectType"
+							data-bind="checked:handlerSelectType,click:function(data,event){$parent.clearHandler('handlerType');return true;}"
+							value="org" /> 从组织架构选择 &nbsp;&nbsp; 
+						<input type="radio" name="handlerSelectType"
+							data-bind="checked:handlerSelectType,click:function(data,event){$parent.clearHandler('handlerType');return true;}"
+							value="formula" /> 使用公式定义器 <br> 
+						<input type="hidden" id="handlerIds" data-bind="textInput:handlerIds"
+							style="margin-top:5px; margin-bottom:5px;"> 
+						<input type="text" id="handlerNames" class="class_input"
+							data-bind="textInput:handlerNames"
+							style="margin-top:5px; margin-bottom:5px; width:400px" readonly="readonly">
+						
+						<button class="btn btn-default" type="button" style="margin-left:-5px;margin-top:-2px;"
+							data-bind="click:function(){setSelectType('handlerType');$parent.openWindow('handlerSelectType');$('#handleIdArr').click()}">
+							<i class="fa fa-search" aria-hidden="true">选择</i>
+						</button>
+						 
+						<span hidden="hidden" id="handleIdArr" data-bind="click:$parent.computeHandler.bind($data,handlerNames)"></span>
+						<br> 
+						<input type="checkbox" name="ignoreOnHandlerEmpty" value="true"
+							data-bind="checked:ignoreOnHandlerEmpty" /> 
+						<span>处理人为空时自动跳过</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="left_td">
+						<label>流转方式</label>
+					</td>
+					<td>
+						<input type="radio" value="0" name="processType"
+							data-bind="checked:processType" onclick="checkRadio(true)" /> 串行
+							&nbsp;&nbsp; 
+						<input type="radio" value="1" name="processType"
+							data-bind="checked:processType" onclick="checkRadio(true)" /> 并行
+							&nbsp;&nbsp; 
+						<input type="radio" value="2" name="processType"
+							data-bind="checked:processType" onclick="checkRadio(false)" /> 会审
+							&nbsp;&nbsp;<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						<input type="radio" value="0" name="passType"
+							data-bind="checked:passType,enable:getProcessType()==false" />
+							全部 &nbsp;&nbsp; 
+						<input type="radio" value="1" name="passType"
+							data-bind="checked:passType,enable:getProcessType()==false" />
+							按比例 
+						<span>
+							<input type="text" class="class_input" style="width:50px" 
+								data-bind="value:passPercent">%
+						</span><br>
+						
+						<input type="checkbox" name="ignoreOnSerialHandlerSame"
+							data-bind="checked:ignoreOnSerialHandlerSame" />
+						<span>身份重复跳过(相邻)</span> 
+						<input type="checkbox" name="ignoreOnHandlerSame"
+							data-bind="checked:ignoreOnHandlerSame" /> 
+						<span>身份重复跳过(相间)</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="left_td">
+						<label>预警设置</label>
+					</td>
+					<td>
+						<span>节点时长不超过</span>
+						<input type="text" class="class_input"
+							name="nodeDelay" data-bind="textInput:nodeDelay"
+							style="width:50px;"><span>小时</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="left_td">
+						<label>业务标识</label>
+					</td>
+					<td>
+						<select class="class_input" style="width:150px;"
+							name="wf_bizInfoType" data-bind="value:bizInfoType">
+							<option value="YWSP">业务审批</option>
+							<option value="CWCS">财务初审</option>
+							<option value="CWFS">财务复审</option>
+							<option value="CNSP">出纳审批</option>
+							<option value="QTJD">其他节点</option>
+							<option value="JSJD">结束节点</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="left_td">
+						<label>节点帮助</label>
+					</td>
+					<td>
+						<textarea style="height:30px; width:400px;"
+							name="description" data-bind="textInput:description"></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<!-- 查看内容 -->
+	<!-- ko if:!$parent.editFlag  -->
+	<table id="tbUser" class="table table-bordered table-hover" data-bind="if:!$parent.editFlag">
+		<tbody>
+			<tr>
+				<td class="left_td">
+					<label>节点名<span style="color:red"></span></label>
+				</td>
+				<td>
+					<input type="text" class="class_input" id="name" data-bind="textInput:name" style="width:250px;" disabled="disabled">
+				</td>
+			</tr>
+			<tr>
+				<td class="left_td">
+					<label>默认处理人</label>
+				</td>
+				<td>
+					<input type="radio" name="handlerSelectType"
+						data-bind="checked:handlerSelectType" value="org"
+						disabled="disabled" /> 从组织架构选择 &nbsp;&nbsp; 
+					<input type="radio" name="handlerSelectType" data-bind="checked:handlerSelectType"
+						value="formula" disabled="disabled" /> 使用公式定义器 <br> 
+					<input type="text" id="handlerNames" class="class_input"
+						data-bind="textInput: handlerNames"
+						style="margin-top:5px; margin-bottom:5px; width:400px"
+						disabled="disabled"> <br> 
+					<input type="checkbox" name="ignoreOnHandlerEmpty"
+						data-bind="checked:ignoreOnHandlerEmpty" /> 
+					<span>处理人为空时自动跳过</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="left_td">
+					<label>流转方式</label>
+				</td>
+				<td>
+					<input type="radio" value="0" name="processType" data-bind="checked:processType" disabled="disabled" /> 
+					串行&nbsp;&nbsp; 
+					<input type="radio" value="1" name="processType" data-bind="checked:processType" disabled="disabled" /> 
+					并行&nbsp;&nbsp; 
+					<input type="radio" value="2" name="processType" data-bind="checked:processType" disabled="disabled" /> 
+					会审&nbsp;&nbsp; <br>
+					<div data-bind="if:processType=='2'">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" value="0" name="passType" data-bind="checked:passType" disabled="disabled" /> 
+						全部&nbsp;&nbsp; 
+						<input type="radio" value="1" name="passType" data-bind="checked:passType" disabled="disabled" /> 
+						按比例 
+						<span>
+							<input type="text" class="class_input" style="width:50px" data-bind="value:passPercent" disabled="disabled">%
+						</span><br>
+					</div> 
+					<input type="checkbox" name="ignoreOnSerialHandlerSame"
+						data-bind="checked:ignoreOnSerialHandlerSame" disabled="disabled" /> 
+					<span>身份重复跳过(相邻)</span> 
+					<input type="checkbox" name="ignoreOnHandlerSame"
+						data-bind="checked:ignoreOnHandlerSame" disabled="disabled" />
+					<span>身份重复跳过(相间)</span></td>
+			</tr>
+			<tr>
+				<td class="left_td">
+					<label>预警设置</label>
+				</td>
+				<td>
+					<span>节点时长不超过</span>
+					<input type="text" class="class_input" name="nodeDelay" data-bind="textInput:nodeDelay"
+						style="width:50px;" disabled="disabled"><span>小时</span></td>
+			</tr>
+			<tr>
+				<td class="left_td">
+					<label>业务标识</label>
+				</td>
+				<td>
+					<select class="class_input" style="width:150px;" name="wf_bizInfoType" data-bind="value:bizInfoType" disabled="disabled">
+						<option value="YWSP">业务审批</option>
+						<option value="CWCS">财务初审</option>
+						<option value="CWFS">财务复审</option>
+						<option value="CNSP">出纳审批</option>
+						<option value="QTJD">其他节点</option>
+						<option value="JSJD">结束节点</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="left_td">
+					<label>节点帮助</label>
+				</td>
+				<td>
+					<textarea style="height:30px;width:400px;" name="description" data-bind="textInput:description" disabled="disabled"></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- /ko -->
+</div>

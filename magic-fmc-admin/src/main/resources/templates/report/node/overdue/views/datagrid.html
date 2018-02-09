@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+			<th width="5%">[[#{serialNumber}]]</th>
+			<th width="25%">流程节点</th>
+			<th width="25%">流程模板</th>
+			<th width="10%">预警设置时长</th>
+			<th width="10%">节点超期数</th>
+			<th width="10%">平均超期时长</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach:{data:data.content,as:'sysUser'}">
+		<tr>
+			<td data-bind="text:$index()+1"></td>
+			<td data-bind="text:fdFactNodeName"></td>
+			<td data-bind="text:fdTemplateName"></td>
+			<td data-bind="text:fdAlertTime"></td>
+			<td data-bind="text:fdOverdueNumber"></td>
+			<td data-bind="text:fdOverdueAvg"></td>
+		</tr>
+	</tbody>
+	<tfoot  data-bind="visible:!data.content().length>0">
+		<tr>
+			<td colspan="11">[[#{nodata}]]</td>
+		</tr>
+	</tfoot>
+</table>
+
+<div data-bind='visible:data.content().length>0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>

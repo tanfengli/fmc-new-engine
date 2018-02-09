@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:ns="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_NextNodesSrv"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://csb.fmc.vispractice.com/SB_WF_NextNodesSrv">
+
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation="../../schemas/fmcMsgHeader.xsd" />
+
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request" type="tns:SB_WF_NextNodesSrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+		
+	<xs:element name="processResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return" type="tns:SB_WF_NextNodesSrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="SB_WF_NextNodesSrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="ns:MsgHeader" />
+			<xs:element name="WF_TEMPLATE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_NODE_ID" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_NextNodesSrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element name="SB_WF_LAST_Node_Collection" type="tns:SB_WF_LAST_Node_Collection" />
+			<xs:element name="SB_WF_NEXT_Node_Collection" type="tns:SB_WF_NEXT_Node_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SB_WF_LAST_Node_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_OP_ITEM" type="tns:SB_WF_Node_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_NEXT_Node_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_OP_ITEM" type="tns:SB_WF_Node_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_Node_Item">
+		<xs:sequence>
+			<xs:element name="Node_Id" nillable="true" type="xs:string" />
+			<xs:element name="Node_Name" nillable="true" type="xs:string" />
+			<xs:element name="Node_Type" nillable="true" type="xs:string" />
+			<xs:element name="Biz_Info_Type" nillable="true" type="xs:string" />
+			<xs:element name="SB_WF_CreateOper_Item_Collection" type="tns:SB_WF_CreateOper_Item_Collection" />
+			<xs:element name="SB_WF_HandlerOper_Item_Collection" type="tns:SB_WF_HandlerOper_Item_Collection" />
+			<xs:element name="SB_WF_Variable_Item_Collection" type="tns:SB_WF_Variable_Item_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_CreateOper_Item_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_OP_ITEM" type="tns:SB_WF_Oper_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_HandlerOper_Item_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_OP_ITEM" type="tns:SB_WF_Oper_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_Oper_Item">
+		<xs:sequence>
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="type" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_Variable_Item_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_OP_ITEM" type="tns:SB_WF_Variable_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_Variable_Item">
+		<xs:sequence>
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="value" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

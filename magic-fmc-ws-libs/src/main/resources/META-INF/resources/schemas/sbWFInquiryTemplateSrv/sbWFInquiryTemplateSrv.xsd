@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:nsm="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_InquiryTemplateSrv"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://csb.fmc.vispractice.com/SB_WF_InquiryTemplateSrv">
+
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation="../../schemas/fmcMsgHeader.xsd" />
+
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request" type="tns:SB_WF_InquiryTemplateSrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="processResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return" type="tns:SB_WF_InquiryTemplateSrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="SB_WF_InquiryTemplateSrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="nsm:MsgHeader" />
+			<xs:element name="WF_CATE_ID" type="xs:string" />
+			<xs:element name="WF_QUERY_ALL" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SB_WF_InquiryTemplateSrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element name="SB_WF_TEMPORCATE_COLLECTION" type="tns:SB_WF_TempOrCate_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SB_WF_TempOrCate_Collection">
+		<xs:sequence>
+			<xs:element name="SB_WF_TEMPORCATE_ITEM" type="tns:SB_WF_TempOrCate_Item" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_TempOrCate_Item">
+		<xs:sequence>
+			<xs:element name="Id" nillable="true" type="xs:string" />
+			<xs:element name="Type" nillable="true" type="xs:int" />
+			<xs:element name="Name" nillable="true" type="xs:string" />
+			<xs:element name="Children" type="tns:SB_WF_TempOrCate_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

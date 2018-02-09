@@ -1,0 +1,66 @@
+<meta charset="utf-8" />
+<style>
+	.class_input {
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		height: 25px;
+	}
+	
+	.left_td {
+		background: #f5f5f5;
+		text-align: left;
+		width: 15%
+	}
+</style>
+	<!-- 编辑内容 -->
+	<!-- ko if: $parent.editFlag  -->
+	<form class="form-horizontal" role="form">
+		<table id="tbUser" class="table table-bordered table-hover">
+			<!-- <tr>
+				<th>业务标识</th>
+				<td><select class="form-control"></select></td>
+			</tr> -->
+			<tr>
+				<th>变量编码</th>
+				<th>变量值</th>
+				<td><a href="javascript:void(0)" data-bind="click: function(){addVariable()}">添加</a></td>
+			</tr>
+			<!-- ko foreach: variablesArr -->
+			<tr>
+				<td class="col-xs-5"><input type="text" class="form-control" data-bind="textInput: name"></td>
+				<td class="col-xs-5"><input type="text" class="form-control" data-bind="textInput: value"></td>
+				<td class="col-xs-2">
+					<a href="javascript:void(0)" data-bind="click: function(){$parent.deleteVariable($data)}">删除</a>
+					<a href="javascript:void(0)" data-bind="click: function(){$parent.upVariable($index)}">上移</a>
+					<a href="javascript:void(0)" data-bind="click: function(){$parent.downVariable($index)}">下移</a>
+				</td>
+			</tr>
+			<!-- /ko -->
+		</table>
+	</form>
+	<!-- /ko -->
+	
+	
+	<!-- 查看内容 -->
+	<!-- ko if: !$parent.editFlag  -->
+	<table id="tbUser" class="table table-bordered table-hover">
+			<!-- <tr>
+				<th>业务标识</th>
+				<td><select class="form-control"></select></td>
+			</tr> -->
+			<tr>
+				<th>变量编码</th>
+				<th>变量值</th>
+				<td></td>
+			</tr>
+			<!-- ko foreach: variablesArr -->
+			<tr>
+				<td class="col-xs-5"><input type="text" class="form-control" readonly="readonly" data-bind="textInput: name"></td>
+				<td class="col-xs-5"><input type="text" class="form-control" readonly="readonly" data-bind="textInput: value"></td>
+				<td class="col-xs-2">
+				</td>
+			</tr>
+			<!-- /ko -->
+		</table>
+	<!-- /ko -->
+	

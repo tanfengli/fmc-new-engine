@@ -1,0 +1,281 @@
+<meta charset="UTF-8">
+<!-- ko if:isComponentShow()==true -->
+<div data-bind='component:{name:"flowchartView",params:{data:flowchart_props}}'></div>
+<div data-bind='component:{name:"groupMember",params:{data:elementForm,callFunc:selectNewElement,width:"200px",height:"280px"}}'></div>
+<!-- /ko -->
+
+<div class="col-xs-12" data-bind="template:{data:docSubmitForm,afterRender:docSubmitInit}">
+	<div class="nav-tab-title">
+		<ul id="billEditor_main_tab" class="nav">
+			<li class="active"><a href="#billEditor_basic" data-toggle="tab">基本信息</a></li>
+			<li class=""><a href="#billEditor_process" data-toggle="tab">流程</a></li>
+			<li class=""><a href="#billEditor_permission" data-toggle="tab">权限</a></li>
+		</ul>
+		
+		<div class="tab-content">
+			<div class="tab-pane active in" id="billEditor_basic">
+				<table class="table table-bordered" data-bind="with:$parent.sysWfBusinessForm().basic">
+					<tbody>
+						<tr>
+							<th style="width:180px">
+								主题<span style="color:red">*</span>
+							</th>
+							<td style="width:38%">
+								<input type="text" class="form-control" data-bind="value:docSubject">
+							</td>
+							<th style="width:180px">流程模板</th>
+							<td style="width:38%" data-bind="text:templateName">
+								<input type="hidden" data-bind="value:fdTemplateId">
+							</td>
+						</tr>
+						<tr>
+							<th>所属业务系统</th>
+							<td data-bind="text:busiName">
+								<input type="hidden" data-bind="value:busiSysId">
+							</td>
+							<th>文档重要度</th>
+							<td>
+								<label>
+									<input type="radio" name="grade"  value='1' data-bind="checked:fdImportance">普通
+								</label>
+								<label>
+									<input type="radio" name="grade" value='2' data-bind="checked:fdImportance">重要
+								</label> 
+								<label>
+									<input type="radio" name="grade" value='3' data-bind="checked:fdImportance">非常重要 
+								</label> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="tab-pane" id="billEditor_process">
+				<table class="table table-bordered" data-bind="with:formItem">
+					<tr>
+						<th>流程说明</th>
+						<td>
+							<span><span data-bind="text:$parents[1].sysWfBusinessForm().basic.fdDescription"></span></span>
+						</td>
+					</tr>
+					
+					<tr>
+						<th>即将流向</th>
+						<td>
+							<select class="form-control" data-bind="options:$parents[1].nextNodeList, 
+								optionsCaption:'--请选择--',
+								optionsText:function(item){
+									var handlerNames=item.handlerNames==undefined?'':'('+item.handlerNames+')';
+									return item.id+'.'+item.name+handlerNames;
+								},
+								optionsValue:'id',
+								value:futureNodeId">
+							</select>
+						</td>
+					</tr>
+					
+					<tr>
+						<th>常用意见</th>
+						<td>
+							<select class="form-control" data-bind="options:$parents[1].approvalArray, 
+								optionsCaption:'--请选择--',
+								optionsText:'fdUsageContent',
+								optionsValue:'fdUsageContent',
+								value:$parents[1].wfOptionCon">
+							</select>
+						</td>
+					</tr>
+					
+					<tr>
+						<th>处理意见</th>
+						<td>
+							<textarea rows="" cols="" class="form-control" data-bind="value:wfOptionCon"></textarea>
+						</td>
+					</tr>
+					
+					<tr>
+						<th>提交身份</th>
+						<td>
+							<select class="form-control" data-bind="options:currentPosts, 
+								optionsCaption:'--请选择--',
+								optionsText:'fdName',
+								optionsValue:'fdId',
+								value:postCode">
+							</select>
+						</td>
+					</tr>
+					
+					<tr>
+						<th>更多信息</th>
+						<td>
+							<label> 
+								<input type="checkbox" class="proc-more-btn" data-bind="checked:$parents[1].isMoreInfoShow">更多信息
+							</label>
+						</td>
+					</tr>
+				</table>
+				
+				<div data-bind="visible:$parent.isMoreInfoShow">
+					<div class="proc-more-box proc-more-md">
+						<ul class="nav" id="billEditor_process_tab">
+							<li class="active"><a href="#billEditor_process_flowchart" data-toggle="tab">流程图</a></li>
+							<li><a href="#billEditor_process_node" data-toggle="tab">表格</a></li>
+							<li><a href="#billEditor_process_log" data-toggle="tab">流转日志</a></li>
+							
+							<!-- ko if:$parent.isProcessSeniorShow()==true -->
+							<li><a href="#billEditor_process_senior" data-toggle="tab">高级</a></li>
+							<!-- /ko -->
+						</ul>
+						
+						<div class="tab-content">
+							<div class="tab-pane active in text-center" id="billEditor_process_flowchart" style="overflow:auto;">
+								<!-- ko if: $parent.isToolbarShow()==true -->
+								<div data-bind="template:{name:'flowchart_toolbar_toolbarView_html',data:$parent.billEditor_flowchart.toolbar}"></div>
+								<!-- /ko -->
+								<div id="billEditor_flowchart" class="flowchart" style="width:100%;height:500px;"></div>
+							</div>
+							
+							<div class="tab-pane" id="billEditor_process_node">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th colspan="6">
+												<div class="checkbox pull-left" style="width:100px;">
+													<label> 
+														<input type="checkbox">显示所有节点
+													</label>
+												</div> 
+											</th>
+										</tr>
+										<tr>
+											<th>节点</th>
+											<th>节点名</th>
+											<th>处理人员</th>
+											<th>处理方式</th>
+											<th>流向</th>
+											<th>备注</th>
+										</tr>
+									<thead>
+									<tbody data-bind="foreach:$parent.flowNodeList">
+										<tr data-bind="visible:$data.id!='N2'">
+											<td data-bind="text:$data.id"></td>
+											<td data-bind="text:$data.name"></td>
+											<td data-bind="text:$data.handlerNames"></td>
+											<td>
+											<!-- ko if:$data.processType=='0' -->
+											<span>审批：串行</span>
+											<!-- /ko -->
+											<!-- ko if:$data.processType=='1' -->
+											<span>审批：并行</span>
+											<!-- /ko -->
+											<!-- ko if:$data.processType=='2' -->
+											<span>审批：会审</span>
+											<!-- /ko -->
+											</td>
+											<td>
+												<div data-bind="visible:$data.gotoId!=undefined">
+													<span data-bind="text:$data.gotoId"></span>.
+													<span data-bind="text:$data.gotoName"></span>
+												</div>
+											</td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="tab-pane" id="billEditor_process_log">
+								<table class="table table-bordered" data-bind="with:$parent.sysWfBusinessForm">
+									<thead>
+										<tr>
+											<th>时间</th>
+											<th>节点名</th>
+											<th>操作者</th>
+											<th>操作</th>
+											<th>系统操作</th>
+											<th>下一节点通知方式</th>
+										</tr>
+									<thead>
+									<tbody data-bind="foreach:wfLog">
+										<tr>
+											<td data-bind="text:fdCreateDate"></td>
+											<td data-bind="text:fdFactNodeName"></td>
+											<td><span data-bind="text:fdName"></span>
+												<!-- ko if: fdActionId=='501' -->
+												<span>系统</span>
+												<!-- /ko -->
+											</td>
+											<td data-bind="text:fdActionInfo"></td>
+											<td data-bind="text:fdActionName"></td>
+											<td>
+												<div data-bind="visible:fdNotifyType=='todo'">
+												<input type="checkbox" disabled="disabled" checked="checked">待办</div>
+												<span data-bind="visible:fdNotifyType!='todo'">N/A</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						
+							<!-- ko if:$parent.isProcessSeniorShow()==true -->
+							<div class="tab-pane text-center" id="billEditor_process_senior" style="overflow:auto;">
+								<table class="table table-bordered">
+									<tr>
+										<th>通知起草人</th>
+										<td>流程启动 &nbsp;
+											<input type="text">&nbsp;天仍未完成&nbsp;&nbsp;&nbsp; 
+											<input type="checkbox">&nbsp;流程结束后
+										</td>
+									</tr>
+								</table>
+							</div>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane" id="billEditor_permission">
+				<table class="table table-bordered" >
+					<tr>
+						<th>可阅读者</th>
+						<td>
+							<div class="col-xs-10">
+								<textarea id="reader" rows="" cols="" class="form-control"></textarea>
+								<p>（为空则所有人可以阅读）</p>
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn btn-default" data-bind="click:$data.readerClick">
+									<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+								</button>
+							</div> 
+						</td>
+					</tr>
+					<tr>
+						<th class="col-xs-2">可编辑者</th>
+						<td>
+							<div class="col-xs-10">
+								<textarea id="editor" rows="" cols="" class="form-control"></textarea>
+								<p>（为空则只有管理人员可以编辑）</p>
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn btn-default" data-bind="click:$data.editorClick">
+									<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+								</button>
+							</div> 
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary" id="billEditor_button" data-loading-text="提交" data-bind="click:saveOrUpdateList">
+				<span aria-hidden="true">提交</span>
+			</button>
+			<button type="submit" class="btn btn-primary" data-bind="click:$parent.docSubmitSuccess">
+				<span aria-hidden="true">返回</span>
+			</button>
+		</div>
+	</div>
+</div>

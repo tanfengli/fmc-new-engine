@@ -1,0 +1,71 @@
+<meta charset="utf-8" />   
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+ .left_td{
+     background: #f5f5f5;
+     text-align: left;
+     width:15%
+ }   
+</style>
+<div> 
+	<form class="form-horizontal" role="form" data-bind="visible:$parent.editFlag" >
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">连线信息</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>连线信息</label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name" > 
+                   </td> 
+              </tr>  
+              <!--  <tr>
+                   <td class="left_td">
+                       <label>节点帮助</label>  
+                   </td>
+                   <td colspan="">
+                       <span>在流程流转过程中，若定义的条件计算出错，或计算满足条件的结果不是唯一的时候，流程将通知起草人、当前处理和特权人进行错误处理，此时必须由特权人对流程进行干预，才能继续往下走</span>    
+                   </td> 
+               </tr>   -->
+           </tbody>
+        </table>
+        
+	</form>
+	
+	
+	
+	
+	<!-- ko if: !$parent.editFlag  -->
+	<form class="form-horizontal" role="form"  data-bind="visible:!$parent.editFlag">
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">连线信息</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>连线信息</label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name"  disabled="disabled"> 
+                   </td> 
+              </tr>  
+              <!--  <tr>
+                   <td class="left_td">
+                       <label>节点帮助</label>  
+                   </td>
+                   <td colspan="">
+                       <span>在流程流转过程中，若定义的条件计算出错，或计算满足条件的结果不是唯一的时候，流程将通知起草人、当前处理和特权人进行错误处理，此时必须由特权人对流程进行干预，才能继续往下走</span>    
+                   </td> 
+               </tr>   -->
+           </tbody>
+        </table>
+        
+	</form>
+	 <!-- /ko -->
+</div>

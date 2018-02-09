@@ -1,0 +1,269 @@
+body {
+	font-family: "Microsoft YaHei", sans-serif;
+	font-size: 13px;
+	line-height: 25px;
+	background: #e5ebf2;
+}
+
+body .bg-c-white {
+	padding-left: 5px;
+	padding-right: 5px;
+	background: #fff;
+}
+
+a {
+	color: #0099cc;
+	text-decoration: none;
+}
+
+.fti-nav-dm {
+	background-color: #0099cc;
+	border-color: #00a8e0;
+	color: #fff;
+	border-radius: 0;
+	margin-bottom: 0;
+	z-index: 100;
+}
+
+.fti-nav-dm .navbar-nav>li>a {
+	color: #ccf2ff;
+}
+
+.fti-nav-dm .navbar-nav>li>a:hover, .fti-nav-dm .navbar-nav>li>a:focus,
+	.fti-nav-dm .navbar-nav>li>a:active {
+	color: #fff;
+	background: #00a8e0;
+}
+
+.fti-nav-dm .navbar-nav .active a {
+	background: #0099cc;
+	color: #ccf2ff;
+}
+
+.fti-nav-dm .navbar-brand {
+	padding: 0 15px;
+	color: #fff;
+}
+
+.fti-main {
+	margin-top: 50px;
+}
+
+.fti-main .fti-nav-left {
+	height: 100%;
+	position: fixed;
+	top: 51px;
+	left: 0;
+	width: 160px;
+	background: #293038;
+	z-index: 100;
+}
+
+.fti-main .fti-nav-left li {
+	position: relative;
+	height: 45px;
+	line-height: 45px;
+	border-bottom: solid 1px heighted(#293038, 100%);
+	padding: 0 15px;
+}
+
+.fti-main .fti-nav-left li a {
+	position: relative;
+	color: #fff;
+	width: 100%;
+	height: 100%;
+	display: block;
+	font-size: 14px;
+}
+
+.fti-main .fti-nav-left li a:hover, .fti-main .fti-nav-left li a:focus,
+	.fti-main .fti-nav-left li a:active {
+	text-decoration: none;
+}
+
+.fti-main .fti-nav-left li.active>a:after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 5px;
+	height: 5px;
+	display: table;
+	content: "\f105";
+	overflow: hidden;
+	font-family: 'FTIICON_V1_1' !important;
+}
+
+.fti-main .fti-nav-left li.active>a.collapsed:after {
+	content: "\f105";
+}
+
+.fti-main .fti-nav-left li.active, .fti-main .fti-nav-left li:hover {
+	background: #0099cc;
+}
+
+.fti-main .fti-nav-left li ul {
+	margin: 0 -15px;
+	background: #363f4a;
+}
+
+.fti-main .fti-nav-left li ul li {
+	height: 30px;
+	line-height: 30px;
+	padding-left: 35px;
+	color: #fff;
+}
+
+.fti-main .fti-nav-left li ul li a {
+	font-size: 12px;
+}
+
+.fti-main .fti-nav-left li ul li a:hover {
+	text-decoration: none;
+}
+
+.fti-main .fti-nav-left li ul li:hover {
+	background: #293038;
+}
+
+.fti-main .ft-dm-right {
+	margin-left: 160px;
+}
+
+.fti-ri-tit {
+	height: 35px;
+	line-height: 35px;
+	padding-left: 5px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	border-bottom: solid 1px #ddd;
+	color: #1c75bf;
+}
+
+.fast-nav {
+	padding-bottom: 10px;
+}
+
+.fast-nav>div.col-xs-3 {
+	padding: 10px;
+	padding-top: 0;
+}
+
+.fast-nav a {
+	position: relative;
+	display: block;
+	padding: 10px 10px 0px 10px;
+	height: 110px;
+	text-decoration: none;
+	text-align: center;
+	color: #fff;
+}
+
+.fast-nav a:hover {
+	color: #fff;
+}
+
+.fast-nav a b, .fast-nav a span {
+	display: block;
+	text-align: right;
+}
+
+.fast-nav a b {
+	padding-top: 5px;
+	font-size: 38px;
+	line-height: 38px;
+}
+
+.fast-nav a span {
+	font-size: 14px;
+}
+
+.fti-news-list {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	height: 110px;
+	overflow: hidden;
+}
+
+.fti-right-tab {
+	background: #fff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.fti-right-tab .active {
+	opacity: 1;
+}
+
+.fti-right-tab table tr td [class*=fti-] {
+	display: initial;
+}
+
+table .fti-radio, table .fti-checkbox {
+	position: relative;
+	display: table-cell;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.bg-c-icon i {
+	font-size: 58px;
+	padding-bottom: 10px;
+}
+
+.bg-c-q-nav {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: -10px;
+	margin-right: -10px;
+	text-align: left;
+	line-height: 25px;
+	background-color: #0f3857;
+}
+
+.bg-c-q-nav i {
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.bg-c-q-nav .glyphicon {
+	float: right;
+}
+
+.bg-c-icon, .bg-c-text {
+	float: left;
+}
+
+.bg-c-icon {
+	width: 40%;
+	padding-left: 10px;
+	padding-top: 5px;
+	text-align: left;
+}
+
+.bg-c-text {
+	width: 60%;
+	text-align: right;
+}
+
+.bg-alert-info {
+	background-color: #1c75bf;
+}
+
+.bg-alert-success {
+	background-color: #29ae92;
+}
+
+.bg-alert-warning {
+	background-color: #dd9b5f;
+}
+
+.bg-alert-danger {
+	background-color: #d76767;
+}
+
+.fti-margin-top-sm {
+	margin-top: 10px;
+}

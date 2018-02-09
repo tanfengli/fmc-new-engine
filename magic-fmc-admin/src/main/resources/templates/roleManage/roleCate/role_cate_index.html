@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	
+	<div data-bind="component: {name: 'page-title'}">[[#{roleCateAdmin}]]</div>
+	
+	<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+		<div data-bind="template:{name:'roleManage_roleCate_searchForm_html', data: searchForm}"></div>
+	</div>
+	
+	<div data-bind="template:{name:'roleManage_roleCate_gridToolbar_html'}"></div>
+
+	<div data-bind="template:{name:'roleManage_roleCate_datagrid_html', data: roleCateId}"></div>
+
+	<div data-bind="template:{name:'roleManage_roleCate_editWindow_html', data: roleCateForm}"></div>
+
+	<script type="text/javascript" th:src="@{/js/roleManage/roleCate/main.js}"
+		 src="/js/roleManage/roleCate/main.js"></script>
+</body>
+</html>

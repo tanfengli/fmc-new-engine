@@ -1,0 +1,16 @@
+<div class="modal fade" data-backdrop="static" id="flowviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:1115">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height:600px;">
+		    <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              	<h4 class="modal-title" id="myModalLabel" data-bind='text:labelName()+"("+labelId()+")"'></h4>
+            </div>
+	             
+            <div class="modal-body">
+            	<div data-bind="template:{name:'flowchart_flowchartView_editWindow_html',data:nodeForm}"></div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<div data-bind='component:{name:"robotNode",params:{data:robotNodeForm,callFunc:confirmRobot,width:"200px",height:"540px"}}'></div>	

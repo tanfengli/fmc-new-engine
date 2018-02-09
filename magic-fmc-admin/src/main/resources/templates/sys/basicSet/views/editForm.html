@@ -1,0 +1,87 @@
+<meta charset="utf-8" />   
+<style>
+.left_td{
+     background: #f5f5f5;
+     text-align: left;
+ } 
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+</style>
+<div> 
+	<form class="form-horizontal" role="form" data-bind="with: formItem"> 
+		 <table id="tbUser" class="table table-bordered table-hover"> 
+		           <tbody> 
+		               <tr>
+		                  <td class="left_td">
+		                       <label for="nodeNameSelectItem">[[#{nodeNameOptions}]] </label>  
+		                   </td>
+		                   <td colspan="4">
+		                       <input type="text" data-bind="textInput: nodeNameSelectItem" class="form-control"> 
+		                       <span>[[#{nodeSelItem}]]</span> 
+		                   </td>
+		               </tr>
+		               <tr>
+		                   <td class="left_td">
+		                       <label for="defaultNotifyType">[[#{defNotif}]]</label>  
+		                   </td>
+		                   <td>
+		                      <label>   
+			                    <input type="checkbox" value="todo" data-bind="checked: defaultNotifyTypeSel" />[[#{todo}]]
+								<input type="checkbox" value="mobile" data-bind="checked: defaultNotifyTypeSel" />[[#{mobile}]]
+								<input type="checkbox" value="email" data-bind="checked: defaultNotifyTypeSel" />[[#{email}]] 
+		                      </label>  
+		                   </td>
+		                   <td class="left_td">
+		                       <label for="systemNotifyType">[[#{sysNotif}]]</label>  
+		                    </td>
+		                   <td>
+		                      <label>  
+			                      <input type="checkbox" value="todo" data-bind="checked: systemNotifyTypeSel" />[[#{todo}]]
+								  <input type="checkbox" value="mobile" data-bind="checked: systemNotifyTypeSel" />[[#{mobile}]]
+								  <input type="checkbox" value="email" data-bind="checked: systemNotifyTypeSel" />[[#{email}]] 
+				              </label>   
+		                   </td> 
+		                </tr>
+		                <tr> 
+		                   <td class="left_td">
+		                       <label for="notifyCrashTargetNames">[[#{proError}]]</label>  
+		                   </td>
+		                   <td style="text-align: left;"> 
+		                      <input type="hidden" id="ids" data-bind="textInput: notifyCrashTargetIds">
+		                      <input type="text" id="editor" data-bind="textInput: notifyCrashTargetNames" class="class_input" style="width: 150px;">   
+								<button  type="button" class="btn btn-default"
+									data-bind="click: function() {$('#memberSelectWindow').modal();}">
+									<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+								</button>
+								<button  type="button" class="btn btn-default"
+									data-bind="click: $root.clearEditor">
+									<i class="fa fa-reply" aria-hidden="true"></i>清空
+								</button>  
+								<br>
+		                      <input type="checkbox" data-bind="checked: notifyTargetAuthor" style="margin-left:10px;margin-top:5px;"/> [[#{privilegedPerson}]]
+		                      <input type="checkbox" data-bind="checked: notifyTargetSubmit" style="margin-left:10px;"/> [[#{submitter}]] 
+		                   </td> 
+		                   <td class="left_td">
+		                       <label for="notifyExpire">[[#{outOf}]]</label>  
+		                   </td>
+		                   <td> 
+		                       <span>[[#{processStag}]]</span><input type="text" data-bind="textInput: notifyExpire" class="class_input" style="width: 160px;">
+		                       <span>[[#{proTip}]]</span>    
+		                   </td>
+		                </tr>
+		                <tr>
+		                   <td class="left_td">
+		                      <label for="threadPoolSize">[[#{poolSizeTip}]]</label>  
+		                   </td>
+		                   <td colspan="4">
+		                         <input type="text" data-bind="textInput: threadPoolSize" class="form-control" style="width: 300px;">  
+		                   </td>
+		                </tr> 
+		           </tbody>
+		      </table>   
+		</form>
+	   <div class="modal-footer text-center">
+            <button type="submit" id="btn_submit" data-bind="click: saveOrUpdateList" class="btn btn-primary"> [[#{save}]]</button>
+       </div>
+</div>

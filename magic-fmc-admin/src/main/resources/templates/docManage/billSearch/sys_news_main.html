@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+	</head>
+	<body>
+		<div data-bind="component:{name:'page-title'}">流程查询</div>
+		<div data-bind="visible:chooseView()=='list'">
+			<div data-bind="component:{name:'searchForm-panel',params:{data:searchForm}}">
+				<div data-bind="template:{name:'docManage_billSearch_searchForm_html',data:searchForm}"></div>
+			</div>
+			
+			<!-- 
+			<div data-bind="template:{name:'docManage_billSearch_gridToolbar_html',data: toolbarViewModel}"></div> 
+			-->
+
+			<div id="docsubmitId" data-bind="template:{name:'docManage_billSearch_datagrid_html',data:docSubmitId}"></div>
+		</div>
+
+		<div data-bind="visible: chooseView()=='detail'">
+			<div data-bind='component:{name:"billDetail",params:{data:wfInstanceId,callFunc:toList,initSuccess:toDetailPage}}'></div>
+		</div>
+
+		<script type="text/javascript" th:src="@{/js/docManage/billSearch/main.js}" src="/js/docManage/billSearch/main.js"></script>
+	</body>
+</html>

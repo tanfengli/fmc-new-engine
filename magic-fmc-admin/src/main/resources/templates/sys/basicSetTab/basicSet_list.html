@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">  
+<script type="text/javascript" src="/webjars/knockout/knockout.debug.js"></script>
+<script type="text/javascript"
+	src="webjars/knockout-mapping/knockout.mapping.js"></script>
+<script type="text/javascript"
+	src="js/vendors/koExternalTemplateEngine_all.js"></script> 
+
+
+<script type="text/javascript" src="/js/models/components.js"></script>
+   
+</head>
+<body>
+     <legend>基础设置</legend>
+     <div> 
+		 <ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#nodeManagement" data-toggle="tab">节点备选名管理 </a></li>
+			<li><a href="#otherSet" data-toggle="tab">其他设置</a></li> 
+		</ul>
+		
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade in active" id="nodeManagement">
+			    
+				<div class="row" data-bind="if: visibleCatalog" style="margin-top:20px;"> 
+					<div data-bind="template:{name:'sys_basicSet_gridToolbar_html'}"></div>
+					<div id="datagrid_panel" data-bind="template:{name:'sys_basicSet_datagrid_html',data: grid}"></div>
+				</div> 
+		
+	            <div id="datagrid_Form" data-bind="template:{name:'sys_basicSet_editWindow_html', data: basicSetForm}"></div>
+			    
+			    <script src="/js/sys/basicSet/basicSetModel.js"></script>
+			    <script src="/js/sys/basicSet/basicSet_list.js"></script> 
+			</div>
+	
+			<div class="tab-pane fade" id="otherSet" style="margin-top:20px;">
+				  <div id="form" data-bind="template:{name:'sys_basicSet_editForm_html', data: form}"></div>
+			</div>
+			
+		</div>
+		
+	 </div>
+</body>
+</html>

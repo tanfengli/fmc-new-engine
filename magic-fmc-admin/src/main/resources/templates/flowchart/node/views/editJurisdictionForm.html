@@ -1,0 +1,184 @@
+<meta charset="utf-8" />   
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;width: 305px;
+             }
+ .left_td{
+     background: #f5f5f5;
+     text-align: left;
+     width:15%
+ }   
+</style>
+<div> 
+	<form class="form-horizontal" role="form" data-bind="visible:$parent.editFlag"> 
+	   <table id="tbUser" class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td" rowspan="2">
+                       <label>处理人修改权限</label>  
+                   </td>
+                   <td class="left_td">
+                       <label>可修改的节点</label>
+                      <span hidden="hidden" id="reviewArray" data-bind="click: $parent.reviewHandle.bind($data,'')"></span> 
+                       
+                   </td> 
+                   <td>
+               
+                   	   <input type="hidden" name="canModifyHandlerNodeIds"  data-bind="value: canModifyHandlerNodeIds"/>
+                       <input type="text" class="class_input" name="canModifyHandlerNodeNames"data-bind="value: canModifyHandlerNodeNames"  readonly="readonly">   
+                       <button type="button" style="margin-left:-5px;margin-top:-2px;" class="btn btn-default" 
+                        	data-bind="click: function(){setSelectType('canModifyHandlerNode') ; $('#reviewNodeWin2').modal();$('#reviewArray').click()}">
+		                <i class="fa fa-search" aria-hidden="true">选择</i>
+    	        		</button>
+                   </td>
+              </tr> 
+              <tr> 
+                   <td class="left_td">
+                       <label>必须修改的节点</label>  
+                   </td>
+                   <td>
+                   <input type="hidden" name="mustModifyHandlerNodeIds"   data-bind="value: mustModifyHandlerNodeIds"/>
+                       <input type="text" class="class_input" name="mustModifyHandlerNodeNames"  data-bind="value: mustModifyHandlerNodeNames"  readonly="readonly">   
+                        <button type="button" style="margin-left:-5px;margin-top:-2px;" class="btn btn-default" 
+                        	data-bind="click: function(){setSelectType('mustModifyHandlerNode') ; $('#reviewNodeWin2').modal();$('#reviewArray').click()}">
+		                <i class="fa fa-search" aria-hidden="true">选择</i>
+    	        		</button>
+					   <br>
+					   
+					   <span>说明：当流程流转到本节点时，若“必须修改的节点”中有处理人为空的<br>节点，则本节点的处理人必须往那些节点中添加处理人</span>  
+                   </td>
+              </tr>  
+              
+              <tr>
+                   <td class="left_td" rowspan="3">
+                       <label>本节点意见查看权限</label>  
+                   </td>
+                   <td class="left_td">
+                       <label>可查看意见的节点</label>
+                   </td> 
+                   <td>
+                    <input type="hidden" name="nodeCanViewCurNodeIds"  data-bind="value: nodeCanViewCurNodeIds"/>
+                       <input type="text" class="class_input" name="nodeCanViewCurNodeNames"  data-bind="value: nodeCanViewCurNodeNames"  readonly="readonly">   
+                       <button type="button" style="margin-left:-5px;margin-top:-2px;" class="btn btn-default" 
+                        	data-bind="click: function(){setSelectType('nodeCanViewCurNode') ; $('#reviewNodeWin2').modal();$('#reviewArray').click()}">
+		                <i class="fa fa-search" aria-hidden="true">选择</i>
+    	        		</button>
+                   </td>
+              </tr> 
+              <tr> 
+                   <td class="left_td">
+                       <label>其他可阅读者</label>  
+                   </td>
+                   <td>
+                   <input type="hidden" name="otherCanViewCurNodeIds"  data-bind="value: otherCanViewCurNodeIds" />
+                   
+                       <input type="text" class="class_input" name="otherCanViewCurNodeNames" data-bind="value:otherCanViewCurNodeNames"  readonly="readonly">   
+                      <!--  <button type="button" style="margin-left:-5px;margin-top:-2px;" class="btn btn-default" 
+                        	data-bind="click: function(){this.selectType='otherCanViewCurNode' ; $('#reviewNodeWin').modal();$('#reviewArray').click()}">
+		                <i class="fa fa-search" aria-hidden="true">选择</i>
+    	        		</button> -->
+    	        		
+    	        		<button type="button" style="margin-left:-5px;margin-top:-2px;" class="btn btn-default" 
+                        data-bind="click: function(){setSelectType('otherCanViewCurNode'); $parent.openWindow('otherCanViewCurNode'); $('#otherView').click()}">
+		                <i class="fa fa-search" aria-hidden="true">选择</i>
+    	        		</button>  
+    	        		  <span hidden="hidden" id="otherView" data-bind="click: $parent.computeHandler.bind($data,otherCanViewCurNodeNames)"></span> 
+                   </td>
+              </tr>  
+              <tr> 
+                   <td class="left_td">
+                       <label>处理人可修改意见查看权限</label>  
+                   </td>
+                   <td>
+                       <input type="radio" value="true" name="canModifyNotionPopedom" data-bind="checked: canModifyNotionPopedom"/> 是   &nbsp;&nbsp;
+	                   <input type="radio" value="false" name="canModifyNotionPopedom" data-bind="checked: canModifyNotionPopedom"/> 否
+                   </td>
+              </tr>  
+              <tr>
+                   <td class="left_td">
+                       <label>可修改流程</label>  
+                   </td>
+                  <td colspan="2">
+                       <input type="radio" value="true" name="canModifyFlow"  data-bind="checked: canModifyFlow"/> 是   &nbsp;&nbsp;
+	                   <input type="radio" value="false" name="canModifyFlow"  data-bind="checked: canModifyFlow"/> 否
+                   </td>
+              </tr>
+	       </tbody>
+	   </table>    
+	</form>
+	
+	<!-- ko if: !$parent.editFlag  -->
+	<form class="form-horizontal" role="form" data-bind="visible:!$parent.editFlag" > 
+	   <table id="tbUser" class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td" rowspan="2">
+                       <label>处理人修改权限</label>  
+                   </td>
+                   <td class="left_td">
+                       <label>可修改的节点</label>
+                   </td> 
+                   <td>
+               
+                       <input type="text" class="class_input" name="canModifyHandlerNodeNames"data-bind="value: canModifyHandlerNodeNames" disabled="disabled">   
+                   </td>
+              </tr> 
+              <tr> 
+                   <td class="left_td">
+                       <label>必须修改的节点</label>  
+                   </td>
+                   <td>
+                       <input type="text" class="class_input" name="mustModifyHandlerNodeNames"  data-bind="value: mustModifyHandlerNodeNames" disabled="disabled">   
+					   <br>
+					   
+					   <span>说明：当流程流转到本节点时，若“必须修改的节点”中有处理人为空的<br>节点，则本节点的处理人必须往那些节点中添加处理人</span>  
+                   </td>
+              </tr>  
+              
+              <tr>
+                   <td class="left_td" rowspan="3">
+                       <label>本节点意见查看权限</label>  
+                   </td>
+                   <td class="left_td">
+                       <label>可查看意见的节点</label>
+                   </td> 
+                   <td>
+                       <input type="text" class="class_input" name="nodeCanViewCurNodeNames"  data-bind="value: nodeCanViewCurNodeNames" disabled="disabled">   
+                   </td>
+              </tr> 
+              <tr> 
+                   <td class="left_td">
+                       <label>其他可阅读者</label>  
+                   </td>
+                   <td>
+                   
+                       <input type="text" class="class_input" name="otherCanViewCurNodeNames" data-bind="value:otherCanViewCurNodeNames" disabled="disabled">   
+    	        		
+                   </td>
+              </tr>  
+              <tr> 
+                   <td class="left_td">
+                       <label>处理人可修改意见查看权限</label>  
+                   </td>
+                   <td>
+                       <input type="radio" value="true" name="canModifyNotionPopedom" data-bind="checked: canModifyNotionPopedom" disabled="disabled"/> 是   &nbsp;&nbsp;
+	                   <input type="radio" value="false" name="canModifyNotionPopedom" data-bind="checked: canModifyNotionPopedom" disabled="disabled"/> 否
+                   </td>
+              </tr>  
+              <tr>
+                   <td class="left_td">
+                       <label>可修改流程</label>  
+                   </td>
+                  <td colspan="2">
+                       <input type="radio" value="true" name="canModifyFlow"  data-bind="checked: canModifyFlow" disabled="disabled"/> 是   &nbsp;&nbsp;
+	                   <input type="radio" value="false" name="canModifyFlow"  data-bind="checked: canModifyFlow" disabled="disabled"/> 否
+                   </td>
+              </tr>
+	       </tbody>
+	   </table>    
+	</form>
+	 <!-- /ko -->
+</div>
+
+
+

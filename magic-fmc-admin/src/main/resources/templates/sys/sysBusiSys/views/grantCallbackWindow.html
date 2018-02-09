@@ -1,0 +1,42 @@
+<meta charset="utf-8" />   
+<div class="modal fade" id="grantCallbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"> 
+	<form class="form-horizontal" role="form" data-bind="with:formItem">
+		<div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">流程回调授权</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<input type="hidden" name="fdBusiId" data-bind="value:fdBusiId" class="form-control"> 
+	            	
+	            	<table id="tbUser" class="table table-striped table-bordered table-hover"> 
+                    	<tbody> 
+						 	<tr>
+		                         <td width="20%">
+		                             <label>是否启动回调<span style="color:red;">*</span></label>  
+		                         </td>
+		                         <td width="40%">
+		                         	 <input name="fdIsBack" type="radio" value="1" data-bind="checked:fdIsBack" /> 是   &nbsp;&nbsp;
+		                             <input name="fdIsBack" type="radio" value="0" data-bind="checked:fdIsBack" /> 否  
+		                         </td>
+	                     	</tr>
+	                     	<tr>
+		                         <td>
+		                             <label>回调地址<span style="color:red;">*</span></label>  
+		                          </td>
+		                         <td>
+		                            <input name="fdBackAddress" type="text" data-bind="textInput:fdBackAddress" class="form-control"/>
+		                         </td> 
+	                     	</tr>
+                     	</tbody>
+	               </table>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="submit" id="btn_submit" data-bind="click:$parent.saveOrUpdateList" class="btn btn-primary">[[#{save}]]</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+	            </div>
+	        </div>
+		</div>  
+	</form>
+</div>

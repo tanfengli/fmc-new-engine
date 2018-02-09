@@ -1,0 +1,46 @@
+<meta charset="UTF-8">
+
+
+<table class="table table-bordered" style="margin-top: -5px">
+	<tbody>
+		<tr>
+			<th class="col-xs-3">流程选项</th>
+			<td><label><input type="checkbox"
+					data-bind="checked: rejectReturn">驳回的节点通过后直接返回本节点（默认值）</label>
+				<label><input
+					type="checkbox" data-bind="checked: recalculateHandler">重新流经节点时重新计算节点处理人（默认值）</label>
+			</td>
+		</tr>
+		<tr>
+			<th class="col-xs-3">流程权限</th>
+			<td>
+				<a id="setAuthority" href="#" data-bind='click:$parent.setAuthorty'>设置修改流程处理人/流程节点权限</a>
+			</td>
+		</tr>
+		<tr>
+			<th class="col-xs-3">通知选项</th>
+			<td>通知方式： <label><input type="checkbox"
+					value="notifyType" data-bind="checked: notifyType"
+					style="margin-left: 5px;">待办;</label> <label><input
+					type="checkbox" data-bind="checked: notifyOnFinish">流程结束后通知审批人(默认值);</label>
+				<label><input type="checkbox"
+					data-bind="checked: notifyDraftOnFinish">流程结束后通知起草人(默认值);</label>
+				<span>流程启动</span> <input type="text"
+				data-bind="value: dayOfNotifyPrivileger" style="width: 50px;"><span>天后未完成则通知特权人</span>
+			</td>
+		</tr>
+		<tr>
+			<th><label>特权人</label></th>
+			<td>
+				<input type="hidden" id="orgPerId"
+				data-bind="textInput: privilegerIds"> <input type="text"
+				id="editor" data-bind="value: privilegerNames"
+				style="border: 1px solid #ccc; border-radius: 4px; width: 350px;">
+				<button type="button" class="btn btn-default"
+					data-bind="click:  $parent.privilegerSelect.bind($data)">
+					<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+				</button> 
+			</td>
+		</tr>
+	</tbody>
+</table>

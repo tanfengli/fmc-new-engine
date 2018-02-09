@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:nsm="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_ApprovalPersonSrv"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://csb.fmc.vispractice.com/SB_WF_ApprovalPersonSrv">
+	
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation = "../../schemas/fmcMsgHeader.xsd"  />
+	
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request" type="tns:SB_WF_ApprovalPersonSrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="processResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return" type="tns:SB_WF_ApprovalPersonSrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="SB_WF_ApprovalPersonSrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="nsm:MsgHeader" />
+			<xs:element name="WF_INSTANCE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_NODE_ID" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SB_WF_ApprovalPersonSrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_HANDLER_RECORD_COLLECTION" type="tns:Wf_Handler_Record_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Handler_Record_Collection">
+		<xs:sequence>
+			<xs:element name="WF_NODE_ID" type="xs:string" nillable="true" />
+			<xs:element name="WF_NODE_NAME" type="xs:string" nillable="true" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_HANDLER_RECORD" type="tns:WF_Handler_Record" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="WF_Handler_Record">
+		<xs:sequence>
+			<xs:element name="WF_HANDLER_ID" type="xs:string" nillable="true" />
+			<xs:element name="WF_HANDLER_NAME" type="xs:string" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

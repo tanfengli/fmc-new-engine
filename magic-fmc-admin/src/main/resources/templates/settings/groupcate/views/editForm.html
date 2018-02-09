@@ -1,0 +1,18 @@
+<meta charset="UTF-8">
+
+<table class="table table-bordered table-hover" data-bind="with: formItem" style="margin-top: 2px;">
+	<tr>
+		<th>类别名称</th>
+		<td><input class="form-control" type="text" data-bind="value: fdName" id="edit"></td>
+	</tr>
+	<tr>
+		<th>创建时间</th>
+		<td data-bind="text: fdCreateTime"></td>
+	</tr>
+	<tr>
+		<th>[[#{edit}]]时间</th>
+		<td data-bind="text: fdAlterTime"></td>
+	</tr>
+</table>
+
+<button style="float: right;" type="button" class="btn btn-primary"  data-bind="click: saveOrUpdateList">[[#{save}]]</button>

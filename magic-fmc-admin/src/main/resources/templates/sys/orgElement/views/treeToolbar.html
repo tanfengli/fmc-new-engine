@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<div class="btn-group margin-right-sm">
+
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		<i class="fa fa-plus"></i>[[#{add}]]<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu">
+		<li data-bind="css:{disabled: $root.selectNodeType()!='1'},click: function(){if($root.selectNodeType()=='1')$parent.addTreeNode(1)}">
+		   <a href="#"><i class="fa fa-users" aria-hidden="true"></i>增加机构</a>
+		</li>
+		<li data-bind="css:{disabled: $root.selectNodeType()=='4'||$root.selectNodeType()=='8'},click: function(){if($root.selectNodeType()=='1'){$parent.addTreeNode(2)}else if($root.selectNodeType()=='2'){$parent.addTreeNode(2)}}">
+		   <a href="#"><i class="fa fa-university" aria-hidden="true"></i>增加部门</a>
+		</li>
+		<li data-bind="css:{disabled: $root.selectNodeType()=='8'},click: function(){if($root.selectNodeType()!='8')$parent.addTreeNode(4)}">
+		   <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>增加岗位</a>
+		</li>
+		<li data-bind="css:{disabled: $root.selectNodeType()=='8'},click: function(){if($root.selectNodeType()!='8')$parent.addTreeNode(8)}">
+		   <a href="#" id="person"><i class="fa fa-user" aria-hidden="true"></i>增加人员</a>
+		</li>
+	</ul>
+
+	<button type="button" class="btn btn-default" data-bind="click: removeNode">
+		<i class="fa fa-trash-o"></i>[[#{delete}]]
+	</button>
+	<!-- <button type="button" class="btn btn-default" data-bind="click: function(){$('#treeSelectPerWindow').modal();}">
+		<i class="fa fa-hand-rock-o" aria-hidden="true"></i>閫夋嫨
+	</button> -->
+</div>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+	</head>
+	<body>
+		<div data-bind="component:{name:'page-title'}">接口查询</div>
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'anonymous_ws_searchForm_html',data:searchForm}"></div>
+		</div>
+		<div data-bind="template:{name:'anonymous_ws_gridToolbar_html'}"></div>
+		<div data-bind="template:{name:'anonymous_ws_datagrid_html',data:gridModel}"></div>
+		<div data-bind="template:{name:'anonymous_ws_editWindow_html',data:interfaceForm}"></div>
+
+		<script type="text/javascript" th:src="@{/js/anonymous/ws/main.js}" src="/js/anonymous/ws/main.js"></script>
+	</body>
+</html>

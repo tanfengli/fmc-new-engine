@@ -1,0 +1,44 @@
+<meta charset="UTF-8">
+
+
+<table class="table table-bordered" style="margin-top: -5px">
+	<thead>
+		<tr>
+		<th class="col-xs-3">节点权限</th>
+		<th class="col-xs-3">可修改的节点</th>
+		<th class="col-xs-3">必须修改的节点
+		 <input type="hidden" name="authorityModIndex" id="authorityModIndex"   />
+		   <span hidden="hidden" id="reviewModify" data-bind="click:computeReview.bind($data,$('#authorityModIndex').val())"></span> 
+		</th>
+		
+	    <th class="col-xs-3">可修改的流程
+		   
+		</th> 
+		</tr>
+	</thead>
+	<tbody data-bind="foreach:reviewNodeData">
+		<tr>
+			<td data-bind="text:name+'('+id+')'"></td>
+			<td>
+			<input type="hidden" name="canModifyHandlerNodeIds"  data-bind="value: canModifyHandlerNodeIds"/>
+                       <textarea   name="canModifyHandlerNodeNames"data-bind="value: canModifyHandlerNodeNames"> 
+                       
+                       </textarea> 
+                       <a href="#" data-bind="click: function(){$('#authorityModIndex').val('authorityCanModi'+$index());  $('#reviewNodeWin').modal();$('#reviewModify').click()}">
+		                                                             选择 </a>
+			</td>
+			<td>
+			 <input type="hidden" name="mustModifyHandlerNodeIds"  data-bind="value: mustModifyHandlerNodeIds"/>
+			 <textarea  name="mustModifyHandlerNodeNames"data-bind="value: mustModifyHandlerNodeNames"> 
+                       </textarea> 
+                       <a href="#" data-bind="click: function(){$('#authorityModIndex').val('authorityMustMod'+$index());$('#reviewNodeWin').modal();$('#reviewModify').click()}">
+		                                                             选择 </a>
+			</td>
+			 <td>
+
+			 <input type="checkbox" value="true" name="canModifyFlow" data-bind="value:canModifyFlow"/> 是   &nbsp;&nbsp;
+			 
+			 </td>  
+		 </tr>
+	</tbody>
+</table>

@@ -1,0 +1,143 @@
+<meta charset="UTF-8">
+
+<div class="col-xs-12">
+	<div class="nav-tab-title">
+		<ul id="firstTab" class="nav">
+			<li class="active"><a href="#basic" data-toggle="tab">基本信息</a></li>
+			<li class=""><a id="lct_edit" href="#process" data-toggle="tab">流程配置</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content" >
+			<div class="tab-pane active in" id="basic">
+				<table class="table table-bordered" data-bind="with:formItem">
+					<tbody>
+						<tr>
+							<td>类别名称</td>
+							<td>
+								<div class="col-xs-10">
+									<input id="cate" type="text" class="form-control"
+										data-bind="textInput:categoryName">
+								</div>
+								<div class="col-xs-2">
+									<button type="button" class="btn btn-default"
+										data-bind="click:function(){$('#templateSelectWindow').modal();}">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+									</button>
+								</div>
+							</td>
+							<td>模板名称</td>
+							<td>
+								<input type="text" class="form-control" data-bind="textInput:fdName">
+							</td>
+						</tr>
+						<tr>
+							<td>所属业务系统</td>
+							<td>
+								<select class="form-control"
+									data-bind="options:busiSysArray,
+									optionsCaption:'--请选择--',
+									optionsText:'fdName',
+									optionsValue:'fdId',
+									value:busiSysId"></select>
+							</td>
+							<td>编号前缀</td>
+							<td>
+								<input type="text" class="form-control" data-bind="textInput:fdNumberPrefix">
+							</td>
+						</tr>
+						<tr>
+							<td>可维护者</td>
+							<td colspan="3">
+								<div class="col-xs-10">
+									<input id="editor" class="form-control">
+								</div>
+								<div class="col-xs-2">
+									<button type="button" class="btn btn-default"
+										data-bind="click:function(){clickType='editor';$('#memberSelectWindow').modal();}">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+									</button>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>可使用者</td>
+							<td colspan="3">
+								<div class="col-xs-10">
+									<input id="reader" class="form-control">
+								</div>
+								<div class="col-xs-2">
+									<button type="button" class="btn btn-default"
+										data-bind="click:function(){clickType='reader';$('#memberSelectWindow').modal();}">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-pane" id="process">
+				<div class="proc-lc-box">
+					<table class="table table-bordered" data-bind="with:formItem">
+						<tr>
+							<th class="col-xs-3">流程运用方式</th>
+							<td>
+								<label>
+									<input type="radio" name="design" checked="checked"><span>自定义</span>
+								</label>
+								<button type="button" class="btn btn-default"
+									data-bind="click:function(){$('#commonTemSelectWindow').modal();}">
+									<i class="fa fa-hand-rock-o" aria-hidden="true"></i>从模板中选择
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th class="col-xs-3">流程说明</th>
+							<td><textarea rows="2" cols="1" class="form-control" data-bind="textInput:description"></textarea></td>
+						</tr>
+						<tr>
+							<th colspan="2"><span class="text-center">流程图</span></th>
+						</tr>
+					</table>
+					<!-- 流程图  -->
+					<div id="flowchart" class="flowchart" style="width:100%;height:500px;"></div>
+					
+					<table class="table table-bordered" data-bind="with: formItem">
+						<tr>
+							<th class="col-xs-3">流程选项</th>
+							<td><input type="checkbox" value="1" data-bind="checked: rejectReturnChe">驳回的节点通过后直接返回本节点（默认值）
+							<input type="checkbox">重新流经节点时重新计算节点处理人（默认值）</td>
+						</tr>
+						<tr>
+							<th class="col-xs-3">流程权限</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="col-xs-3">通知选项</th>
+							<td>通知方式：<label><input type="checkbox"  data-bind="checked: notifyTypeChe" value="todo" style="margin-left:5px;">待办;</label>
+							<label><input type="checkbox" data-bind="checked: notifyOnFinishChe" value="1">流程结束后通知审批人(默认值);</label>
+							<label><input type="checkbox" data-bind="checked: notifyDraftOnFinishChe" value="1">流程结束后通知起草人(默认值);</label>
+							 <span>流程启动</span> <input type="text" data-bind="textInput: dayOfNotifyPrivileger" style="width:50px;"><span>天后未完成则通知特权人</span>
+							</td>
+						</tr>
+						<tr>
+							<th class="col-xs-3">特权人</th>
+							<td><input type="text" class="form-control"></td>
+						</tr>
+						<tr>
+							<th class="col-xs-3">显示历史版本</th>
+							<td><input type="checkbox"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary" data-bind="click: saveOrUpdateList">
+				<span aria-hidden="true">[[#{save}]]</span>
+			</button>
+			<button type="submit" class="btn btn-primary" data-bind="click: $parent.showList">
+				<span aria-hidden="true">返回</span>
+			</button>
+		</div>
+	</div>
+</div>

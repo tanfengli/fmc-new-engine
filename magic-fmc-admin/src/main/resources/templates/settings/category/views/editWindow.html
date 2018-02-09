@@ -1,0 +1,60 @@
+<meta charset="utf-8" />
+
+
+<!-- 模态框（Modal）Start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">[[#{add}]][[#{category}]]</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" id="form" data-bind="with: $data.formItem">
+					<table class="table table-bordered table-hover ">
+						<tr>
+							<!-- <th>类别编码</th>
+							<td><input  class="form-control" type="text"></td> -->
+							<th>类别名称<span style="color: red">*</span></th>
+							<td colspan="3"><input  class="form-control" type="text" data-bind="textInput: fdName"></td>
+						</tr>
+						<tr>
+							<th>可维护者</th>
+							<td><div class="col-xs-8">
+							<input id="editor"  class="form-control" type="text"></div>
+							<div class="col-xs-4 text-right">
+								<button  type="button" class="btn btn-default"
+									data-bind="click: function(){$root.pattern('group');editorClick();}" >
+									<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+								</button></div>
+								 <span hidden="hidden" id="editorArray" data-bind="click: $root.compute.bind($data,editorArray)"></span> 
+								</td>
+							<th>可使用者</th>
+							<td><div class="col-xs-8">
+							<input id="reader"  class="form-control" type="text" ></div>
+								<div class="col-xs-4 text-right">
+								<button  type="button" class="btn btn-default"
+									data-bind="click: function(){$root.pattern('group');readerClick();}" >
+									<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+								</button></div>
+								<span hidden="hidden" id="readerArray" data-bind="click: $root.compute.bind($data,readerArray)"></span>
+								</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" 
+					data-bind="click: saveOrUpdateList">[[#{save}]]</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<!-- 模态框（Modal）End -->
+

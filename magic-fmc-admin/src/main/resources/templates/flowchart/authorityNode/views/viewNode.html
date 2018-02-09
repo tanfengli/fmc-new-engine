@@ -1,0 +1,43 @@
+<meta charset="UTF-8">
+
+
+<table class="table table-bordered" style="margin-top: -5px">
+	<thead>
+		<tr>
+		<th class="col-xs-3">节点权限</th>
+		<th class="col-xs-3">可查看意见的节点</th>
+		<th class="col-xs-3">其他阅读者
+		 <input type="hidden" name="authorityIndex" id="authorityIndex"   />
+		   <span hidden="hidden" id="reviewArrayView" data-bind="click:$parent.computeReview.bind($data,$('#authorityIndex').val())"></span> 
+		   <span hidden="hidden" id="authoryClick" data-bind="click: $parent.authorityReview.bind($data,$('#authorityIndex').val())"></span> 
+		   <span hidden="hidden" id="openWin" data-bind="click: $parent.openWindow.bind($data,'otherCanViewCurNode');"></span> 
+		   
+		
+		</th>
+		 <th class="col-xs-3">可查看权限
+		</th> 
+	</thead>
+	<tbody data-bind="foreach:reviewNodeData">
+		<tr>
+			<td data-bind="text:name+'('+id+')'"></td>
+			<td>
+			<input type="hidden" name="nodeCanViewCurNodeIds"  data-bind="value: nodeCanViewCurNodeIds"/>
+                       <textarea   name="nodeCanViewCurNodeNames"data-bind="value: nodeCanViewCurNodeNames"> 
+                       
+                       </textarea> 
+                       <a href="#" data-bind="click: function(){ $('#authorityIndex').val('authorityCanView'+$index()); $('#reviewNodeWin').modal();$('#reviewArrayView').click()}">
+		                                                             选择 </a>
+			</td>
+			<td>
+			 <input type="hidden" name="otherCanViewCurNodeIds"  data-bind="value: otherCanViewCurNodeIds"/>
+			 <textarea   name="otherCanViewCurNodeNames"data-bind="value: otherCanViewCurNodeNames"> 
+                       </textarea> 
+                       <a href="#" data-bind="click: function(){$('#authorityIndex').val('authorityCanView'+$index()); $('#openWin').click();$('#authoryClick').click();};">
+		                                                             选择 </a>
+			</td>
+			 <td>
+			  <input type="checkbox" value="true" name="canModifyNotionPopedom" data-bind="value: canModifyNotionPopedom"/> 是   &nbsp;&nbsp;
+			 </td> 
+		 </tr>
+	</tbody>
+</table>

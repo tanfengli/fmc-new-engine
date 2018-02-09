@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<betwixt-config>
+	<class
+		name="com.vispractice.fmc.business.entity.sys.workflow.beans.parameter.ProcessParameter">
+		<element name="process-param">
+			<addDefaults />
+		</element>
+	</class>
+	<class
+		name="com.vispractice.fmc.business.entity.sys.workflow.beans.parameter.NodeParameter">
+		<element name="node-param">
+			<addDefaults />
+		</element>
+	</class>
+
+	<class
+		name="com.vispractice.fmc.business.entity.sys.workflow.beans.parameter.WorkitemParameter">
+		<element name="workitem-param">
+			<addDefaults />
+		</element>
+	</class>
+	<class
+		name="com.vispractice.fmc.business.entity.sys.workflow.beans.parameter.WorkitemData">
+		<element name="workitem-data">
+			<addDefaults />
+		</element>
+	</class>
+</betwixt-config>

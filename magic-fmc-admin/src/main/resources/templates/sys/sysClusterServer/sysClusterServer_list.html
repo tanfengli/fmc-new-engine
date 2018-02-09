@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">   
+	</head>
+
+	<body>
+    	<div data-bind="component:{name:'page-title'}">集群信息</div>  
+	 
+		<div class="row" data-bind="if:visibleCatalog"> 
+			<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+				<div data-bind="template:{name:'sys_sysClusterServer_searchForm_html',data:searchForm}"></div>
+			</div>
+			<div data-bind="template:{name:'sys_sysClusterServer_gridToolbar_html'}"></div>
+			<div id="datagrid_panel" data-bind="template:{name:'sys_sysClusterServer_datagrid_html',data:grid}"></div>
+		</div> 
+	
+    	<div id="datagrid_Form" data-bind="template:{name:'sys_sysClusterServer_editWindow_html',data:sysform}"></div>
+    	<div id="config_Form" data-bind="template:{name:'sys_sysClusterServer_editConfigWindow_html',data:sysConfigform}"></div>
+   
+		<script th:src="@{/js/sys/sysClusterServer/main.js}" src="/js/sys/sysClusterServer/main.js"></script>
+	</body>
+</html>

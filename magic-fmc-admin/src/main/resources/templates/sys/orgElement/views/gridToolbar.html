@@ -1,0 +1,22 @@
+<div class="checkbox col-xs-5" style="display: inline-block">
+	组织机构类型：
+		<label class="margin-right-sm"><input type="checkbox" value="1" data-bind="checked: elementSelected">机构</label>
+		<label class="margin-right-sm"><input type="checkbox" value="2" data-bind="checked: elementSelected">部门</label>
+		<label class="margin-right-sm"><input type="checkbox" value="4" data-bind="checked:  elementSelected">岗位</label>
+		<label class="margin-right-sm"><input type="checkbox" value="8" data-bind="checked: elementSelected">人员
+	</label>
+</div>
+<div class="checkbox col-xs-4" style="margin-top: 2px">
+	状态：
+		<label class="margin-right-sm"><input type="checkbox" value="1" data-bind="checked: orgStatus">启用</label>
+		<label class="margin-right-sm"><input type="checkbox" value="0" data-bind="checked: orgStatus">禁用</label>
+</div>
+
+<div class="input-group input-group-xs col-xs-3 pull-right">
+	<input type="text" class="form-control" data-bind="value: filterName" th:attr="placeholder=#{elementSearch}">
+	<span class="input-group-btn">
+		<button class="btn btn-default" type="button">
+			<i class="fa fa-search"></i>
+		</button>
+	</span>
+</div>

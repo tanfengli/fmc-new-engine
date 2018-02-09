@@ -1,0 +1,58 @@
+<meta charset="utf-8">
+
+<!-- 人员列表选择   -->
+<div data-bind='component: {name: "groupMember", params:{data: elementForm, callFunc: addressBookCallback}}'></div> 
+
+<!-- 模拟用户选择  -->
+<div data-bind='component: {name: "orgCommonTree", params:{orgTypeArr: ["1","2","4","8"], callFunc: userSeleteCallback}}'></div> 
+
+<div class="modal-body text-center">
+            <button type="submit" id="btn_submit" data-bind="click: startSimulate" class="btn btn-primary">
+				<i class="fa fa-calculator"></i>开始计算
+			</button>
+</div>
+<div class="padding-left-sm">
+	<table class="table table-bordered">
+		<tr>
+			<th class="col-xs-3">人员列表</th>
+			<td><textarea rows="3" class="form-control" id="personList"></textarea></td>
+		</tr>
+		<tr>
+			<th class="col-xs-3">返回值</th>
+			<td><button type="button" class="btn btn-default"
+						data-bind="click: function() {$('#memberSelectWindow').modal();}">
+					<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+				</button>
+			</td>
+		</tr>
+		<tr>
+			<th class="col-xs-3">模拟用户</th>
+			<td>
+				<div class="col-xs-9">
+					<input class="form-control" type="text" id="simulateUser" data-bind="value: simulatePerson().fdName">
+				</div>
+				<button type="button" class="btn btn-default"
+						data-bind="click: function() {$('#treeSelectPerWindow').modal();}">
+					<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+				</button>
+			</td>
+		</tr>
+		<tr>
+			<th class="col-xs-3">计算结果</th>
+			<td><span data-bind="html: result"></span></td>
+		</tr>
+		<tr>
+			<th class="col-xs-3">说明</th>
+			<td rowspan="5"><p>1.若模拟的用户是一个员工，在查找该员工处于角色线中的位置时，按照以下顺序查找：</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;员工 - 默认岗位（在“重复检查”操作中定义） - 员工所处的岗位 - 员工所处的部门从近到远</p>
+							<br>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;也就是说，若员工在角色线中已经定义，则已经定义的角色就是该员工所处的位置。</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;若没有定义，则查找默认岗位在角色线中是否已经定义，以此类推。</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;注意：若员工处于多个岗位，这多个岗位中若在角色线中已经定义的岗位超过2个，则系统会随机采用其中一个岗位。</p>
+							<br>
+							<p>2.若模拟的用户是一个岗位，在查找该岗位处于角色线中的位置时，按照以下顺序查找：</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;岗位 - 岗位下的员工（仅针对于该岗位下只有一个员工的情况） - 岗位所处的部门从近到远</p>
+			</td>
+		</tr>
+	</table>
+</div>

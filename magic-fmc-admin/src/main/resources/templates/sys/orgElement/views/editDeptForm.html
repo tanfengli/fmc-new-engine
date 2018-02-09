@@ -1,0 +1,110 @@
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+</style>
+<input type="hidden" data-bind="textInput: fdId" class="form-control">   
+<input type="hidden" data-bind="textInput: fdOrgType" class="form-control" value="2"> 
+ <table id="tbUser" class="table table-striped table-bordered table-hover"> 
+   <tbody>
+       <tr>
+         <td> 
+             <label>所属上级</label>  
+         </td>
+         <td colspan="5"> 
+             <input type="hidden" data-bind="textInput: fdParentorgid" class="form-control">   
+	         <input type="text" data-bind="textInput: fdDeptName" class="form-control" readonly="readonly"/>
+             <!-- <span data-bind="text: $root.description"></span> -->
+         </td>
+       </tr> 
+       <tr>
+         <td> 
+             <label for="fdName">部门名称</label><span style="color: red">*</span>  
+         </td>
+         <td> 
+            <input type="text" data-bind="textInput: fdName" class="form-control"> 
+         </td>
+          <td>  
+              <label for="fdNo">编号</label><span style="color: red">*</span>  
+            </td>
+           <td>
+             <input type="text" data-bind="textInput: fdNo" class="form-control"> 
+           </td> 
+       </tr>
+      <!--  <tr>
+          <td>
+               <label for="fdParentorgid">上级部门</label>  
+           </td>
+           <td>
+                <input type="hidden" data-bind="textInput: fdParentorgid" class="form-control"> 
+                <input type="text" data-bind="textInput: fdPersonName" class="form-inline">   
+                <button type="button" style="margin-left:-5px;margin-top:-2px;" class="btn btn-default" 
+                        data-bind="click: function(){$('#treeSelectWindow').modal();}">
+		                <i class="fa fa-search" aria-hidden="true"></i>
+    	        </button>    
+           </td>  
+        </tr> -->
+        <tr>
+           <td>
+               <label for="fdThisLeaderid">部门领导</label>  
+           </td>
+           <td>
+                <input type="hidden" data-bind="textInput: fdThisLeaderid" class="form-control"> 
+                <input type="text" data-bind="textInput: fdThisLeaderName" class="class_input">  
+    	        <button  type="button" class="btn btn-default"
+					data-bind="click: function(){this.selectType='fdThisLeader'; $('#treeSelectPerWindow').modal();}">
+					<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+				</button>  
+           </td>
+           <td>  
+              <label for="fdSuperLeaderid">上级领导</label>  
+            </td>
+           <td>
+               <input type="hidden" data-bind="textInput: fdSuperLeaderid" class="form-control"> 
+               <input type="text" data-bind="textInput: fdSuperLeaderName" class="class_input"> 
+    	       <button  type="button" class="btn btn-default"
+					data-bind="click: function(){this.selectType='fdSuperLeader'; $('#treeSelectPerWindow').modal();}">
+					<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+				</button>  
+           </td> 
+        </tr>
+        <tr>
+           <td>
+               <label for="fdKeyword">关键字</label>  
+           </td>
+           <td>
+                <input type="text" data-bind="textInput: fdKeyword" class="form-control"> 
+           </td>
+           <td>  
+              <label for="fdOrder">排序号</label>  
+            </td>
+           <td>
+             <input type="text" data-bind="textInput: fdOrder" class="form-control"> 
+           </td> 
+        </tr>
+         <tr>
+           <td>
+               <label for="fdIsBusiness">是否业务相关</label>  
+           </td>
+           <td>
+              <input type="radio" name="fdIsBusiness" value="1" data-bind="checked: fdIsBusiness"/> [[#{yes}]] 
+              <input type="radio" name="fdIsBusiness" value="0" data-bind="checked: fdIsBusiness" style="margin-left: 15px"/>[[#{no}]]   
+           </td>
+           <td>  
+              <label for="fdIsAvailable">是否有效</label>  
+            </td>
+           <td>
+             <input type="radio" name="fdIsAvailable" value="1" data-bind="checked: fdIsAvailable"/> [[#{yes}]] 
+             <input type="radio" name="fdIsAvailable" value="0" data-bind="checked: fdIsAvailable" style="margin-left: 15px"/>[[#{no}]]  
+            </td> 
+         </tr> 
+         <tr>
+          <td> 
+         <label for="fdMemo">备注</label>  
+          </td>
+          <td colspan="5">
+             <input type="text" data-bind="textInput: fdMemo" class="form-control"> 
+          </td>
+        </tr>
+       </tbody>
+</table>   

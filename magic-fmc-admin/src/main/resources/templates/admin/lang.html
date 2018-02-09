@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script th:inline="javascript">
+			LangObj={
+				Login:{
+					title:[[#{login.title}]]	
+				},
+				error:{
+					'syserror':[[#{error.10000}]]
+				},
+				org:{
+					org:[[#{org}]],
+					dept:[[#{dept}]],
+					post:[[#{post}]],
+					person:[[#{person}]]
+				},
+				CannotMoveUp:[[#{CannotMoveUp}]]
+			}
+		</script>
+	</body>
+</html>

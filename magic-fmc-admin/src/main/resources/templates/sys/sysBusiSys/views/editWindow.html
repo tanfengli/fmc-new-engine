@@ -1,0 +1,60 @@
+<meta charset="utf-8" />   
+<div class="modal fade" id="sysBusiSysWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"> 
+	<form class="form-horizontal" role="form" data-bind="with:formItem">
+		<div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">业务系统配置维护</h4>
+	            </div>
+	            <div class="modal-body">
+	                <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control">   
+	                <table id="tbUser" class="table table-striped table-bordered table-hover"> 
+                        <tbody> 
+                            <tr>
+                                <td>
+                                    <label for="fdName">系统名称<span style="color:red;">*</span></label>  
+                                </td>
+                                <td>
+                                     <input type="text" data-bind="textInput:fdName" class="form-control">  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="fdCode">系统编码<span style="color:red;">*</span></label>  
+                                 </td>
+                                <td>
+                                    <input type="text" data-bind="textInput:fdCode" class="form-control">  
+                                </td> 
+                            </tr>
+                            <tr> 
+                                <td>
+                                    <label for="fdEnabled">是否启用</label>  
+                                 </td>
+                                <td>
+                                    <input type="radio" name="fdEnabled" value="1" data-bind="checked:fdEnabled" style="margin-left:15px"/>[[#{yes}]] 
+                                    <input type="radio" name="fdEnabled" value="0" data-bind="checked:fdEnabled" style="margin-left:15px"/> [[#{no}]] 
+                                </td>  
+                            </tr> 
+                            <tr> 
+                                <td>
+                                    <label for="fdParameter">参数配置</label>  
+                                 </td>
+                                <td>
+                                	<button type="button" class="btn btn-default" data-bind="click:$root.toDefineParameter">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>自定义参数
+									</button> 
+                                	<input type="hidden" name="fdParameter" data-bind="textInput:fdParameter" class="form-control"> 
+                                </td>  
+                            </tr>  
+                        </tbody>
+                    </table>   
+	            </div>
+	            <div class="modal-footer">
+	                <button type="submit" id="btn_submit" data-bind="click: $parent.saveOrUpdate" class="btn btn-primary"> [[#{save}]]</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal"> [[#{close}]]</button>
+	            </div>
+	        </div>
+		</div>  
+	</form>
+</div>

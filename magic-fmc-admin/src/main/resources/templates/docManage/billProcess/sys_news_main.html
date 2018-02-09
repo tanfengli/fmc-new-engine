@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+	</head>
+	<body>
+		<div id="process">
+			<div data-bind="component:{name:'page-title'}">流程调整</div>
+			<div data-bind="visible:chooseView()=='list'">
+				<div data-bind="component:{name:'searchForm-panel',params:{data:searchForm}}">
+					<div data-bind="template:{name:'docManage_billProcess_searchForm_html',data:searchForm}"></div>
+ 			  	</div>
+
+			  	<!--ko template:{name:'docManage_billProcess_datagrid_html',data:docSubmitId} -->
+ 			  	<!--/ko-->
+			
+			  	<!--ko template:{name:'docManage_billProcess_editWindow_html',data:editForm} -->
+ 			  	<!--/ko-->
+			</div>
+		     
+			<div data-bind="visible:chooseView()=='detail'">
+				<div data-bind='component:{name:"billDetail",params:{data:wfInstanceId,callFunc:toList,initSuccess:toDetailPage}}'></div>
+			</div>
+		</div>
+	    
+		<script type="text/javascript" th:src="@{/js/docManage/billProcess/main.js}" src="/js/docManage/billProcess/main.js"></script>
+	</body>
+</html> 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://csb.fmc.vispractice.com/MsgHeader" 
+	xmlns:tns="http://csb.fmc.vispractice.com/MsgHeader"
+	elementFormDefault="qualified">
+
+	<xs:simpleType name="less_than_30">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="Extend_Param">
+		<xs:sequence>
+			<xs:element name="PARAM_NAME" nillable="true" type="xs:string" />
+			<xs:element name="PARAM_VALUE" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Extend_Param_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="EXTEND_PARAM" type="tns:Extend_Param" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MsgHeader">
+		<xs:sequence>
+			<xs:element name="SOURCE_SYSTEM_ID" type="tns:less_than_30" />
+			<xs:element name="SOURCE_SYSTEM_NAME" type="xs:string" />
+			<xs:element name="USER_ID" type="xs:string" />
+			<xs:element name="USER_NAME" type="xs:string" />
+			<xs:element name="SUBMIT_DATE" type="xs:dateTime" />
+			<xs:element name="PAGE_SIZE" nillable="true" type="xs:decimal" default="10" />
+			<xs:element name="CURRENT_PAGE" nillable="true" type="xs:decimal" default="1"/>
+			<xs:element name="TOTAL_RECORD" nillable="true" type="xs:decimal" />
+			<xs:element name="PROVINCE_CODE" nillable="true" type="xs:string" />
+			<xs:element name="ENVIRONMENT_NAME" nillable="true" type="xs:string" />
+			<xs:element name="EXTEND_PARAM_COLLECTION" type="tns:Extend_Param_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

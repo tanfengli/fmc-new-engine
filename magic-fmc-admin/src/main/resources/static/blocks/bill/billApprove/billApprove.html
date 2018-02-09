@@ -1,0 +1,411 @@
+<meta charset="UTF-8">
+<!-- 选择转交人 -->
+<div data-bind='component:{name:"orgCommonTree",params:{callFunc:selectNewElement,width:"40%",height:"415px"}}'></div>
+		
+<!-- 默认审批语 -->
+<div data-bind='component:{name:"defLanguageMange",params:{callFunc:defLangCallBack}}'></div>
+
+<!-- ko if:isComponentShow()==true -->
+<!-- 节点详情弹窗 -->
+<div data-bind='component:{name:"flowchartView",params:{data:props}}'></div>
+<!-- 地址结构信息 -->
+<div data-bind='component:{name:"groupMember",params:{data:handlerElementForm,pattern:"group",callFunc:orgSelectCallFunc}}'></div>
+<!-- /ko -->
+	
+<!-- 沟通人员选择 -->
+<div data-bind='component:{name:"communicatersSelect",params:{data:elementForm,callFunc:selectMember}}'></div>
+
+<!-- 从备选列表中选择 -->
+<div data-bind='component:{name:"shortlist",params:{data:shortlistForm,callFunc:selectShortlist}}'></div>
+
+<!-- 从公式定义器选择 -->
+<div data-bind='component:{name:"formulaModal",params:{data:formulaForm,callFunc:selectformula,width:"100%",height:"400px"}}'></div>
+
+<div class="col-xs-12">
+	<div class="nav-tab-title" data-bind="template:{foreach:approveForm,afterRender:approveInit}">
+		<ul class="nav" id="approve_main_tab">
+			<li class="active"><a href="#approve_basic" data-toggle="tab">基本信息</a></li>
+			<li class=""><a href="#approve_process" data-toggle="tab">流程</a></li>
+			<li class=""><a href="#approve_permission" data-toggle="tab">权限</a></li>
+		</ul>
+		
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane active in" id="approve_basic">
+				<table class="table table-bordered" data-bind="with:$parent.sysWfBusinessForm().basic">
+					<tbody>
+						<tr>
+							<th style="width:180px">主题</th>
+							<td style="width:38%" data-bind="text:docSubject"></td>
+							<th style="width:180px">流程模板</th>
+							<td style="width:38%" data-bind="text:templateName"></td>
+						</tr>
+						<tr>
+							<th>单据编号</th>
+							<td colspan="3" data-bind="text:applyCode"></td>
+						</tr>
+						<tr>
+							<th>所属业务系统</th>
+							<td data-bind="text:busiName"></td>
+							<th>文档重要度</th>
+							<td>
+							<!-- ko if:fdImportance==1 -->
+							<span>普通</span>
+							<!-- /ko -->
+							<!-- ko if:fdImportance==2 -->
+							<span>重要</span>
+							<!-- /ko -->
+							<!-- ko if:fdImportance==3 -->
+							<span>非常重要</span>
+							<!-- /ko -->
+							</td>
+						</tr>
+						<tr>
+							<th>创建者</th>
+							<td data-bind="text:docCreateName"></td>
+							<th>创建时间</th>
+							<td data-bind="text:docCreateTime"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="tab-pane" id="approve_process">
+				<table class="table table-bordered">
+					<tr>
+						<th class="col-xs-2">流程说明</th>
+						<td></td>
+					</tr>
+				</table>
+				
+				<div class="checkbox">
+					<label><input type="checkbox" class="spjl-btn" data-bind="checked:$parent.isApproveInfoShow">显示审批记录</label>
+				</div>
+
+				<!-- 审批记录  -->
+				<div data-bind="visible:$parent.isApproveInfoShow">
+					<div data-bind="template:{name:'docManage_common_list_approvalLog_html',data:$parent.sysWfBusinessForm()}"></div>
+				</div>
+				
+				<table class="table table-bordered" data-bind="with:formItem">
+					<tr data-bind="visible:currWorkItems().length > 1">
+						<th>处理事务</th>
+						<td>
+							<select data-bind="options:currWorkItems,
+							   optionsCaption:'--请选择--',
+					   		   optionsText:function(item){
+									return item.fdNodeNo+'.'+item.fdNodeName+'('+item.fdExpectedName+')';
+							   },
+							   optionsValue:'fdId',
+							   value:fdHandleWorkItemId">
+							</select>
+						</td>
+					</tr>
+
+					<tr>
+						<th class="col-xs-2">操作</th>
+						<td colspan="3">
+							<div data-bind="foreach:oprNames">
+								<label> 
+									<input type="radio" data-bind="value:$data.oprId,checked:$parent.wfResult,click:$parents[2].oprClick.bind($data.oprId)">
+									<span data-bind="text:$data.oprName"></span>
+								</label>
+							</div>
+						</td>
+					</tr>
+					
+					<tr data-bind="visible:wfResult()=='101'||wfResult()=='106'">
+						<th>即将流向</th>
+						<td colspan="3">
+							<select class="form-control" data-bind="options:$parents[1].nextNodeList, 
+								optionsCaption:'--请选择--',
+								optionsText:function(item){
+									var handlerNames=item.handlerNames==undefined?'':'('+item.handlerNames+')';
+									return item.id+'.'+item.name+handlerNames;
+								},
+								optionsValue:'id',
+								value:futureNodeId">
+							</select>
+						</td>
+					</tr>
+					
+					<tr data-bind="visible:wfResult()=='102'">
+						<th>驳回到<span style="color:red">*</span></th>
+						<td colspan="3">
+							<div class="row">
+								<div class="col-xs-4">
+									<select class="form-control" data-bind="options:$parents[1].nextNodeList,
+									   optionsCaption:'--请选择--',
+									   optionsText:'name',
+									   optionsValue:'id',
+									   value:futureNodeId">
+									</select>
+								</div>
+								
+								<div class="col-xs-4">
+									<span class="form-control">
+       									<input type="checkbox" data-bind="checked:refusePassedToThisNode">
+   										驳回的节点通过后直接返回本节点
+   									</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
+					<tr data-bind="visible:wfResult()=='103'">
+						<th>转办人员<span style="color:red">*</span></th>
+						<td colspan="3">
+							<div class="row">
+								<div class="col-xs-4">
+									<div class="input-group">
+										<input class="form-control" type="text" data-bind="value:toOtherHandlerNames">
+								
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default" data-bind="click:function(){$('#treeSelectPerWindow').modal();}">
+												<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+											</button>
+										</span>
+									</div>
+								</div>
+								
+								<div class="col-xs-4">
+									<span class="form-control">
+      									<input type="checkbox" data-bind="checked:refusePassedToThisNode">
+   										转办后返回本节点
+   									</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr data-bind="visible:wfResult()=='104'">
+						<th>沟通人员<span style="color:red">*</span></th>
+						<td colspan="3">
+							<div class="col-xs-6">
+								<input type="text" class="form-control" data-bind="value:commicateHandlerNames">
+							</div>
+				            <button type="button" class="btn btn-default" data-bind="click:function(){$parents[1].selectCommunicaters()}">
+								<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+							</button>
+							
+							<!-- ko if:fdRelationWorkitemId()==null -->
+							<label><input type="checkbox" data-bind="checked:isMutiCommunicate">允许多级沟通</label>
+							<!-- 
+							<label><input type="checkbox" data-bind="checked:isHiddenAuditNote">隐藏沟通意见</label>
+							-->
+							<!-- /ko -->
+						</td>
+					</tr>
+					
+					<tr data-bind="visible:wfResult()=='104'&&isMutiCommunicate()">
+						<th>限制子级沟通范围</th>
+						<td colspan="3">
+							<div class="col-xs-6">
+								<input type="text" class="form-control" data-bind="value:communicateScopeHandlerNames">
+							</div>
+							<button type="button" class="btn btn-default" data-bind="click:function(){$parents[1].openCommunicateWindow()}">
+								<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+							</button>
+						</td>
+					</tr>
+					
+					<tr data-bind="visible:wfResult()=='108'">
+						<th>沟通人员<span style="color:red">*</span></th>
+						<td colspan="3">
+							<!-- ko foreach:communicaterList-->
+							<label>
+								<input type="checkbox" data-bind="checked:$parent.celCommunicaterList,checkedValue:$data">
+								<span data-bind="text:fdName"></span>
+							</label>
+							<!-- /ko -->
+						</td>
+					</tr>
+
+					<tr>
+						<th>常用意见</th>
+						<td colspan="3">
+							<div class="col-xs-9">
+								<select class="form-control" data-bind="options:$parents[1].approvalArray,
+									optionsCaption:'--请选择--',
+									optionsText:'fdUsageContent',
+									optionsValue:'fdUsageContent',
+									value:$parents[1].wfOptionCon">
+								</select>
+							</div>
+							<div class="col-xs-3">
+								<button type="submit" class="btn" data-bind="click:function(){$('#defLanguageMangeWindow').modal();}">
+									<span aria-hidden="true">自定义意见</span>
+								</button>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<th>处理意见</th>
+						<td colspan="3">
+							<textarea rows="3" class="form-control" data-bind="value:wfOptionCon"></textarea>
+						</td>
+					</tr>
+				</table>
+					
+				<table class="table table-bordered" data-bind="with:$parent.sysWfBusinessForm()">
+					<tr>
+						<th class="col-xs-2">
+							<div class="padding-0">
+								<strong>当前处理人：</strong>
+							</div>
+						</th>
+						<td class="col-xs-4">
+							<div class="padding-0">
+								<span data-bind="html:currentHandlerNames"></span>
+							</div>
+						</td>
+						<th class="col-xs-2">
+							<div class="padding-0">
+								<strong>当前节点停留时间：</strong>
+							</div>
+						</th>
+						<td class="col-xs-4">
+							<div class="padding-0">&nbsp;</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<th class="col-xs-2">
+							<div class="padding-0">
+								<strong>已经处理人：</strong>
+							</div>
+						</th>
+						<td colspan="3">
+							<div class="padding-0">
+								<span data-bind="text:historyHandlerNames"></span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+				<div class="checkbox">
+					<label> 
+						<input type="checkbox" class="proc-more-btn" data-bind="checked:$parent.isMoreInfoShow">更多信息
+					</label>
+				</div>
+
+				<div data-bind="visible:$parent.isMoreInfoShow">
+					<div class="proc-more-box proc-more-md">
+						<ul id="approve_process_tab" class="nav">
+							<li class="active"><a href="#approve_process_senior" data-toggle="tab">高级</a></li>
+							<li><a href="#approve_process_flowchart" id="lct_approve" data-toggle="tab">流程图</a></li>
+							<li><a href="#approve_process_node" data-toggle="tab">表格</a></li>
+							<li><a href="#approve_process_log" data-toggle="tab">流转日志</a></li>
+						</ul>
+						
+						<div class="tab-content">
+							<div class="tab-pane active in text-center" id="approve_process_senior" style="overflow:auto;">
+								<table class="table table-bordered" data-bind="with:formItem()">
+									<tr>
+										<th class="col-xs-2">通知选项</th>
+										<td>
+											<label><input type="checkbox" data-bind="checked:notifyOnFinish">&nbsp;流程结束后通知我</label>
+										</td>
+									</tr>
+									<tr data-bind="visible:$parents[1].modifyNodeList().length>0">
+										<th>修改流程信息</th>
+										<td><a data-bind="click:$parents[1].openModifiedNode">修改其他节点处理人</a></td>
+									</tr>
+								</table>
+							</div>
+							
+							<!-- 修改其它节点处理人模态框Start -->
+							<div id="modifyNodeModal" class="modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-md">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+											<h4 class="modal-title">修改其他节点处理人</h4>
+										</div>
+										<div class="modal-body">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th class="col-xs-3">节点</th>
+														<th class="col-xs-6">处理人</th>
+														<th>节点帮助</th>
+													</tr>
+												</thead>
+												<tbody data-bind="foreach:{data:$parent.modifyNodeList,as:'one'}">
+													<tr data-bind="if:id!=$parent.nextNodeId()">
+														<td><span data-bind="text:id"></span>.<span data-bind="text:name"></span></td>
+														<td>
+															<div>
+																<input type="text" class="form-control" data-bind="value:handlerNames,attr:{id:'node_'+id}">
+															</div>
+															<span class="btn-group" style="margin-left:10px;">
+																<button type="button" class="btn btn-default" data-bind="click:$parents[1].seleteByOrg"><ins>从组织架构选择</ins></button>
+																<button type="button" class="btn btn-default" data-bind="click:$parents[1].seleteByShortlist"><ins>从备选列表中选择</ins></button>
+																<button type="button" class="btn btn-default" data-bind="click:$parents[1].seleteByFormula"><ins>使用公式定义器</ins></button>
+															</span>
+														</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary" data-bind="click:$parent.saveModifiedNode">确定</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 修改其它节点处理人模态框End -->
+							
+							<div class="tab-pane text-center" id="approve_process_flowchart" style="overflow:auto;">
+								<div style="margin-top:-10px">
+									<!-- ko if:$parent.isToolbarShow()==true -->
+									<div data-bind="template:{name:'flowchart_toolbar_toolbarView_html',data:$parent.flowchart_approve.toolbar}"></div>
+									<!-- /ko -->
+									<div id="approve_flowchart" class="flowchart" style="width:100%;height:500px;"></div>
+									<div>
+										<span class="alert-info divcss5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;未执行&nbsp;&nbsp;&nbsp;
+										<span class="alert-success divcss5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;已通过&nbsp;&nbsp;&nbsp;
+										<span class="alert-danger divcss5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;当前节点&nbsp;&nbsp;&nbsp;
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="approve_process_node">
+								<div data-bind="template:{name:'docManage_common_list_flowNodeTable_html',data:$parent}"></div>
+							</div>
+							<div class="tab-pane" id="approve_process_log">
+								<div data-bind="template:{name:'docManage_common_list_processTransferLog_html',data:$parent.sysWfBusinessForm}"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane" id="approve_permission">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<th style="width:180px">可阅读者</th>
+							<td>所有用户</td>
+						</tr>
+						<tr>
+							<th>可编辑者</th>
+							<td colspan="3">只有相关人员可以编辑</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary" data-bind="click:$parent.approveForm.saveOrUpdateList">
+				<span aria-hidden="true">提交</span>
+			</button>
+			
+			<button type="submit" class="btn btn-primary" data-bind="click:$parent.toApproveBack">
+				<span aria-hidden="true">返回</span>
+			</button>
+		</div>
+	</div>
+</div>

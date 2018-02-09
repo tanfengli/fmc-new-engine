@@ -1,0 +1,32 @@
+		<!--			审批记录列表 			-->
+
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="col-xs-2">时间</th>
+			<th class="col-xs-2">节点</th>
+			<th class="col-xs-2">操作者</th>
+			<th class="col-xs-2">操作</th>
+			<th class="col-xs-4">处理意见</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: wfLog">
+		<!-- ko if: $data.fdHandlerId!=null -->
+		<tr>
+			<td data-bind="text:fdCreateDate"></td>
+			<td data-bind="text:fdFactNodeName"></td>
+			<td data-bind="text:fdName"></td>
+			<td data-bind="text:fdActionInfo"></td>
+			<td>
+				<!-- ko if: isHideFlag=='1' -->
+				<i>[隐藏]</i>
+				<!-- /ko -->
+				<!-- ko if: isHideFlag=='2' -->
+				<span data-bind="text:fdAuditNote"></span>
+				<!-- /ko -->
+			</td>
+		</tr>
+		<!-- /ko -->
+	</tbody>
+</table>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+		<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js}" 
+			src="/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js"></script> 
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css}"
+			 href="/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css">
+		<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js}"
+			 src="/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	</head>
+	<body>
+		<div data-bind="component:{name:'page-title'}">流程模板管理</div>
+		
+		<div data-bind="visible: window()=='list'">
+			<div class="panel panel-default col-xs-3">
+		   		<div class="panel-heading">模板分类</div>
+			   	<div id="jqxTree_categorySetting" class="ztree" style="background:#FFFFFF;width:100%;height:530px;overflow-y:scroll;overflow-x:auto;"></div>
+			</div>
+			
+			<div class="col-xs-9">
+				<div class="padding-left-sm">
+					<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+						<div data-bind="template:{name:'settings_sysNewsTemplate_searchForm_html',data: searchForm}"></div>
+					</div>
+				</div>
+				<div data-bind="template:{name:'settings_sysNewsTemplate_gridToolbar_html'}"></div> 
+			 	<div id="gridId" data-bind="template:{name:'settings_sysNewsTemplate_datagrid_html',data:gridViewModel}"></div>
+			</div>
+		</div>
+			
+		<div data-bind="visible:window()=='edit'">
+			<div data-bind="template:{name:'settings_sysNewsTemplate_editForm_html',data:editForm,afterRender:afterRender}"></div>
+		</div>
+		
+			 
+		<div data-bind='component:{name:"templateCateTree",params:{callFunc:selectNewCate,width:"200px",height:"280px"}}'></div> 
+			 
+		<div data-bind='component:{name:"commonTemplateTree",params:{callFunc:selectNewTempalte,width:"200px",height:"280px"}}'></div> 
+			 
+		<div data-bind="template:{name:'settings_sysNewsTemplate_templateWindow_html'}"></div>
+		
+		<script type="text/javascript" th:src="@{/js/setting/sysNewsTemplate/main.js}"
+				 src="/js/setting/sysNewsTemplate/main.js"></script>
+	</body>
+</html>

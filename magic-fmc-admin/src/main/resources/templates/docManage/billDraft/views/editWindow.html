@@ -1,0 +1,113 @@
+<meta charset="UTF-8">
+<!--起草人 弹框-->
+<div id="proc-qcr" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">起草人处理</h4>
+			</div>
+			<div class="modal-body">
+				<form data-bind="with:formItem">
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th style="width:100px;">常用意见</th>
+								<td>
+									<select class="form-control" 
+										data-bind="options:$root.approvalArray, 
+										optionsCaption:'--请选择--',
+										optionsText:'fdUsageContent',
+										optionsValue:'fdUsageContent',
+										value:$root.wfOptionCon">
+									</select>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>处理意见</th>
+								<td>
+									<textarea class="form-control" rows="3" data-bind="value:wfOptionCon"></textarea>
+								</td>
+							</tr>
+							
+							<tr data-bind="visible:$root.nodes().length>1">
+								<th>处理事务</th>
+								<td>
+									<select class="form-control" 
+										data-bind="options:$root.nodes, 
+										optionsCaption:'--请选择--',
+										optionsText:function(item){return item.fdFactNodeId + '.' + item.fdFactNodeName},
+										optionsValue:'fdFactNodeId',
+										value:fdHandleNodeId">
+									</select>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>操作<span style="color:red">*</span></th>
+								<td>
+									<!-- ko ifnot:$root.status()=='11' -->
+									<label>
+										<input type="radio" name="qcr-operation" value="202" 
+											data-bind="checked:wfResult,click:$root.oprClick.bind({id:'202'})">
+										催办
+									</label>
+									<label>
+										<input type="radio" name="qcr-operation" value="203" 
+											data-bind="checked:wfResult,click:$root.oprClick.bind({id:'203'})">
+										撤回
+									</label>
+									<!-- /ko -->
+									
+									<label>
+										<input type="radio" name="qcr-operation" value="204" 
+											data-bind="checked:wfResult,click:$root.oprClick.bind({id:'204'})">
+										废弃
+									</label>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>通知选项</th>
+								<td>
+									<label>
+										<input type="checkbox" data-bind="checked:notifyOnFinish" value="true">流程结束后通知我
+									</label>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>当前处理人</th>
+								<td>
+									<div class="padding-0">
+										<span data-bind="text:$root.currentHandlerNames"></span>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>已经处理人</th>
+								<td>
+									<div class="padding-0">
+										<span data-bind="text:$root.historyHandlerNames"></span>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+								<th></th>
+								<td>
+									<input type="button" class="btn btn-base btn-sm" data-dismiss="modal" 
+										data-bind="click:$parent.saveOrUpdateList" value="提交"> 
+									<input type="button" class="btn btn-base btn-sm" data-dismiss="modal"
+										aria-hidden="true" value="关闭">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<div class="header-box clearfix">
+	        <div class="logo pull-left">
+	        	<a th:href="@{/sys/main}" href="/sys/main" target="blank">
+	        		<img class="img-responsive" th:src="@{/images/page-logo.png}" src="/images/page-logo.png"/>
+	       			<span class="logo-text">流程管理中心</span>
+	            </a>
+	        </div>
+	                    
+	        <div class="pull-right header-right">
+	        	<i class="fa fa-home" onclick="javascript:window.location.reload();"></i>
+	        	
+	        	<span th:text="#{welcome}"></span>
+	            <span class="margin-left-sm" th:text="${currentUser}"></span>
+	            <span class="margin-left-sm">
+	            	<i class="fa fa-key" onclick="$('.reset_password').modal();"></i>
+	            </span>
+	            <a th:href="@{/logout}" href="/logout"><i class="fa fa-sign-out"></i>退出</a>
+	        </div>
+	    </div>
+	    
+	    <div th:replace="admin/password"></div>
+	    
+      	<script type="text/javascript">
+	    	requirejs(['../js/common.js'],function(common){
+	    		requirejs(['jquery','domReady!'],function($){
+	    			requirejs(['bootstrap'],function(){
+	    			});
+	    		});
+	    	});
+	    </script>
+	</body>
+</html>

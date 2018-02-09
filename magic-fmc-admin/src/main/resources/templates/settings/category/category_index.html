@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+	<div data-bind="component: {name: 'page-title'}">[[#{templateCategory}]]</div>
+
+	<div class="row-fluid">
+
+		<div data-bind="template:{name:'settings_category_treeToolbar_html', data: categoryTree }"></div>
+
+		<div class="panel panel-default col-xs-3">
+			<div class="panel-heading">[[#{templateCategory}]]</div>
+			<div id="categoryTree" class="ztree" style="background: #FFFFFF; width: 100%;height:480px;overflow-y:scroll;overflow-x:auto;"></div>
+		</div>
+
+		<div class="col-xs-9" style="margin-top: -2px;">
+			<div id="categoryGrid" data-bind="template:{name:'settings_category_dataGrid_html', data: gridViewModel }"></div>
+		</div>
+
+	</div>
+
+	<div
+		data-bind='component: {name: "groupMember", params:{data: elementForm , pattern: pattern,callFunc: selectNewElement,  height: "280px"}}'></div>
+
+	<div id="add_Form"
+		data-bind="template:{name:'settings_category_editWindow_html', data: addForm }"></div>
+
+
+
+
+	<script type="text/javascript" th:src="@{/js/setting/category/main.js}"
+			 src="/js/setting/category/main.js"></script>
+</body>
+</html>

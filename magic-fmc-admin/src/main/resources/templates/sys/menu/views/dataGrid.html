@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<div class="padding-left-sm">
+<div class="col-xs-12">
+
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th class="col-xs-2">菜单名称</th>
+				<th class="col-xs-5">链接地址</th>
+				<th class="col-xs-3">描述</th>
+				<th class="col-xs-2">[[#{operation}]]</th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: {data: data.content, as: 'sysMenu'}">
+			<tr>
+				<td data-bind="text: fdName"></td>
+				<td data-bind="text: linkUrl"></td>
+				<td data-bind="text: fdDescription"></td>
+				<td><div class="btn-group">
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){$parent.editOne(sysMenu)}">
+							<i class="fa fa-pencil" aria-hidden="true"></i>[[#{edit}]]
+						</button>
+					</div></td>
+			</tr>
+		</tbody>
+		<tfoot data-bind="visible: !data.content().length > 0">
+			<tr>
+				<td colspan="7">[[#{nodata}]]</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div
+		data-bind='visible: data.content().length > 0,
+			component: {name: "grid-pagination", params:{data: data, toPage: toPage}}'></div>
+</div>
+
+</div>
+

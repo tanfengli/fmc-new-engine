@@ -1,0 +1,114 @@
+<meta charset="utf-8" />   
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+ .left_td{
+     background: #f5f5f5;
+     text-align: left;
+     width:15%
+ }   
+</style>
+<div> 
+	<form class="form-horizontal" role="form" data-bind="visible:$parent.editFlag" >
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">并行分支</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>节点名</label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name" > 
+                   </td> 
+                     
+              </tr>  
+               <tr>
+                   <td class="left_td">
+                       <label>结束类型</label>  
+                   </td>
+                   <td>
+                    <input type="radio"   name="joinType"  data-bind="checked: joinType,click:selectJoinFlag(false)"  value="all"  /> 全部结束  &nbsp;&nbsp;
+	                <input type="radio"   name="joinType"  data-bind="checked: joinType,click:selectJoinFlag(false)" value="anyone"  /> 任意结束   
+	                <input type="radio"   name="joinType"  data-bind="checked: joinType,click:selectJoinFlag(true)" value="formula" /> 公式定义器   <br/>
+	                
+	                 <!-- ko if:  joinType=='formula' --> 
+	                <span hidden="hidden"  data-bind="click:selectJoinFlag(true)"></span>
+	                   <!-- /ko -->
+	                <!-- ko if: joinType!='formula' -->
+	                <span hidden="hidden"  data-bind="click:selectJoinFlag(false)"></span>
+	                   <!-- /ko -->
+	                <div id="formula" data-bind="visible:joinFlag()">
+	                   <input type="hidden"  class="form-control"  id="formulaJoinTypeValue" data-bind="value: formulaJoinTypeValue"> 
+                       <input type="text" class="class_input"  	 id="formulaJoinTypeText" data-bind="value: formulaJoinTypeText" style="width:350px" > 
+                       <input type="button" value="公式定义器"  data-bind="click: function(){this.selectType='joinLine' ; $('#formulaModal').modal();$('#handleIdArr').click()}">
+	                                 	   <span hidden="hidden" id="handleIdArr" data-bind="click: $parent.formulaHandler.bind($data,formulaJoinTypeText)"></span> 
+	                </div>
+	                
+                   </td> 
+                     
+              </tr>  
+               <tr>
+                   <td class="left_td">
+                       <label>提示</label>  
+                   </td>
+                   <td colspan="">
+                       <span>可以通过并行结束节点，结束并行流程。全部结束表示等待全部分支都结束，任意结束表示任意分支先结束就结束并行，公式定义可以通过公式判断是否结束并行分支。</span>    
+                   </td> 
+               </tr>  
+           </tbody>
+        </table>
+        
+	</form>
+	
+	
+	
+	
+	
+	<!-- ko if: !$parent.editFlag  -->
+	<form class="form-horizontal" role="form"  data-bind="visible:!$parent.editFlag">
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">并行分支</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>节点名</label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name" disabled="disabled"> 
+                   </td> 
+                     
+              </tr>  
+               <tr>
+                   <td class="left_td">
+                       <label>结束类型</label>  
+                   </td>
+                   <td>
+                    <input type="radio"   name="joinType"  data-bind="checked: joinType"  value="all" disabled="disabled"/> 全部结束  &nbsp;&nbsp;
+	                <input type="radio"   name="joinType"  data-bind="checked: joinType" value="anyone" disabled="disabled"/> 任意结束   
+	                <input type="radio"   name="joinType"  data-bind="checked: joinType" value="formula" disabled="disabled"/> 公式定义器   <br/>
+	                <div id="formula" style="display:none">
+                       <input type="text" class="class_input"  	 id="formulaJoinTypeText" data-bind="value: formulaJoinTypeText" style="width:350px" disabled="disabled"> 
+	                </div>
+	                
+                   </td> 
+                     
+              </tr>  
+               <tr>
+                   <td class="left_td">
+                       <label>提示</label>  
+                   </td>
+                   <td colspan="">
+                       <span>可以通过并行结束节点，结束并行流程。全部结束表示等待全部分支都结束，任意结束表示任意分支先结束就结束并行，公式定义可以通过公式判断是否结束并行分支。</span>    
+                   </td> 
+               </tr>  
+           </tbody>
+        </table>
+        
+	</form>
+	 <!-- /ko -->
+</div>

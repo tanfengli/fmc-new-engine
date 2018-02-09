@@ -1,0 +1,81 @@
+<meta charset="utf-8" />   
+<style>
+  td {
+    text-align: center
+  }
+</style> 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"> 
+	<form class="form-horizontal" role="form" data-bind="with: formItem">
+		<div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">错误日志详情</h4>
+	            </div>
+	            <div class="modal-body">
+	                <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control" id="fdId">   
+	                <table id="tbUser" class="table table-striped table-bordered table-hover"> 
+                        <tbody>
+                            <tr>
+                              <td width="25%"> 
+			                    <label for="fdCreateTime">操作时间</label>  
+                              </td>
+                              <td>
+                                 <input type="text" data-bind="textInput: fdCreateTime" class="form-control" readonly="readonly"> 
+                              </td>
+                              <td width="25%"> 
+			                    <label for="fdIp">IP地址</label>  
+                              </td>
+                              <td>
+                                 <input type="text" data-bind="textInput: fdIp" class="form-control" readonly="readonly"> 
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="25%"> 
+			                    <label for="fdOperator">操作者</label>  
+                              </td>
+                              <td>
+                                 <input type="text" data-bind="textInput: fdOperator" class="form-control" readonly="readonly"> 
+                              </td>
+                              <td width="25%"> 
+			                    <label for="fdOperatorId">操作者ID</label>  
+                              </td>
+                              <td>
+                                 <input type="text" data-bind="textInput: fdOperatorId" class="form-control" readonly="readonly"> 
+                              </td>
+                            </tr> 
+                           <tr>
+                              <td width="25%"> 
+			                    <label for="fdMethod">HTTP请求</label>  
+                              </td>
+                              <td colspan="4">
+                                 <input type="text" data-bind="textInput: fdMethod" class="form-control" readonly="readonly"> 
+                              </td> 
+                           </tr>
+                           <tr>
+                              <td width="25%"> 
+			                    <label for="fdUrl">URL</label>  
+                              </td>
+                              <td colspan="4">
+                                 <input type="text" data-bind="textInput: fdUrl" class="form-control" readonly="readonly"> 
+                              </td> 
+                          </tr>
+                           <tr>
+                              <td width="25%"> 
+			                    <label for="fdErrorInfo">错误信息</label>  
+                              </td>
+                              <td colspan="4">
+                                 <textarea style="resize:none; width:450px; height:400px;" data-bind="textInput: fdErrorInfo" readonly="readonly"></textarea>
+                              </td> 
+                          </tr>
+                      </table>    
+	            </div> 
+	            
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary" data-dismiss="modal"> [[#{close}]]</button>
+	            </div>
+	            
+	        </div>
+		</div>  
+	</form>
+</div>

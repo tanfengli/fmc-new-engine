@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process id="oa" name="全局的OA工作流引擎" detailClass="com.vispractice.fmc.business.entity.sys.workflow.support.detail.OAProcessDetail">
+	<abstract-nodes>
+		<abstract-node id="oaInitNode" name="OA启动节点">
+			<action type="spring" value="oaInitNodeService" />
+		</abstract-node>
+		<abstract-node id="oaDraftNode" name="OA草稿节点">
+			<action type="spring" value="oaDraftNodeService" />
+		</abstract-node>
+		<abstract-node id="oaAuditNode" name="OA审批类节点">
+			<action type="spring" value="oaAuditNodeService" />
+		</abstract-node>
+		<abstract-node id="oaSignNode" name="OA签字类节点">
+			<action type="spring" value="oaSignNodeService" />
+		</abstract-node>
+		<abstract-node id="oaSendNode" name="OA抄送类节点">
+			<action type="spring" value="oaSendNodeService" />
+		</abstract-node>
+		<abstract-node id="oaManualBranchNode" name="OA人工决策分支节点">
+			<action type="spring" value="oaManualBranchNodeService" />
+		</abstract-node>
+		<abstract-node id="oaAutoRunNode" name="OA自动运行节点">
+			<action type="spring" value="oaAutoRunNodeService" />
+		</abstract-node>
+		<abstract-node id="oaRobotNode" name="OA机器人节点">
+			<action type="spring" value="oaRobotNodeService" />
+		</abstract-node>
+		<abstract-node id="oaAutoBranchNode" name="OA条件分支节点">
+			<action type="spring" value="oaAutoBranchNodeService" />
+		</abstract-node>
+		<abstract-node id="oaStartSubProcessNode" name="OA启动子流程节点">
+			<action type="spring" value="oaStartSubProcessNodeService" />
+		</abstract-node>
+		<abstract-node id="oaRecoverSubProcessNode" name="OA回收子流程节点">
+			<action type="spring" value="oaRecoverSubProcessNodeService" />
+		</abstract-node>
+		<abstract-node id="oaSplitNode" name="OA分支节点">
+			<action type="spring" value="oaSplitNodeService" />
+		</abstract-node>
+		<abstract-node id="oaJoinNode" name="OA合并节点">
+			<action type="spring" value="oaJoinNodeService" />
+		</abstract-node>
+		<abstract-node id="oaFinalNode" name="OA结束节点">
+			<action type="spring" value="oaFinalNodeService" />
+		</abstract-node>
+	</abstract-nodes>
+</process>

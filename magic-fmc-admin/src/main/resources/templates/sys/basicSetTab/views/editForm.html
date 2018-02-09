@@ -1,0 +1,57 @@
+<meta charset="utf-8" /> 
+<div> 
+	<form class="form-horizontal" role="form">
+	    <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control" id="fdId">   
+        <table id="tbUser" class="table table-striped table-bordered table-hover"> 
+            <tbody> 
+                <tr>
+                    <td width="10%">
+                        <label for="varName">默认通知方式</label>  
+                    </td>
+                    <td width="35%">
+                       <label>  
+		                   <input type="checkbox" value="1" data-bind="checked: varName"/> 待办
+		                   <input type="checkbox" value="2" data-bind="checked: varName" style="margin-left:10px;"/> 短信
+		                   <input type="checkbox" value="4" data-bind="checked: varName" style="margin-left:10px;"/> 邮件
+                       </label>  
+                    </td>
+                    <td width="10%">
+                        <label for="varName">系统通知方式</label>  
+                     </td>
+                    <td width="35%">
+                       <label>  
+			              <input type="checkbox" value="1" data-bind="checked: varName"/> 待办
+			              <input type="checkbox" value="2" data-bind="checked: varName" style="margin-left:10px;"/> 短信
+			              <input type="checkbox" value="4" data-bind="checked: varName" style="margin-left:10px;"/> 邮件
+			           </label>   
+                    </td> 
+                 </tr>
+                 <tr> 
+                    <td>
+                        <label for="varIsJdbc">流程出错通知人</label>  
+                    </td>
+                    <td style="text-align: left;"> 
+                       <input type="text" data-bind="textInput: varName" style="width: 150px;">   
+                       <input type="checkbox" value="2" data-bind="checked: varName" style="margin-left:10px;"/> 特权人
+                       <input type="checkbox" value="4" data-bind="checked: varName" style="margin-left:10px;"/> 提交人 
+                    </td> 
+                    <td>
+                        <label for="varConnFdId">过期处理</label>  
+                    </td>
+                    <td> 
+                        <span>流程停滞</span><input type="text" data-bind="textInput: varName" style="width: 80px;">
+                        <span>天后置为废弃（为空或0则不废弃）</span>    
+                    </td>
+                 </tr>
+                 <tr>
+                    <td>
+                       <label for="varSql">流程线程池允许最大线程数</label>  
+                    </td>
+                    <td colspan="3">
+                          <input type="text" data-bind="textInput: varSql" class="form-control" style="width: 150px;">  
+                    </td>
+                 </tr> 
+            </tbody>
+       </table>   
+	</form>
+</div>

@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+			<th width="2%"><input type="checkbox" id="selectAll" data-bind="click:checkboxSelect"></th>
+			<th width="5%">[[#{serialNumber}]]</th>
+			<th >主题</th>
+			<th width="12%">单据编号</th>
+			<th width="7%">创建人</th>
+			<th width="8%">创建时间</th>
+			<th width="8%">单据状态</th>
+			<th width="10%">当前节点</th>
+			<th width="10%">当前处理人</th>
+			<th width="11%">[[#{operation}]]</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: {data: data.content, as: 'sysUser'}">
+		<tr>
+			<td><input type="checkbox" name="fdIdArr" data-bind="value: fdId"></td>
+			<td data-bind="text:$index()+1"></td>
+			<td data-bind="text:docSubject"></td>
+			<td data-bind="text:applyCode"></td>
+			<td data-bind="text:creatorUserName"></td>
+			<td width="120px" data-bind="dateConvert:docCreateTime"></td>
+			<td data-bind="text:(docStatus()==0)?'废弃':(docStatus()==10)?'草稿':(docStatus()==20)?'待审':(docStatus()==30)?'完成':'驳回'"></td>
+			<td data-bind="html:nodeNames"></td>
+			<td data-bind="html:dealName"></td>
+			<td width="160px"><div class="btn-group">
+				<button type="button" class="btn btn-default btn-xs" data-bind="click: function(){$parent.editOne(sysUser)}">
+					<i class="fa fa-server" aria-hidden="true"></i>[[#{detail}]]
+				</button> 
+			</div></td>
+		</tr>
+	</tbody>
+	<tfoot  data-bind="visible:!data.content().length>0">
+		<tr>
+			<td colspan="11">[[#{nodata}]]</td>
+		</tr>
+	</tfoot>
+</table>
+
+<div data-bind='visible:data.content().length>0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>

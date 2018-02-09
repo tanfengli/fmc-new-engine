@@ -1,0 +1,112 @@
+<meta charset="utf-8" />   
+<style>
+  td {
+    text-align: center
+  }
+</style>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"> 
+	<form class="form-horizontal" role="form" data-bind="with: formItem">
+		<div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">[[#{varSettingMain}]]</h4>
+	            </div>
+	            <div class="modal-body">
+	                <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control" id="fdId">   
+	                <table id="tbUser" class="table table-striped table-bordered table-hover"> 
+                        <tbody> 
+                            <tr>
+                                <td class="col-xs-2">
+                                    <label for="varUseType">[[#{parameterClass}]]</label>  
+                                </td>
+                                <td  class="col-xs-4">  
+									<select  class="form-control"
+									         data-bind="options: $root.varTypeArray,
+	  							　　　　　　　　　　                                  　optionsText: 'name', 
+	  							                        optionsValue:'id',
+	  							                        value: varUseType">
+									</select>		
+                                </td>
+                                <td  class="col-xs-2">
+                                    <label for="varName">[[#{varName}]]</label>  
+                                 </td>
+                                <td  class="col-xs-4">
+                                    <input type="text" name="varName" data-bind="textInput:varName" class="form-control" id="varName">  
+                                </td> 
+                             </tr>
+                             <tr> 
+                                <td>
+                                    <label for="varIsJdbc">[[#{varIsJdbc}]]</label>  
+                                 </td>
+                                <td colspan="3" style="text-align: left;">
+                                    <input id="isJdbcYes" type="radio" name="varIsJdbc" value="1" data-bind="checked: varIsJdbc,click: function(){$('#showOne').show();$('#showTwo').show();$('#detailOne').hide();$('#detailTwo').hide();return true;}" style="margin-left: 15px"/> [[#{yes}]] 
+                                    <input id="isJdbcNo" type="radio" name="varIsJdbc" value="0" data-bind="checked: varIsJdbc,click: function(){$('#detailOne').show();$('#detailTwo').show();$('#showOne').hide();$('#showTwo').hide();return true;}" style="margin-left: 15px"/> [[#{no}]] 
+                                </td>  
+                             </tr>
+                             
+                             <tr id="showOne">
+                                <td>
+                                    <label for="varConnFdId">[[#{databaseName}]]</label>  
+                                </td>
+                                <td colspan="3">
+							        <select  class="form-control"
+									         data-bind="options: dbcpTypeArray,
+	  							　　　　　　　　　　                                  　optionsText: 'name', 
+	  							                        optionsValue:'id',
+	  							                        value: varConnFdId">
+									</select>		  
+                                </td>
+                             </tr>
+                             <tr id="showTwo">
+                                <td>
+                                   <label for="varSql">[[#{sqlStatement}]]<span style="color: red">*</span></label>  
+                                </td>
+                                <td colspan="3"><!-- 
+                                      <input type="text" name="varSql" data-bind="textInput:varSql" class="form-control" id="varSql" >   -->
+                                      <textarea  data-bind="textInput: varSql" style="height:100px;width:480px;"></textarea>
+                                      <span>for example: select column from table where wfNoColumn</span>
+                                </td>
+                             </tr>
+                             
+                             <tr id="detailOne">
+                                <td>
+                                    <label for="varCode">参数编码或</label>  
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" data-bind="textInput: varCode" class="form-control" id="varCode">  
+							        <span>不含冒号或格式为：SQL:{表名};{变量字段名};{关联code的字段名} </span>   
+                                </td>
+                             </tr>
+                             <tr id="detailTwo">
+                                <td>
+                                   <label for="varType">变量类型 </label>  
+                                </td>
+                                <td colspan="3"> 
+                                   <select class="form-control" name="varType" data-bind="value: varType">
+							            <option value="string" selected="selected">字符</option> 
+							            <option value="number">数字</option> 
+							        </select>  
+                                </td>
+                             </tr>
+                             
+                             <tr>
+                                <td>
+                                    <label for="varStatus">[[#{status}]]</label>  
+                                </td>
+                                <td colspan="3" style="text-align: left;"> 
+                                    <input type="radio" id="statusYes" name="varStatus" value="1" data-bind="checked: varStatus" style="margin-left: 15px"/> [[#{enable}]] 
+                                    <input type="radio" name="varStatus" value="0" data-bind="checked: varStatus" style="margin-left: 15px"/> [[#{disable}]] 
+                                </td> 
+                             </tr>
+                        </tbody>
+                    </table>   
+	            </div>
+	            <div class="modal-footer">
+	                <button type="submit" id="btn_submit" data-bind="click: $parent.saveOrUpdate" class="btn btn-primary" > [[#{save}]]</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal"> [[#{close}]]</button>
+	            </div>
+	        </div>
+		</div>  
+	</form>
+</div>

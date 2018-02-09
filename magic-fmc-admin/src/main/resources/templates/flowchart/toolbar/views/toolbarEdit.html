@@ -1,0 +1,74 @@
+<div class="toolbar-box" style="margin-top:-10px;">
+	<ul class="list-unstyled clearfix">
+		<li>
+			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='point'},click:function(){setMod('point')}" data-toggle="tooltip" title="选择">
+				<img th:src="@{/images/flowchart/toolbar/point.png}" src="/images/flowchart/toolbar/point.png"/>
+			</a>
+		</li>
+	 	<!-- ko if: editable -->
+		<li>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='line'},click:function(){setMod('line')}" data-toggle="tooltip" title="添加连线">
+ 				<img th:src="@{/images/flowchart/toolbar/line.png}" src="/images/flowchart/toolbar/line.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='reviewNode'},click:function(){setMod('reviewNode')}" data-toggle="tooltip" title="添加审批节点">
+ 				<img th:src="@{/images/flowchart/toolbar/review.png}" src="/images/flowchart/toolbar/review.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='signNode'},click:function(){setMod('signNode')}" data-toggle="tooltip" title="添加签字节点">
+ 				<img th:src="@{/images/flowchart/toolbar/sign.png}" src="/images/flowchart/toolbar/sign.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='sendNode'},click:function(){setMod('sendNode')}" data-toggle="tooltip" title="添加抄送节点">
+ 				<img th:src="@{/images/flowchart/toolbar/send.png}" src="/images/flowchart/toolbar/send.png" /></a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='manualBranchNode'},click:function(){setMod('manualBranchNode')}" data-toggle="tooltip" title="添加人工决策节点">
+ 				<img th:src="@{/images/flowchart/toolbar/manualBranch.png}" src="/images/flowchart/toolbar/manualBranch.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='autoBranchNode'},click:function(){setMod('autoBranchNode')}" data-toggle="tooltip" title="添加条件分支">
+ 				<img th:src="@{/images/flowchart/toolbar/autoBranch.png}" src="/images/flowchart/toolbar/autoBranch.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='robotNode'},click:function(){setMod('robotNode')}" data-toggle="tooltip" title="添加机器人节点">
+ 				<img th:src="@{/images/flowchart/toolbar/robot.png}" src="/images/flowchart/toolbar/robot.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='startSubProcessNode'},click:function(){setMod('startSubProcessNode')}" data-toggle="tooltip" title="启动子流程">
+ 				<img th:src="@{/images/flowchart/toolbar/startSubProcessNode.png}" src="/images/flowchart/toolbar/startSubProcessNode.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='recoverSubProcessNode'},click:function(){setMod('recoverSubProcessNode')}" data-toggle="tooltip" title="回收子流程">
+ 				<img th:src="@{/images/flowchart/toolbar/recoverSubProcessNode.png}" src="/images/flowchart/toolbar/recoverSubProcessNode.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="css:{active:getMod()=='splitNode'}, click:function(){setMod('splitNode')}" data-toggle="tooltip" title="添加并行分支">
+ 				<img th:src="@{/images/flowchart/toolbar/split.png}" src="/images/flowchart/toolbar/split.png" />
+ 			</a>
+ 		</li>
+ 		<li>
+ 			<!-- 
+ 			<a href="javascript:void(0);" data-toggle="tooltip" title="复制">
+ 				<img th:src="@{/images/flowchart/toolbar/copy.png}" src="/images/flowchart/toolbar/copy.png"/></a>
+ 			<a href="javascript:void(0);" data-toggle="tooltip" title="粘贴">
+ 				<img th:src="@{/images/flowchart/toolbar/paste.png}" src="/images/flowchart/toolbar/paste.png"/></a> 
+ 			-->
+ 			<a href="javascript:void(0);" data-bind="click:remove" data-toggle="tooltip" title="删除">
+ 				<img th:src="@{/images/flowchart/toolbar/delete.png}" src="/images/flowchart/toolbar/delete.png" />
+ 			</a>
+ 		</li>
+			<!-- /ko -->
+ 		<li>
+ 			<a href="javascript:void(0);" data-bind="click:increaseChart" data-toggle="tooltip" title="放大画布">
+ 				<img th:src="@{/images/flowchart/toolbar/icon15.png}" src="/images/flowchart/toolbar/icon15.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="click:reduceChart" data-toggle="tooltip" title="缩小画布">
+ 				<img th:src="@{/images/flowchart/toolbar/icon16.png}" src="/images/flowchart/toolbar/icon16.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="click:zoomIn" data-toggle="tooltip" title="放大比例">
+ 				<img th:src="@{/images/flowchart/toolbar/icon17.png}" src="/images/flowchart/toolbar/icon17.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-bind="click:zoomOut" data-toggle="tooltip" title="缩小比例">
+ 				<img th:src="@{/images/flowchart/toolbar/icon18.png}" src="/images/flowchart/toolbar/icon18.png" />
+ 			</a>
+ 		</li>
+ 		<li>
+ 			<a href="javascript:void(0);" data-bind="click:checkFlow" data-toggle="tooltip" title="流程检测">
+ 				<img th:src="@{/images/flowchart/toolbar/flowcheck.png}" src="/images/flowchart/toolbar/flowcheck.png" />
+ 			</a>
+ 			<a href="javascript:void(0);" data-toggle="tooltip" title="清屏" data-bind="click:function(){return clear()}"><i class="fa fa-eraser fa-lg" aria-hidden="true"></i></a>
+ 			<!-- <a href="javascript:void(0);" data-toggle="tooltip" title="保存" data-bind="click: save"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i></a> -->
+ 		</li>
+ 	</ul>
+</div>

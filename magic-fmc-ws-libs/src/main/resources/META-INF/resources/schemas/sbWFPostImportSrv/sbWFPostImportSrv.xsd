@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:nsm="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_PostImportSrv"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+	elementFormDefault="qualified" targetNamespace="http://csb.fmc.vispractice.com/SB_WF_PostImportSrv">
+
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation="../../schemas/fmcMsgHeader.xsd" />
+
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request" type="tns:SB_WF_PostImportSrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="processResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return" type="tns:SB_WF_PostImportSrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="SB_WF_PostImportSrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="nsm:MsgHeader" />
+			<xs:element name="WF_POST_COLLECTION" type="tns:Wf_Post_Collection" />
+			<xs:element name="WF_IS_ROLLBACK_ALL" type="xs:integer" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Post_Collection">
+		<xs:sequence>
+			<xs:element name="WF_POST_ITEM" type="tns:Wf_Post_Item" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Post_Item">
+		<xs:sequence>
+			<xs:element name="WF_POST_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_POST_NAME" nillable="true" type="xs:string" />
+			<xs:element name="WF_POST_ORG_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_IMPORT_TYPE" nillable="true" type="xs:integer" />
+			<xs:element name="WF_POST_ORDER" nillable="true" type="xs:integer" />
+			<xs:element name="WF_POST_IS_AVAILABLE" nillable="true" type="xs:integer" />
+			<xs:element name="WF_POST_IS_BUSINESS" nillable="true" type="xs:integer" />
+			<xs:element name="WF_POST_MEMO" nillable="true" type="xs:string" />
+			<xs:element name="WF_POST_PERSON_COLLECTION" type="tns:Wf_Post_Person_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Post_Person_Collection">
+		<xs:sequence>
+			<xs:element name="WF_PERSON_NO" nillable="true" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SB_WF_PostImportSrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element name="ROLLBACK_POST_NO_COLLECTION" type="tns:Rollback_Post_No_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Rollback_Post_No_Collection">
+		<xs:sequence>
+			<xs:element name="WF_POST_NO" type="xs:string" nillable="true" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

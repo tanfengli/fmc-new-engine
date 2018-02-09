@@ -1,0 +1,55 @@
+
+
+<table class="table table-bordered">
+  <tr>
+    <th class="col-xs-2">已阅人员</th>
+    <td data-bind="text: readerNames"></td>
+  </tr>
+</table>
+
+<!-- ko with: $parent.readGrid -->
+<table class="table table-bordered table-hover table-striped">
+	<caption>阅读记录</caption>
+	<thead>
+		<tr>
+			<th class="col-xs-1">[[#{serialNumber}]]</th>
+			<th class="col-xs-3">阅读人</th>
+			<th class="col-xs-3">阅读时间</th>
+			<th class="col-xs-3">部门</th>
+			<th class="col-xs-2">阅读阶段</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: {data: data.content, as: 'sysUser'}">
+		<tr>
+			<td data-bind="text:$index()+1"></td>
+			<td data-bind="text:fdReaderName"></td>
+			<td data-bind="text:fdReadTime"></td>
+			<td data-bind="text:fdReaderDeptName"></td>
+			<td>
+				<!-- ko if: fdReadType()==1 -->
+				<span>流程中</span>
+				<!-- /ko -->
+				<!-- ko if: fdReadType()==0 -->
+				<span>发布</span>
+				<!-- /ko -->
+			</td>
+		</tr>
+	</tbody>
+	<tfoot  data-bind="visible:!data.content().length>0">
+		<tr>
+			<td colspan="11">[[#{nodata}]]</td>
+		</tr>
+	</tfoot>
+</table>
+
+<div data-bind='visible:data.content().length>0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>
+<!-- /ko -->
+
+<table class="table table-bordered">
+  <tr>
+    <td colspan="11">阅读次数(点击率)仅统计发布阶段的阅读记录</td>
+  </tr>
+</table>
+
+
+

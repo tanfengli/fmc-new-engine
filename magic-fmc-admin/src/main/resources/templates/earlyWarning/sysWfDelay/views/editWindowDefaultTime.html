@@ -1,0 +1,40 @@
+
+
+<div class="modal fade" id="defalutDelayWindow" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel" aria-hidden="true" align="center">
+	<div class="modal-dialog" >
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">[[#{add}]]/[[#{edit}]]默认时长</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" >
+					<table class="table table-bordered " data-bind="with: defalutDelayForm">
+						<tbody>
+							<tr>
+								<th>节点处理时长设置</th>
+								<td><input class="form-control" data-bind="textInput: node_delay"></td>
+							</tr>
+							<tr>
+								<th>流程处理时长</th>
+								<td><input class="form-control" data-bind="textInput: process_delay"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary" data-bind="click: saveDefalutDelay">
+					<span aria-hidden="true">[[#{save}]]</span>
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<!-- 模态框（Modal）End -->

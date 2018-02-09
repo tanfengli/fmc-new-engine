@@ -1,0 +1,37 @@
+<meta charset="UTF-8">
+<style>
+	<!--
+	.btn-mybtn{
+	  padding:1px 2px;
+	  font-size:11px;
+	  line-height:2;
+	  border-radius:3px;
+	  margin-right:-4px;
+	}
+	-->
+</style>
+
+		<form data-bind="with:formItem">
+			<div class="form-group col-xs-6">
+				<label class="control-label col-xs-2" for="title">接口名称</label>
+				<div class="col-xs-6">
+					<input class="form-control" type="text" data-bind="textInput:fdName" />
+				</div>
+			</div>
+			
+			<div class="form-group col-xs-6">
+				<label class="control-label col-xs-3" for="boeCode">接口编号</label>
+				<div class="col-xs-6">
+					<input class="form-control" type="text" data-bind="textInput:fdCode" />
+				</div>
+			</div>
+			
+			<div class="col-xs-12 text-right">
+				<button type="submit" class="btn btn-primary" data-bind="click:$parent.search">
+					<i class="fa fa-search"></i>[[#{search}]]
+				</button>
+				<button class="btn btn-default" data-bind="click:$parent.reset">
+					<i class="fa fa-eraser"></i>[[#{reset}]]
+				</button>
+			</div>
+		</form>

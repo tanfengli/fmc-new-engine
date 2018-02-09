@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:ns="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_GetNodesSrv"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://csb.fmc.vispractice.com/SB_WF_GetNodesSrv">
+
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation="../../schemas/fmcMsgHeader.xsd" />
+
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request" type="tns:SB_WF_GetNodesSrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+		
+	<xs:element name="processResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return" type="tns:SB_WF_GetNodesSrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="SB_WF_GetNodesSrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="ns:MsgHeader" />
+			<xs:element name="WF_TEMPLATE_ID" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_GetNodesSrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element name="SB_WF_NODE_COLLECTION" type="tns:SB_WF_Node_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SB_WF_Node_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_OP_ITEM" type="tns:Wf_OP_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_OP_Item">
+		<xs:sequence>
+			<xs:element name="WF_NODE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_NODE_NAME" nillable="true" type="xs:string" />
+			<xs:element name="WF_NODE_TYPE" nillable="true" type="xs:string" />
+			<xs:element name="WF_BIZ_INFO_TYPE" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

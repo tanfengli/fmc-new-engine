@@ -1,0 +1,86 @@
+<meta charset="UTF-8">
+<style>
+	.inputFileWrapper {
+		height: 80px	
+	}
+	.inputFileWrapper label {
+		display: block;
+		float: left;
+		position: absolute;
+		margin-top: 10px;
+	}
+
+	.inputFileWrapper .filename {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		clip: rect(0, 0, 0, 0);
+	}
+
+	.inputFileWrapper .custorm-style {
+		display: block;
+		width: 390px;
+		height: 30px;
+	}
+
+	.inputFileWrapper .custorm-style .right-button {
+		width: 80px;
+		line-height: 30px;
+		background: #008ac7;
+		color: #fff;
+		display: block;
+		text-align: center;
+		float: right;
+	}
+
+	.inputFileWrapper .custorm-style .left-text {
+		width: 300px;
+		height: 30px;
+		line-height: 30px;
+		display: block;
+		float: left;
+		text-align:left;
+		vertical-align:middle;
+		padding: 0px;
+		border: 1px solid #008ac7;
+		overflow: hidden;
+		-ms-text-overflow: ellipsis;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+</style>
+<div id="template_upload_modal" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal" id="template_upload_form" enctype="multipart/form-data">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	        	<div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                	<span aria-hidden="true">&times;</span>
+	                </button>
+	                <h4 class="modal-title" id="myModalLabel">请选择导入模板文件</h4>
+	            </div>
+	           
+                <div class="modal-body">
+                	<div class="inputFileWrapper">
+	   					<label for="filename">
+	       					<input class="filename" type="file" id="filename" name="filename" 
+	       						accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+	       						data-bind="event:{change:$root.importFileSelect}" />
+	       					<span class="custorm-style">
+	           					<span class="right-button">上传文件</span>
+	           					<span class="left-text" data-bind="text:$root.importFileName"></span>
+	      					</span>
+	   					</label>
+   					</div>
+                </div>
+				
+                <div class="modal-footer">
+                	<button type="button" class="submit btn btn-primary" aria-hidden="true" data-bind="click:$root.callBack">
+                		<span aria-hidden="true">导入</span>
+                	</button> 
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+	        </div>
+	    </div>
+    </form>
+</div>

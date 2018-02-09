@@ -1,0 +1,61 @@
+<!-- header -->
+<meta charset="utf-8">
+<div class="btn-group">
+	<button id="btn_add" type="button" class="btn btn-default"
+		data-bind="click: $parent.toAdd">
+		<i class="fa fa-plus" aria-hidden="true"></i>[[#{add}]]
+	</button>
+</div>
+<div>
+	<div style=" overflow: auto">
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th  width="40px">[[#{serialNumber}]]</th>
+				<th width="130px">群组名称</th>
+				<th>群组成员</th>
+				<th width="65px">是否有效</th>
+				<th width="50px">备注</th>
+				<th width="100px">[[#{operation}]]</th>
+			</tr>
+		</thead>
+		
+		<tbody data-bind="foreach: {data: data.content, as: 'sysUser'}">
+			<tr>
+				<td data-bind="text: $index()+1"></td>
+				<td width="130px" data-bind="text: fdName"></td>
+				<td>
+				<div class="text-ellipsis" data-bind="text: fdMemberName"></div>
+				</td>
+				<td data-bind="text: (fdIsAvailable()==1)?'是':'否'"></td>
+				<td data-bind="text: fdMemo"></td>
+				<td  style="width: 13%;"><div class="btn-group">
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){$parent.editOne(sysUser)}">
+							<i class="fa fa-pencil" aria-hidden="true"></i>[[#{edit}]]
+						</button>
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){$parent.deleteOne(sysUser)}">
+							<i class="fa fa-trash-o" aria-hidden="true"></i>[[#{delete}]]
+						</button>
+					</div></td>
+			</tr>
+		</tbody>
+		<tfoot data-bind="visible: !data.content().length > 0">
+			<tr>
+				<td colspan="8">[[#{nodata}]]</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div
+		data-bind='visible: data.content().length > 0,
+				component: {name: "grid-pagination", params:{data: data, toPage: toPage}}'></div>
+
+</div>
+</div>
+
+<!-- header -->
+
+
+
+

@@ -1,0 +1,191 @@
+<meta charset="utf-8" />   
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+ .left_td{
+     background: #f5f5f5;
+     text-align: left;
+     width:15%
+ }   
+</style>
+<div> 
+	<form class="form-horizontal" role="form"  data-bind="visible:$parent.editFlag">
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">节点信息</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>节点名</label>  
+                   </td>
+                   <td>
+                   	<input type="hidden" name="conditionText" id="conditionText" />
+                   	   <span hidden="hidden" id="conditionClick" data-bind="click: $parent.formulaHandler.bind($data,$('#conditionText').val())"></span>
+                       <span hidden="hidden" id="conditionClick2" data-bind="click: function(){setIndex($('#conditionText').val())}"></span>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name" > 
+                   </td> 
+                     
+              </tr>  
+              <tr>
+             <tr>
+                   <td class="left_td">
+                       <label>启动类型</label>  
+                   </td>
+                   <td>
+                    <input type="radio"   name="splitType"  data-bind="checked: splitType,click:setSplitType('all')"  value="all"    /> 全部启动  &nbsp;&nbsp;
+	                <input type="radio"   name="splitType"  data-bind="checked: splitType,click:setSplitType('condition')"  value="condition"  /> 公式定义器   <br/>
+	                
+	                <!-- ko if:  splitType=='all' -->
+	                <span hidden="hidden"  data-bind="click:setSplitType('all')"></span>
+	                   <!-- /ko -->
+	                <!-- ko if: splitType=='condition' -->
+	                <span hidden="hidden"  data-bind="click:setSplitType('condition')"></span>
+	                   <!-- /ko -->
+                   </td> 
+                     
+              </tr> 
+              	 
+              <tr id="conditionTr" data-bind="visible:splitFlag() == 'condition'">
+              		<td colspan=2>
+                     <table class="table table-bordered table-hover"> 
+				       <tbody> 
+				          <tr>
+			                   <td class="left_td">
+			                       <label>下一节点</label>  
+			                   </td>
+			                    <td class="left_td">
+			                       <label>连线信息</label>  
+			                   </td>
+			                     <td class="left_td">
+			                       <label>条件公式</label>  
+			                   </td>
+			             </tr>
+			             
+			               <!-- ko foreach: {data:lineData,as:'oper'} -->
+			              
+			               <tr >
+			                <td class="left_td" data-bind="text:endNodeName">
+				              </td>
+				              
+				               <td class="left_td" >
+				               	  <input type="text" class="class_input"  	 id="name" data-bind="value:name"   > 
+				              </td>
+				              
+				                   <td>
+				                       <input type="hidden"  class="form-control"  id="condition" data-bind="value:condition"> 
+				                       <input type="text" class="class_input"  	 id="disCondition" data-bind="value:disCondition" style="width:300px" > 
+				                 
+				                 		<div>
+				                        <div style="float: left">
+				                      	 <input type="button" value="公式定义器"  data-bind="click: function(){$('#conditionText').val($index());$('#formulaModal').modal();$('#conditionClick').click();$('#conditionClick2').click()}">
+	                                 	  </div> 
+	                                 	  <div style="float: right;padding-right:30px">
+	                                 	   <a href="javascript:void(0)" data-bind="click: function(){$parent.upOperation(this)}">[[#{moveUp}]]</a>
+					                 	   <a href="javascript:void(0)" data-bind="click: function(){$parent.downOperation(this)}">[[#{moveDown}]]</a>
+	                                 	  </div>
+				                       </div>
+				                 
+				                   </td>
+				            </tr>
+			               <!-- /ko -->
+                     </tbody>
+                     </table>
+                     </td>
+              </tr> 
+               <tr>
+                   <td class="left_td">
+                       <label>节点帮助</label>  
+                   </td>
+                   <td colspan="">
+                       <span>可以通过并行启动节点，发起并行流程。全部启动表示全部分支都启动，公式定义，可以为每条分支设置启动条件。</span>    
+                   </td> 
+               </tr>  
+           </tbody>
+        </table>
+        
+	</form>
+	
+	
+	
+	
+	<!-- ko if: !$parent.editFlag  -->
+	<form class="form-horizontal" role="form"  data-bind="visible:!$parent.editFlag">
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">连线信息</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>连线名</label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name" disabled="disabled"> 
+                   </td> 
+                     
+              </tr>  
+              <tr>
+             <tr>
+                   <td class="left_td">
+                       <label>启动类型</label>  
+                   </td>
+                   <td>
+                    <input type="radio"   name="splitType"  data-bind="checked: splitType"  value="all"  disabled="disabled"/> 全部启动  &nbsp;&nbsp;
+	                <input type="radio"   name="splitType"  data-bind="checked: splitType"  value="condition" disabled="disabled"/> 公式定义器   <br/>
+                   </td> 
+                     
+              </tr> 
+              
+              <tr id="conditionTr" data-bind="visible:splitFlag() == 'condition'">
+              		<td colspan=2>
+                     <table class="table table-bordered table-hover"> 
+				       <tbody> 
+				          <tr>
+			                   <td class="left_td">
+			                       <label>下一节点</label>  
+			                   </td>
+			                    <td class="left_td">
+			                       <label>连线信息</label>  
+			                   </td>
+			                     <td class="left_td">
+			                       <label>条件公式</label>  
+			                   </td>
+			             </tr>
+			             
+			               <!-- ko foreach: {data:lineData,as:'oper'} -->
+			              
+			               <tr >
+			                <td class="left_td" data-bind="text:endNodeName">
+				              </td>
+				              
+				               <td class="left_td" >
+				               	  <input type="text" class="class_input"  	 id="name" data-bind="value:name"  disabled="disabled"  > 
+				              </td>
+				              
+				                   <td>
+				                       <input type="text" class="class_input"  	 id="disCondition" data-bind="value:disCondition" style="width:300px" disabled="disabled" > 
+				                   </td>
+				            </tr>
+			               <!-- /ko -->
+                     </tbody>
+                     </table>
+                     </td>
+              </tr> 
+              
+              
+               <tr>
+                   <td class="left_td">
+                       <label>节点帮助</label>  
+                   </td>
+                   <td colspan="">
+                       <span>可以通过并行启动节点，发起并行流程。全部启动表示全部分支都启动，公式定义，可以为每条分支设置启动条件。</span>    
+                   </td> 
+               </tr>  
+           </tbody>
+        </table>
+        
+	</form>
+	 <!-- /ko -->
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">   
+	</head>
+	<body>
+	    <div data-bind="component:{name:'page-title'}">业务系统配置</div>   
+		 
+		<div class="row" data-bind="if:visibleCatalog"> 
+			<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+				<div data-bind="template:{name:'sys_sysBusiSys_searchForm_html',data: searchForm}"></div>
+			</div>
+			<div data-bind="template:{name:'sys_sysBusiSys_gridToolbar_html'}"></div>
+			<div id="datagrid_panel" data-bind="template:{name:'sys_sysBusiSys_datagrid_html',data:grid}"></div>
+		</div> 
+		
+	    <div id="datagrid_Form" data-bind="template:{name:'sys_sysBusiSys_editWindow_html',data:sysBusiSysForm}"></div>
+	    
+	    <div data-bind="template:{name:'sys_sysBusiSys_grantInterfaceWindow_html',data:grantInterfaceForm}"></div>
+	
+		<div data-bind="template:{name:'sys_sysBusiSys_grantCallbackWindow_html',data:grantCallbackForm}"></div>
+		
+		<div data-bind='component:{name:"defineParameter",params:{data:parameters,callFunc:parameterCallback,width:"230px",height:"380px"}}'></div> 
+		
+		<script th:src="@{/js/sys/sysBusiSys/main.js}" src="/js/sys/sysBusiSys/main.js"></script>
+	</body>
+</html>

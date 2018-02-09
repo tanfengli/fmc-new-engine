@@ -1,0 +1,97 @@
+<meta charset="utf-8">
+
+<div class="col-xs-12">
+	<div class="nav-tab-title">
+		<ul id="myFirstTab" class="nav">
+			<li class="active"><a href="#basic_detail" data-toggle="tab">基本信息</a></li>
+			<li class=""><a id="lct_detail" href="#process_detail" data-toggle="tab">流程配置</a></li>
+		</ul>
+		<form id="jsForm">
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane active in" id="basic_detail" data-bind="with: $root.detailForm">
+				<table class="table table-bordered" >
+					<tbody>
+						<tr>
+							<td class="col-xs-2">类别名称</td>
+							<td class="col-xs-4"><span data-bind="text: categoryName"></span></td>
+							<td class="col-xs-2">模板名称</td>
+							<td class="col-xs-4"><span data-bind="text: fdName"></span></td>
+						</tr>
+						<tr>
+							<td>所属业务系统</td>
+							<td>
+								<div data-bind="foreach: busiSysArray">
+								<span data-bind="visible: $data.busyId==$parent.busiSysId,text: $data.busyName"></span></div>
+							</td>
+							<td>编号前缀</td>
+							<td><span  data-bind="text: fdNumberPrefix"></span></td>
+						</tr>
+						<tr>
+							<td>业务单据链接</td>
+							<td colspan="3">
+								<span data-bind="text: fdAppLink"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>可维护者</td>
+							<td colspan="3"><span id="editor"></span></td>
+						</tr>
+						<tr>
+							<td>可使用者</td>
+							<td colspan="3"><span id="reader"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-pane" id="process_detail">
+				<div class="proc-lc-box">
+					<table class="table table-bordered" data-bind="with: $root.detailForm">
+						<tr>
+							<th class="col-xs-3">流程运用方式</th>
+							<td><label> <input type="radio" name="design" disabled="disabled"
+									value="default" data-bind="checked: pattern">引用默认模板
+							</label> <label> <input type="radio" name="design" value="other" disabled="disabled"
+									data-bind="checked: pattern">引用其它模板
+							</label> <label> <input type="radio" name="design" value="custom" disabled="disabled"
+									data-bind="checked: pattern" checked="checked">自定义
+							</label>
+							</td>
+						</tr>
+						<tr data-bind="visible: pattern()=='other'">
+							<th>模板</th>
+							<td><div class="col-xs-9">
+							<span class="form-control" data-bind="span: $root.otherTemName"></span></div>
+							</td>
+						</tr>
+					</table>
+					<!-- 流程图  -->
+					
+						<div data-bind="visible: $root.detailForm().pattern()=='custom'" style="margin-top: -10px;">
+							<div id="flowchart_detail" class="flowchart" style="width: 100%; height: 500px;"></div>
+						</div>
+					
+					
+					<table class="table table-bordered" style="margin-top: -5px">
+						<tr>
+							<th class="col-xs-3">显示历史版本</th>
+							<td><input type="checkbox"></td>
+						</tr>
+					</table>
+				
+			</div>
+		</div>
+		</div>
+		
+		<div class="text-right">
+			<button type="button" class="btn btn-primary"
+				data-bind="click: $root.showList">
+				<span aria-hidden="true">返回</span>
+			</button>
+		</div>
+		</form>
+		</div>
+	</div>
+
+
+
+

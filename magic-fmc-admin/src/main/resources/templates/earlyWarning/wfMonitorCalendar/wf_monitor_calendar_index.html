@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	
+	<div data-bind="component: {name: 'page-title'}">工作日历设置</div>
+
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'earlyWarning_wfMonitorCalendar_searchForm_html', data: searchForm}"></div>
+		</div>
+
+		<div data-bind="template:{name:'earlyWarning_wfMonitorCalendar_gridToolbar_html',data: gridToolbarForm}"></div>
+			
+		<div data-bind="template:{name:'earlyWarning_wfMonitorCalendar_datagrid_html', data: gridViewModel}"></div>
+		
+		<div data-bind="template:{name:'earlyWarning_wfMonitorCalendar_editWindow_html', data: editForm}"></div>
+
+	<script type="text/javascript" th:src="@{/js/earlyWarning/wfMonitorCalendar/main.js}" src="/js/earlyWarning/wfMonitorCalendar/main.js"></script>
+
+</body>
+</html>

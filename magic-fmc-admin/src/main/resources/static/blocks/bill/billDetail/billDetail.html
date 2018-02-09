@@ -1,0 +1,186 @@
+<meta charset="UTF-8">
+<!-- ko if:isPageShow()==true -->
+<!-- 流程图节点双击组件  -->
+<div data-bind='component:{name:"flowchartView",params:{data:props_detail}}'></div>
+<!-- /ko -->
+<style>
+<!--
+.divcss5{ 
+width:150px;height:100px; 
+border:1px solid #000; 
+} 
+
+-->
+</style>
+
+<div class="col-xs-12" data-bind="foreach:{data:sysWfBusinessForm,afterRender:afterRender_detail}">
+	<div class="nav-tab-title">
+		<ul id="detailFirstTab" class="nav">
+			<li class="active"><a href="#basic_detail" data-toggle="tab">基本信息</a></li>
+			<li class=""><a id='lct_detail' href="#process_detail" data-toggle="tab">流程</a></li>
+			<li class=""><a href="#permissions_detail" data-toggle="tab">权限</a></li>
+			<li class="">
+				<a href="#read_detail" data-toggle="tab">阅读信息
+					<!-- ko if:readTimes!=null&&readTimes!=0-->
+					(<span data-bind="text:readTimes"></span>)<!-- /ko -->
+				</a>
+			</li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane active in" id="basic_detail">
+				<table class="table table-bordered"
+					data-bind="with:basic">
+					<tbody>
+						<tr>
+							<th style="width:180px">主题</th>
+							<td style="width:38%" data-bind="text:docSubject"></td>
+							<th style="width:180px">流程模板</th>
+							<td style="width:38%" data-bind="text:templateName"></td>
+						</tr>
+						<tr>
+							<th>单据编号</th>
+							<td colspan="3" data-bind="text:applyCode"></td>
+						</tr>
+						<tr>
+							<th>所属业务系统</th>
+							<td data-bind="text:busiName"></td>
+							<th>文档重要度</th>
+							<td>
+							<!-- ko if:fdImportance==1 -->
+							<span>普通</span>
+							<!-- /ko -->
+							<!-- ko if:fdImportance==2 -->
+							<span>重要</span>
+							<!-- /ko -->
+							<!-- ko if:fdImportance==3 -->
+							<span>非常重要</span>
+							<!-- /ko -->
+							</td>
+						</tr>
+						<tr>
+							<th>创建者</th>
+							<td data-bind="text:docCreateName"></td>
+							<th>创建时间</th>
+							<td data-bind="text:docCreateTime"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="tab-pane" id="process_detail">
+				<div class="proc-lc-box">
+					<h5 class="proc-lc-tit">流程说明</h5>
+					<div class="checkbox">
+						<label> 
+							<input type="checkbox" class="spjl-btn" data-bind="checked:$parent.showAppro">显示审批记录
+						</label>
+					</div>
+
+					<!-- 审批记录  -->
+					<div data-bind="visible:$parent.showAppro">
+						<div data-bind="template:{name:'docManage_common_list_approvalLog_html',data:$data}"></div>
+					</div>
+
+					<div>
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<th class="col-xs-2">
+										<div class="padding-0">
+											<strong>当前处理人：</strong>
+										</div>
+									</th>
+									<td class="col-xs-4">
+										<div class="padding-0">
+											<span data-bind="html:currentHandlerNames"></span>
+										</div>
+									</td>
+									<th class="col-xs-2">
+										<div class="padding-0">
+											<strong>当前节点停留时间：</strong>
+										</div>
+									</th>
+									<td class="col-xs-4">
+										<div class="padding-0">&nbsp;</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="col-xs-2">
+										<div class="padding-0">
+											<strong>已经处理人：</strong>
+										</div>
+									</th>
+									<td colspan="3">
+										<div class="padding-0">
+											<span data-bind="text:historyHandlerNames"></span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="checkbox">
+						<label> 
+							<input type="checkbox" class="proc-more-btn" data-bind="checked:$parent.moreInfo">更多信息
+						</label>
+					</div>
+
+					<div data-bind="visible:$parent.moreInfo">
+						<div class="proc-more-box proc-more-md">
+							<ul id="detailSecondTab" class="nav">
+								<li class="active"><a href="#lctdetail" id="lec_detail" data-toggle="tab">流程图</a></li>
+								<li><a href="#bg_detail" data-toggle="tab">表格</a></li>
+								<li><a href="#lzrz_detail" data-toggle="tab">流转日志</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active in text-center" id="lctdetail" style="overflow:auto;">
+									<div style="margin-top:-10px">
+										<!-- ko if: $parent.flowchartInited()==true -->
+										<div data-bind="template:{name:'flowchart_toolbar_toolbarView_html',data:$parent.flowchart_detail.toolbar}"></div>
+										<!-- /ko -->
+										<div id="flowchart_detail" class="flowchart" style="width:100%;height:500px;"></div>
+										<div>
+										<span class="alert-info divcss5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;未执行&nbsp;&nbsp;&nbsp;
+										<span class="alert-success divcss5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;已通过&nbsp;&nbsp;&nbsp;
+										<span class="alert-danger divcss5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;当前节点&nbsp;&nbsp;&nbsp;
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" id="bg_detail">
+									<div data-bind="template:{name:'docManage_common_list_flowNodeTable_html',data:$parent}"></div>
+								</div>
+								<div class="tab-pane" id="lzrz_detail">
+									<div data-bind="template:{name:'docManage_common_list_processTransferLog_html',data:$data}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="tab-pane" id="permissions_detail">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<th style="width:180px">可阅读者</th>
+							<td>所有用户</td>
+						</tr>
+						<tr>
+							<th>可编辑者</th>
+							<td colspan="3">只有相关人员可以编辑</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-pane" id="read_detail">
+				<div data-bind="template:{name:'docManage_common_list_readMessage_html'}"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="text-right">
+		<button type="submit" class="btn btn-primary" data-bind="click:$parent.toBack_detail">
+			<span aria-hidden="true">返回</span>
+		</button>
+	</div>
+</div>

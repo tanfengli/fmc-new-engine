@@ -1,0 +1,58 @@
+<meta charset="utf-8" />
+<!-- *****************详细信息展示Start****************** -->
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">详细信息</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-horizontal" role="form"
+						data-bind="with: formItem">
+						<table class="table table-bordered table-hover master-table">
+							<tr>
+								<td class="col-xs-5">[[#{posName}]]</td>
+								<td data-bind="text:fdName()"></td>
+							</tr>
+							<tr>
+								<td>[[#{dbType}]]</td>
+								<td data-bind="text:fdType()"></td>
+							</tr>
+							<tr>
+								<td>JDBC[[#{driver}]]</td>
+								<td data-bind="text:fdDriver()"></td>
+							</tr>
+							<tr>
+								<td>JDBC[[#{link}]]URL</td>
+								<td data-bind="text:fdUrl()"></td>
+							</tr>
+							<tr>
+								<td>[[#{username}]]</td>
+								<td data-bind="text:fdUsername()"></td>
+							</tr>
+							<tr>
+								<td>[[#{password}]]</td>
+								<td data-bind="text:fdPassword()"></td>
+							</tr>
+							<tr>
+								<td>[[#{describe}]]</td>
+								<td data-bind="text:fdDescription()"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<!-- 模态框（Modal）End -->
+
+
+<!-- *****************详细信息展示End****************** -->

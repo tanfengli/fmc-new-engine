@@ -1,0 +1,52 @@
+<meta charset="utf-8" />   
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel"> 
+	<form class="form-horizontal" role="form" data-bind="with: formItem">
+		<div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">[[#{genPostionMaintain}]]</h4>
+	            </div>
+	            <div class="modal-body">
+	                <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control" id="fdId">  
+	                <div class="form-group" style="margin:10px;padding:5px;">
+	                    <label for="fdName">[[#{positionName}]]<span style="color: red;">*</span></label>  
+	                    <input type="text" name="fdName" data-bind="textInput:fdName" class="form-control" id="fdName">
+	                </div>
+	                <div class="form-group" style="margin:10px;padding:5px;">
+	                    <label for="fdPlugin">[[#{programName}]]<span style="color: red;">*</span></label>
+	                    <input type="text" name="fdPlugin" data-bind="textInput:fdPlugin" class="form-control" id="fdPlugin">
+	                </div>
+	                <div class="form-group" style="margin:10px;padding:5px;">
+	                    <label for="fdParameter">[[#{parameter}]]</label>
+	                    <input type="text" name="fdParameter" data-bind="textInput:fdParameter" class="form-control" id="fdParameter">
+	                </div>
+	                <div class="form-group" style="margin:10px;padding:5px;">       
+	                    <label for="fdRtnValue">[[#{returnValue}]]</label> 
+	                    <br> 
+	                    <input type="checkbox" value="1" data-bind="checked: $parent.selMul"/>[[#{multiValue}]] 
+	                    <input type="checkbox" value="1" data-bind="checked: $parent.elementSelected" />[[#{org}]]
+						<input type="checkbox" value="2" data-bind="checked: $parent.elementSelected" />[[#{dept}]]
+						<input type="checkbox" value="4" data-bind="checked: $parent.elementSelected" />[[#{post}]] 
+						<input type="checkbox" value="8" data-bind="checked: $parent.elementSelected" />[[#{person}]] 
+	                </div>
+	                <div class="form-group" style="margin:10px;padding:5px;">
+	                    <label for="fdIsAvailable">[[#{whetherEffective}]]</label>  
+	                     <select class="form-control" name="fdIsAvailable" data-bind="value:fdIsAvailable"> 
+				            <option value="1">[[#{yes}]]</option>
+				            <option value="0">[[#{no}]]</option> 
+				        </select>  
+	                </div>
+	                <div class="form-group" style="margin:10px;padding:5px;">
+	                    <label for="fdAvctiveFlag">[[#{describe}]]</label>
+	                    <input type="text" name="fdMemo" data-bind="textInput:fdMemo" class="form-control" id="fdMemo">
+	                </div> 
+	            </div>
+	            <div class="modal-footer">
+	                <button type="submit" id="btn_submit" data-bind="click: $parent.saveOrUpdateList" class="btn btn-primary">[[#{save}]]</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+	            </div>
+	        </div>
+		</div>  
+	</form>
+</div>

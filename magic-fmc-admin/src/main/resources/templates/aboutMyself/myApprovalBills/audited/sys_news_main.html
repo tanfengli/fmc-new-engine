@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+	</head>
+	<body>
+		<div data-bind="component:{name:'page-title'}">已办的流程</div>
+		
+		<div data-bind="visible:chooseView()=='list'">
+			<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+				<div data-bind="template:{name:'aboutMyself_myApprovalBills_audited_searchForm_html',data:searchForm}"></div>
+			</div>
+			<div id="docsubmitId" data-bind="template:{name:'aboutMyself_myApprovalBills_audited_datagrid_html',data:docSubmitId}"></div>
+		</div>
+
+		<div data-bind="visible:chooseView()=='detail'">
+			<div data-bind='component:{name:"billDetail",params:{data:wfInstanceId,callFunc:toList,initSuccess:toDetailPage}}'></div>
+		</div>
+			
+		<script type="text/javascript" th:src="@{/js/aboutMyself/myApprovalBills/audited/main.js}" src="/js/aboutMyself/myApprovalBills/audited/main.js"></script>
+	</body>
+</html>

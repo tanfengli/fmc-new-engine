@@ -1,0 +1,146 @@
+<meta charset="UTF-8">
+
+<div class="modal fade" id="memberSelectPerWindow" tabindex="-1" data-backdrop="static"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+	style="z-index: 1111;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" >人员选择</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<div class="select-people-left" style="overflow: auto;width: 30%">
+					<div class="panel-group" id="accordion_memberSelect" >
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion_memberSelect"
+										href="#collapseOne_memberSelect" aria-expanded="false" class="collapsed"><i
+										class="fa fa-user" aria-hidden="true"></i>我的部门 </a>
+								</h4>
+							</div>
+							<div id="collapseOne_memberSelect" class="panel-collapse collapse in"
+								aria-expanded="false">
+								<div id="memberSelectTree" class="ztree" style="background: #FFFFFF; width: 100%;height:300px;overflow-y:scroll;overflow-x:auto;"></div>
+							</div>
+						</div>
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion_memberSelect"
+										href="#collapseTwo_memberSelect" class="collapsed" aria-expanded="false"><i
+										class="fa fa-map-marker" aria-hidden="true"></i>常用地址本 </a>
+								</h4>
+							</div>
+							<div id="collapseTwo_memberSelect" class="panel-collapse collapse"
+								aria-expanded="false">
+								<div class="panel-body">
+									<div>数据源</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapseThree" class="collapsed" aria-expanded="false"><i
+										class="fa fa-sitemap" aria-hidden="true"></i>组织架构</a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse"
+								aria-expanded="false">
+								<div class="panel-body">
+									<div>我的业务</div>
+									<div>待我审批</div>
+									<div>我已审批</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="select-people-right" style="width: 70%">
+					<div class="search-box">
+						<form>
+							<div class="col-xs-12">
+								<label class="col-xs-2 control-label text-left">关建字</label>
+								<div class="col-xs-6">
+									<input type="text" class="form-control" data-bind="value: filterName">
+								</div>
+								<div class="col-xs-4 text-right">
+									<button type="submit" class="btn btn-base btn-sm" data-bind="click: search">搜索</button>
+									<button type="button" class="btn btn-base btn-sm" data-bind="click: reset">清除</button>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<div class="checkbox margin-0">  
+									 <label class="margin-right-sm"> <input type="checkbox" data-bind="checked: searchMode">精确搜索
+									</label>
+								</div>
+							</div>
+							<div class="col-xs-12 select-people-info" >
+								<table class="table table-bordered " >
+									<tbody>
+										<tr>
+											<td colspan="3" style="height: 43px">描述： <div data-bind="html: description"></div></td>
+										</tr>
+										<tr>
+											<td class="text-center">待选列表</td>
+											<td></td>
+											<td class="text-center">已选列表 <i
+												class="fti-icon-long-arrow-down"></i></td>
+										</tr>
+										<tr>
+											<td style="width: 40%">
+												<select style="width: 100%" id="selected1" class="form-control select-people-list select-pp-left" multiple="multiple" data-bind="foreach: {data:leftElement , as: 'one'}">
+													<option data-bind="text: fdName ,click: function(one){$parent.clickMember(one);}" ></option> 
+												</select>
+											</td>
+											<td style="width: 20%">
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: addOne">添加</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: delOne">删除</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: addAll">全部添加</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: delAll">全部删除</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default">上移</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default">下移</button>
+												</p>
+											</td>
+											<td style="width: 40%">
+												<select style="width: 100%" id="selected2" class="form-control select-people-list select-pp-left" multiple="multiple" data-bind="foreach: {data:rightElement , as: 'one'}">
+													<option data-bind="text: fdName ,click: function(one){$parent.clickNewMember(one)}"></option> 
+												</select>
+											</td>
+										</tr>
+
+										<tr>
+											<td colspan="3" class="text-right">
+												<button type="submit" class="btn btn-base" data-dismiss="modal" data-bind="click: passSelectNode">确定</button>
+												<button type="submit" class="btn btn-base" data-dismiss="modal">取消</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+

@@ -1,0 +1,43 @@
+<meta charset="UTF-8">
+
+<div >
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th>[[#{index}]]</th>
+				<th>流程模板</th>
+				<th>流程总时长</th>
+				<!-- <th>通知方式</th>
+				<th>通知模板管理员</th> -->
+				<th class="col-xs-3">[[#{operation}]]</th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: {data: data.content, as: 'time'}">
+			<tr>
+				<td data-bind="text:$index()+1"></td>
+				<td data-bind="text: fdTemplateName"></td>
+				<td data-bind="text: fdDelayTime"></td>
+				<!-- <td data-bind="text: "></td>
+				<td data-bind="text: "></td> -->
+				<td width="340px"><div class="btn-group">
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){$parent.editOne(time)}">
+							<i class="fa fa-pencil" aria-hidden="true"></i>[[#{edit}]]
+						</button>
+						<button type="button" class="btn btn-default" data-bind="click: function(){$parent.deleteById(time)}">
+							<i class="fa fa-trash-o"></i>[[#{delete}]]
+						</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot data-bind="visible: !data.content().length > 0">
+			<tr>
+				<td colspan="10">[[#{nodata}]]</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div
+		data-bind='visible: data.content().length > 0,
+				component: {name: "grid-pagination", params:{data: data, toPage: toPage}}'></div>
+</div>

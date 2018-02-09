@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+			<th width="2%"><input type="checkbox"></th>
+			<th width="5%">[[#{serialNumber}]]</th>
+			<th>接口名称</th>
+			<th width="12%">接口编码</th>
+			<th width="7%">接口地址</th>
+			<th width="11%">[[#{operation}]]</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach:{data:data.content,as:'sysInterface'}">
+		<tr>
+			<td><input type="checkbox" data-bind="value:fdId"></td>
+			<td data-bind="text:$index()+1"></td>
+			<td data-bind="text:fdName"></td>
+			<td data-bind="text:fdCode"></td>
+			<td data-bind="text:fdUrl"></td>
+			<td width="160px">
+				<div class="btn-group">
+					<div class="btn-group"> 
+						<button type="button" class="btn btn-default" data-bind="click:function(){$parent.editOne(sysInterface)}">
+							<i class="fa fa-pencil"></i>[[#{edit}]]
+						</button>
+						<button type="button" class="btn btn-default" data-bind="click:function(){$parent.deleteById(sysInterface)}">
+							<i class="fa fa-trash-o"></i>[[#{delete}]]
+						</button>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+	
+	<tfoot  data-bind="visible:!data.content().length>0">
+		<tr>
+			<td colspan="11">[[#{nodata}]]</td>
+		</tr>
+	</tfoot>
+</table>
+
+<div data-bind='visible:data.content().length>0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>

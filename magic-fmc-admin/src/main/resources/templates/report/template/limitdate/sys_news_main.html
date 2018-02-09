@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js}" 
+			src="/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js"></script> 
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css}"
+	 		href="/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css">
+		<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js}"
+	 		src="/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	</head>
+	<body>
+		<div data-bind="component:{name:'page-title'}">按模板时效统计</div>
+		
+		<div data-bind="visible:chooseView()=='list'">
+			<div data-bind="component:{name:'searchForm-panel',params:{data:sysReportTemplateSearchForm}}">
+				<div data-bind="template:{name:'report_template_limitdate_searchForm_html',data:searchForm,afterRender:$parent.initReportTemplateSearchForm}"></div>
+			</div>
+				
+			<div data-bind="template:{name:'report_template_limitdate_gridToolbar_html',data:sysReportTemplateToolbarForm}"></div>
+	
+			<div data-bind="template:{name:'report_template_limitdate_datagrid_html',data:sysReportTemplateGridForm}"></div>
+		</div>
+		
+		<script type="text/javascript" th:src="@{/js/report/template/limitdate/main.js}" src="/js/report/template/limitdate/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+</head>
+
+<body>
+	<div data-bind="component: {name: 'page-title'}">通用流程模板</div>
+
+	<div data-bind="if: visibleCatalog()=='list'">
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'templateManage_commonTemplate_searchForm_html', data: searchForm}"></div>
+		</div>
+		<div data-bind="template:{name:'templateManage_commonTemplate_gridToolbar_html'}"></div>
+		<div data-bind="template:{name:'templateManage_commonTemplate_datagrid_html',data: grid}"></div>
+	</div>
+
+	<div data-bind="if: visibleCatalog()=='edit'">
+		<div data-bind="template:{name:'templateManage_commonTemplate_editWindow_html', data: form}"></div>
+	</div>
+
+	<div
+		data-bind='component: {name: "groupMember", params:{data: elementForm ,callFunc: selectNewElement, width: "200px", height: "280px"}}'></div>
+
+	<script th:src="@{/js/templateManage/commonTemplate/main.js}"
+		src="/js/templateManage/commonTemplate/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://csb.fmc.vispractice.com/ExtendParamCollection"
+	xmlns:tns="http://csb.fmc.vispractice.com/ExtendParamCollection"
+	elementFormDefault="qualified">
+	<xs:complexType name="Wf_Process_Var_Collection">
+		<xs:sequence>
+			<xs:element name="WF_PROCESS_VAR" type="tns:Wf_Process_Var" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Process_Var">
+		<xs:sequence>
+			<xs:element name="WF_VAR_NAME" type="xs:string" nillable="true" />
+			<xs:element name="WF_VAR_VALUE" type="xs:string" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

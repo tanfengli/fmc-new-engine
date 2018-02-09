@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">   
+</head>
+
+<body>
+    <div data-bind="component: {name: 'page-title'}">[[#{varStting}]]</div>   
+	 
+	<div class="row" data-bind="if: visibleCatalog"> 
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'sys_variableSetting_searchForm_html', data:searchForm}"></div>
+		</div>
+		<div data-bind="template:{name:'sys_variableSetting_gridToolbar_html'}"></div>
+		<div id="datagrid_panel" data-bind="template:{name:'sys_variableSetting_datagrid_html',data: grid}"></div>
+	</div> 
+	
+    <div id="datagrid_Form" data-bind="template:{name:'sys_variableSetting_editWindow_html', data: varform}"></div>
+     
+	<script th:src="@{/js/sys/variableSetting/main.js}" src="/js/sys/variableSetting/main.js"></script>
+
+</body>
+</html>

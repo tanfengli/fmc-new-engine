@@ -1,0 +1,50 @@
+<!-- 		流程图流转节点表格		 -->
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>节点</th>
+			<th>节点名</th>
+			<th>处理人员</th>
+			<th>处理方式</th>
+			<th>流向</th>
+			<th>备注</th>
+		</tr>
+	<thead>
+	<tbody
+		data-bind="foreach:flowNodeList">
+		<tr data-bind="css:{danger:$data.status=='3',success:$data.status=='2',warning:$data.status=='1'},visible:$data.id!='N2'">
+			<td data-bind="text:$data.id"></td>
+			<td data-bind="text:$data.name"></td>
+			<td data-bind="text:$data.handlerNames"></td>
+			<td>
+				<!-- ko if:$data.processType=='0' -->
+				<span>审批：串行</span>
+				<!-- /ko -->
+				<!-- ko if:$data.processType=='1' -->
+				<span>审批：并行</span>
+				<!-- /ko -->
+				<!-- ko if:$data.processType=='2' -->
+				<span>审批：会审</span>
+				<!-- /ko -->
+			</td>
+			<td>
+				<div data-bind="visible:$data.gotoId!=undefined">
+					<span data-bind="text:$data.gotoId"></span>. 
+					<span data-bind="text:$data.gotoName"></span>
+				</div>
+			</td>
+			<td>
+				<!-- ko if:$data.status=='1' -->
+				<span>未执行</span>
+				<!-- /ko -->
+				<!-- ko if:$data.status=='2' -->
+				<span>已通过</span>
+				<!-- /ko -->
+				<!-- ko if:$data.status=='3' -->
+				<span>当前节点</span>
+				<!-- /ko -->
+			</td>
+		</tr>
+	</tbody>
+</table>

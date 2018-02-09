@@ -1,0 +1,168 @@
+<meta charset="UTF-8">
+
+<div class="modal fade" id="addressBookSelectWindow" tabindex="-1" data-backdrop="static"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+	style="z-index: 1111;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" >地址本</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<div class="select-people-left" style="overflow: auto;width: 30%;height: 385px;">
+					<div class="panel-group" id="accordion" >
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapseOne" aria-expanded="false" class="collapsed"><i
+										class="fa fa-user" aria-hidden="true"></i>组织管理</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in"
+								aria-expanded="false">
+								<div id="elementTree_addressBook"  class="ztree" style="border: 0px solid #617775;background: #FFFFFF; width: 100%;height:321px;overflow-y:scroll;overflow-x:auto;"></div>
+							</div>
+						</div>
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapseTwo" class="collapsed" aria-expanded="false"><i
+										class="fa fa-map-marker" aria-hidden="true"></i>常用地址本 </a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse"
+								aria-expanded="false">
+									<div data-bind="visible: pattern() == 'handler'">
+									<div id="addressTree_addressBook"  class="ztree" style="border: 0px solid #617775;background: #FFFFFF; width: 100%;height:321px;overflow-y:scroll;overflow-x:auto;"></div>
+									</div>
+									<div data-bind="visible: pattern() == 'group'||pattern() == 'privileger'">
+									<div id="groupTree_addressBook"  class="ztree" style="border: 0px solid #617775;background: #FFFFFF; width: 100%;height:321px;overflow-y:scroll;overflow-x:auto;"></div>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="select-people-right" style="width: 70%">
+					<div class="search-box">
+						<form data-bind="submit: search">
+							<div class="col-xs-12">
+								<label class="col-xs-2 control-label text-left">关建字</label>
+								<div class="col-xs-6">
+									<input type="text" class="form-control" data-bind="value: filterName">
+								</div>
+								<div class="col-xs-4 text-right">
+									<button type="submit" class="btn btn-base btn-sm" data-bind="click: search">搜索</button>
+									<button type="button" class="btn btn-base btn-sm" data-bind="click: reset">清除</button>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<div class="checkbox margin-0">
+									<div>
+										<!-- ko foreach: orgTypeList -->
+										<label class="margin-right-sm"> 
+										<input type="checkbox" data-bind="checked: $parent.elementSelected,checkedValue: $data">
+										<!-- ko if: $data==1 -->
+										机构
+										<!-- /ko -->
+										<!-- ko if: $data==2 -->
+										部门
+										<!-- /ko -->
+										<!-- ko if: $data==4 -->
+										岗位
+										<!-- /ko -->
+										<!-- ko if: $data==8 -->
+										人员
+										<!-- /ko -->
+										<!-- ko if: $data==16 -->
+										群组
+										<!-- /ko -->
+										<!-- ko if: $data==32 -->
+										角色
+										<!-- /ko -->
+										</label> 
+										<!-- /ko -->
+										<label class="margin-right-sm"> 
+										<input type="checkbox" data-bind="checked: searchMode">精确搜索
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 select-people-info" >
+								<table class="table table-bordered " >
+									<tbody>
+										<tr style="height: 75px;">
+											<td style="padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px;" colSpan="3">
+											描述： <span data-bind="html: description"></span></td>
+										</tr>
+										<tr>
+											<td class="text-center" >待选列表</td>
+											<td></td>
+											<td class="text-center">已选列表 <i
+												class="fti-icon-long-arrow-down"></i></td>
+										</tr>
+										<tr>
+											<td style="width: 40%">
+												<select style="width: 100%" id="select_left" class="form-control select-people-list select-pp-left" multiple="multiple" 
+														data-bind="foreach: {data: leftElement , as: 'one'}, selectedOptions: chosenLeftOptions ">
+													<option data-bind="text: fdName ,
+																	   value: one , 
+																	   click: function(one){$parent.clickMember(one);return true;},
+																	   event: {dblclick: function(one){ $parent.addOne(one); }}
+																	   " >
+													</option> 
+												</select>
+											</td>
+											<td style="width: 20%">
+												<p class="text-center">
+													<button type="button" class="btn btn-primary" data-bind="click: add" style="width: 90%;">添 加</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-primary" data-bind="click: del" style="width: 90%;">删 除</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-primary" data-bind="click: addAll" style="width: 90%;">全部添加</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-primary" data-bind="click: delAll" style="width: 90%;">全部删除</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-xs btn-primary" style="width: 40%;" data-bind="click: upRecord">上移</button>
+													<button type="button" class="btn btn-xs btn-primary" style="width: 40%;" data-bind="click: downRecord">下移</button>
+												</p>
+											</td>
+											<td style="width: 40%">
+												<select style="width: 100%" id="select_right" class="form-control select-people-list select-pp-left" multiple="multiple" 
+												 		data-bind="foreach: {data: rightElement , as: 'one'} , 
+												 				   selectedOptions: chosenRightOptions
+												 				   ">
+													<option data-bind="text: fdName ,
+																	   value: one,
+																	   click: function(one){$parent.clickNewMember(one,$index())},
+																	   event: {dblclick: function(one){ $parent.delOne(one); }}">
+													</option> 
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								
+							</div>
+							<div  class="text-right">
+									<button type="button" class="btn btn-base" data-dismiss="modal" data-bind="click: passSelectNode">确定</button>
+									<button type="button" class="btn btn-base" data-dismiss="modal">取消</button>
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+

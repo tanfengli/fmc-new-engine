@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<div data-bind="component: {name: 'page-title'}">[[#{groupAdmin}]]</div>
+
+	<div class="row">
+
+		<div class="panel panel-default col-xs-3">
+    		<div class="panel-heading">群组分类</div>
+		   	<div id="groupCateTree_groupAdmin" class="ztree" style="background: #FFFFFF; width: 100%;height:480px;overflow-y:scroll;overflow-x:auto;"></div>
+		</div>
+
+		<div class="padding-left-sm col-xs-9" >
+			<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+				<div data-bind="template:{name:'settings_groupadmin_searchForm_html', data: searchForm}"></div>
+			</div>
+
+			<div id="groupadminId"
+				data-bind="template:{name:'settings_groupadmin_list_html', data: groupAdminId}"></div>
+		</div>
+		
+		<div id="groupadminForm" data-bind="template:{name:'settings_groupadmin_editForm_html', data: groupAdminForm}"></div>
+		
+		
+		<div data-bind='component: {name: "groupCateTree", params:{callFunc: selectNewCate, width: "200px", height: "400px"}}'></div>
+
+		<div data-bind='component: {name: "groupMember", params:{data: elementForm, callFunc: selectNewMember, width: "200px", height: "280px"}}'></div>
+
+	</div>
+
+	<script type="text/javascript" th:src="@{/js/setting/groupadmin/main.js}"
+			 src="/js/setting/groupadmin/main.js"></script>
+
+</body>
+</html>

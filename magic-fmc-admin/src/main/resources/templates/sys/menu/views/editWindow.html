@@ -1,0 +1,100 @@
+<meta charset="utf-8" />
+
+<div data-bind='component:{name:"defineParameter",params:{data: $parent.paramList,callFunc: $parent.parameterCallback,width:"230px",height:"380px"}}'></div> 
+
+<!-- 模态框（Modal）Start -->
+<div class="modal fade" id="menuModal" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">[[#{add}]][[#{edit}]]</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" id="form" data-bind="with: formItem">
+					<table class="table table-bordered table-hover ">
+						<tr>
+							<th>菜单类型<span style="color: red">*</span></th>
+							<td colspan="3">
+								<select class="form-control" data-bind="textInput: fdType">
+									<option value="0">---[[#{pleaseSelect}]]---</option>
+									<option value="1">子系统</option>
+									<option value="2">模块</option>
+									<option value="3">菜单</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>菜单名<span style="color: red">*</span></th>
+							<td colspan="3"><input class="form-control" type="text" data-bind="textInput: fdName"></td>
+						</tr>
+						<tr>
+							<th>菜单编码<span style="color: red">*</span></th>
+							<td colspan="3"><input class="form-control" type="text" data-bind="textInput: fdNo"></td>
+						</tr>
+						<tr>
+							<th>链接地址</th>
+							<td>
+								<input class="form-control" type="text" data-bind="textInput: linkUrl">
+							</td>
+						</tr>
+						<tr>
+							<th>是否有效</th>
+							<td>
+								<label><input type="radio" value="1" name="isAvailable" data-bind="checked: fdIsAvailable">是</label>
+								<label><input type="radio" value="0" name="isAvailable" data-bind="checked: fdIsAvailable">否</label>
+							</td>
+						</tr>
+						<tr>
+							<th>是否展开</th>
+							<td>
+								<label><input type="radio" value="1" name="isOpen" data-bind="checked: fdIsOpen">是</label>
+								<label><input type="radio" value="0" name="isOpen" data-bind="checked: fdIsOpen">否</label>
+							</td>
+						</tr>
+						<tr>
+							<th>授权方式</th>
+							<td>
+								<label><input type="radio" value="0" name="authorizeType" data-bind="checked: fdAuthorizeType">菜单授权</label>
+								<label><input type="radio" value="1" name="authorizeType" data-bind="checked: fdAuthorizeType">无需授权</label>
+							</td>
+						</tr>
+						<tr>
+							<th>参数配置</th>
+							<td>
+								<button type="button" class="btn btn-default" data-bind="click:function(){$('#defineParameterWindow').modal();}">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>自定义参数
+									</button> 
+                                	<input type="hidden" name="fdParameter" data-bind="textInput:fdParameter" class="form-control"> 
+							</td>
+						</tr>
+						<tr>
+							<th>路径</th>
+							<td>
+								<input class="form-control" type="text" data-bind="textInput: path">
+							</td>
+						</tr>
+						<tr>
+							<th>描述</th>
+							<td>
+								<textarea rows="3" cols="3" class="form-control" data-bind="textInput: fdDescription"></textarea> 
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" 
+					data-bind="click: function(){saveOrUpdateList()}">[[#{save}]]</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<!-- 模态框（Modal）End -->
+

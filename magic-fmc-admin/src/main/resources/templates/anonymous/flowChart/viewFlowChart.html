@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/css/font-awesome.min.css}" href="/webjars/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/toastr/build/toastr.min.css}" href="/webjars/toastr/build/toastr.min.css" />
+		<link rel="stylesheet" th:href="@{/css/common.css}" href="/css/common.css" />
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+		<script type="text/javascript" th:src="@{/webjars/requirejs/require.js}" src="/webjars/requirejs/require.js"></script>
+	</head>
+	<body>
+		<div class="col-xs-12" data-bind="with:sysWfBusinessForm">
+			<!-- 
+			<input id="fdId" type="hidden" th:value="${fdId}"> 
+			-->
+			
+			<div class="nav-tab-title">
+				<!-- 
+				<ul id="detailFirstTab" class="nav">
+					<li class="active">
+						<a id='lct_detail' href="#process_detail" data-toggle="tab">流程</a>
+					</li>
+				</ul>
+				-->
+				
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane active in">
+						<div class="proc-lc-box">
+							<!--
+							<h5 class="proc-lc-tit">流程说明</h5>
+							
+							<div>
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>时间</th>
+											<th>节点</th>
+											<th>操作者</th>
+											<th>操作</th>
+											<th>处理意见</th>
+										</tr>
+									</thead>
+									<tbody data-bind="foreach:wfLog">
+										<tr>
+											<td data-bind="text:fdCreateDate"></td>
+											<td data-bind="text:fdFactNodeName"></td>
+											<td data-bind="text:fdName"></td>
+											<td data-bind="text:fdActionInfo"></td>
+											<td data-bind="text:fdAuditNote"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							-->
+							
+							<div>
+								<div class="proc-more-box proc-more-md">
+									<!--
+									<ul id="detailSecondTab" class="nav">
+										<li class="active"><a href="#lctdetail" id="lec_detail" data-toggle="tab">流程图</a></li>
+									</ul>
+									-->
+									
+									<div class="tab-content">
+										<div class="tab-pane active in text-center" id="lctdetail" style="overflow:auto;">
+											<div class="toolbar-box" style="margin-top:-10px;">
+												<ul class="list-unstyled clearfix" data-bind="with:$root.flowchart.toolbar">
+											 		<li>
+											 			<a href="javascript:void(0);" data-bind="click:increaseChart" data-toggle="tooltip" title="放大画布">
+											 				<img th:src="@{/images/flowchart/toolbar/icon15.png}" src="/images/flowchart/toolbar/icon15.png"/>
+											 			</a>
+											 			<a href="javascript:void(0);" data-bind="click:reduceChart" data-toggle="tooltip" title="缩小画布">
+											 				<img th:src="@{/images/flowchart/toolbar/icon16.png}" src="/images/flowchart/toolbar/icon16.png"/>
+											 			</a>
+											 			<a href="javascript:void(0);" data-bind="click:zoomIn" data-toggle="tooltip" title="放大比例">
+											 				<img th:src="@{/images/flowchart/toolbar/icon17.png}" src="/images/flowchart/toolbar/icon17.png"/>
+											 			</a>
+											 			<a href="javascript:void(0);" data-bind="click:zoomOut" data-toggle="tooltip" title="缩小比例">
+											 				<img th:src="@{/images/flowchart/toolbar/icon18.png}" src="/images/flowchart/toolbar/icon18.png"/>
+											 			</a>
+											 		</li>
+											 	</ul>
+											</div>
+											
+											<div id="flowchart_detail" class="flowchart" style="width:100%;height:100%;"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" th:src="@{/js/anonymous/flowChart/main.js}" src="/js/anonymous/flowChart/main.js"></script>
+	</body>
+</html>

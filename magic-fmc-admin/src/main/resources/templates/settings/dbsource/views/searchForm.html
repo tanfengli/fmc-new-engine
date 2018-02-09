@@ -1,0 +1,47 @@
+
+<meta charset="UTF-8">
+		<form data-bind="with: formItem">
+			<div class="form-group col-xs-4">
+				<label class="control-label col-xs-2">[[#{posName}]]</label>
+				<div class="col-xs-8">
+					<input class="form-control" id="ds_host" type="text"
+						data-bind="textInput: fdName" />
+				</div>
+			</div>
+			<div class="form-group col-xs-4">
+				<label class="control-label col-xs-4">[[#{dbType}]]</label>
+				<div class="col-xs-8">
+					<select  name="fdType" id="fdType" 
+									data-bind="textInput: fdType" class="form-control">
+										<option value="" selected="selected">[[#{pleaseSelected}]]</option>
+										<option value="Oracle">Oracle</option>
+										<option value="MS SQL Server">MS SQL Server</option>
+										<option value="DB2">DB2</option>
+										<option value="My SQL">My SQL</option>
+										<option value="Sybase">Sybase</option>
+										<option value="Informix">Informix</option>
+										<option value="PostgreSQL">PostgreSQL</option>
+										<option value="ODBC">ODBC</option>
+										<option value="其他">其他</option>
+									</select>
+				</div>
+			</div>
+			<div class="form-group col-xs-4">
+				<label class="control-label col-xs-4">[[#{describe}]]</label>
+				<div class="col-xs-8">
+					<input class="form-control" id="ds_username" type="text"
+						placeholder="" data-bind="textInput: fdDescription" />
+				</div>
+			</div>
+
+			<div class="fti-xs-12 text-right">
+				<button type="submit" class="btn btn-primary"
+					data-bind="click: $parent.search">
+					<i class="fa fa-search"></i>[[#{search}]]
+				</button>
+				<button class="btn btn-default" data-bind="click: $parent.reset">
+					<i class="fa fa-eraser"></i>[[#{reset}]]
+				</button>
+			</div>
+
+		</form>

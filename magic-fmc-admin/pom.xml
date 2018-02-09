@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>magic-fmc-admin</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
+
+	<parent>
+		<groupId>com.vispractice</groupId>
+		<artifactId>magic-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.vispractice</groupId>
+			<artifactId>magic-base-web</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+ <dependency>
+			<groupId>com.vispractice</groupId>
+			<artifactId>magic-fmc-jgroupsreplication</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>  
+
+		<dependency>
+			<groupId>com.vispractice</groupId>
+			<artifactId>magic-fmc-engine</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vispractice</groupId>
+			<artifactId>magic-fmc-task</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- 汉字转拼音 -->
+		<dependency>
+			<groupId>com.github.stuxuhai</groupId>
+			<artifactId>jpinyin</artifactId>
+			<version>1.1.7</version>
+		</dependency>
+
+		<!-- JQUERY异步提交表单 -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery-form</artifactId>
+			<version>3.51</version>
+		</dependency>
+
+		<!-- Jquery Ui -->
+		<!-- <dependency> <groupId>org.webjars</groupId> <artifactId>jquery-ui</artifactId> 
+			<version>1.12.1</version> </dependency> -->
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<force>true</force>
+					<encoding>UTF-8</encoding>
+					<jswarn>false</jswarn>
+					<nosuffix>true</nosuffix>
+					<linebreakpos>-1</linebreakpos>
+					<includes>
+						<include>**/*.js</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

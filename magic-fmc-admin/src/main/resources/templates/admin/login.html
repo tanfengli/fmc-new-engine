@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=100">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		
+		<title>[[#{Magic-Fmc-Login}]]</title>
+		
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/css/font-awesome.min.css}" href="/webjars/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" th:href="@{/css/login.css}" href="/css/login.css" />
+		
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</head>
+	<body>
+		<div class="pull-right" style="width: 120px; padding: 5px">
+			<form id="languageForm" th:action="@{/switchLanguage}"
+				onchange="languageForm.submit()">
+				<select name="languageSelect" class="form-control">
+					<option value="en" th:selected="${language eq 'en'} ? selected">[[#{en}]]</option>
+					<option value="zh_CN" th:selected="${language eq 'zh_CN'} ? selected">[[#{zh_CN}]]</option>
+				</select>
+			</form>
+		</div>
+	
+		<div class="clearfix">
+			<div class="login-box" id="login">
+				<div class="logo">
+					<img class="img-responsive" th:src="@{/images/logo.png}" src="/images/logo.png" />
+				</div>
+				<div class="login">
+					<div class="login-tit text-center">[[#{login.title}]]</div>
+					<form class="form-horizontal" name="form" th:action="@{/login}"
+						action="/login" method="POST">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"> <i class="fa fa-user"
+									style="font-size: 20px;"></i>
+								</span> <input type="text" name="username" class="form-control"
+									th:attr="placeholder=#{username}" required autofocus>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"> <i class="fa fa-lock"
+									style="font-size: 20px;"></i>
+								</span> <input type="password" name="password" class="form-control"
+									th:attr="placeholder=#{password}" required>
+							</div>
+						</div>
+	
+						<div th:if="${param.error}" class="form-group text-danger">
+							<!-- [[${session.SPRING_SECURITY_LAST_EXCEPTION}? ${session.SPRING_SECURITY_LAST_EXCEPTION.message}]] -->
+							[[#{AbstractUserDetailsAuthenticationProvider.badCredentials}]]
+						</div>
+						<div th:if="${param.logout}" class="form-group text-danger">[[#{logout.msg}]]</div>
+						<div class="row">
+							<input type="submit" class="form-control btn btn-base" th:attr="value=#{login.button}">
+						</div>
+					</form>
+				</div>
+				<p class="text-center login-copyright">© 2013 - 2017 [[#{login.company}]]</p>
+			</div>
+		</div>
+	</body>
+</html>

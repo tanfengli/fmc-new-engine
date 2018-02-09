@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+</head>
+<body>
+	<div data-bind="component: {name: 'page-title'}">异常统计</div>
+	
+	<div data-bind="visible: chooseView()=='list'">
+		<!-- 查询框 -->
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'sys_wfExceptionLog_searchForm_html', data: searchForm}"></div>
+		</div>
+		<!-- 列表 -->
+		<div data-bind="template:{name:'sys_wfExceptionLog_datagrid_html', data: exceptionLogGrid}"></div>
+		<!-- 错误原因详情弹窗 -->
+		<div data-bind="template:{name:'sys_wfExceptionLog_reasonWindow_html'}"></div>
+	</div>
+	
+	<div data-bind="visible: chooseView()=='detail'">
+		<!-- 流程详情      -->
+		<div data-bind='component:{name:"billDetail",params:{data:instanceId,callFunc:toList}}'></div>
+	</div>
+	
+</body>
+
+<script th:src="@{/js/sys/wfExceptionLog/main.js}" src="/js/sys/wfExceptionLog/main.js"></script> 
+</html>

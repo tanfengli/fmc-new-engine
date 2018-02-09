@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+
+<!--流程图修改 弹框-->
+<div id="flowchart_edit_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-md" style="width:900px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-bind="click:function(){$('#flowchart_edit_modal').modal('hide')}" aria-hidden="true">×</button>
+				<h4 class="modal-title">流程图</h4>
+			</div>
+			<div class="modal-body">
+				<!-- 流程图  -->
+				<div data-bind='component:{name:"flowchartDesigner", 
+					params:{"editFlowchart":$parent.editFlowchart,"runningNodes":$parent.runningNodes,"historyNodes":$parent.historyNodes, 
+					"xmlString":$parent.flowXml,"privile":true}}'>
+				</div>
+				
+				<!-- 流程图 -->
+				<div class="text-right">
+				<input type="button" class="btn btn-base btn-sm" value="保存" aria-hidden="true" data-bind="click:$parent.flowChartSubmit"> 
+				<input type="button" class="btn btn-base btn-sm" value="关闭" data-bind="click:function(){$('#flowchart_edit_modal').modal('hide')}" aria-hidden="true">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

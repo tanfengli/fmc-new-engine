@@ -1,0 +1,21 @@
+<meta charset="UTF-8"> 
+
+<div class="modal fade" id="authorizeMenuWindow" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:1111">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height:480px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">菜单授权</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="col-xs-12">
+           		<div id="authorizeMenuTree" class="ztree" style="background: #FFFFFF;float: left; height:380px;overflow-y:scroll;overflow-x:auto;"></div>
+				</div>
+            </div>   
+            <div class="modal-footer" >
+         		<button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: passSelectNode">确定</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>                
+       	 </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>

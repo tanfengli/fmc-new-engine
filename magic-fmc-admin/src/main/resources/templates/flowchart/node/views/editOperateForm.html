@@ -1,0 +1,403 @@
+<meta charset="utf-8" />   
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+ .left_td{
+     background: #f5f5f5;
+     text-align: left;
+     width:15%
+ }     
+</style>
+<div> 
+	<form class="form-horizontal" role="form" data-bind="if:$parent.editFlag" > 
+		<!-- 编辑内容 -->
+	   <table id="tbUser" class="table table-bordered table-hover" > 
+	       <tbody data-bind="if:getRefId()">   
+	          <tr>
+                   <td class="left_td">
+                       <label>操作方式</label>  
+                   </td>
+                   <td colspan="3"> 
+                    <select id="operater" name="operater" data-bind="options: operaterArr, 
+                     optionsCaption: '--自定义--',optionsText: 'fdName', 
+                     optionsValue: 'fdId', value:refIdVal, 
+                     event: { change: function(){changeOperList()}}"
+                      >  
+   				 	</select>  
+                   </td> 
+              </tr>  
+              <tr>
+              
+                   <td class="left_td" rowspan='99' id="createOperationTd">
+                       <label>创建人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，起草人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名
+                   </td> 
+                   <td>
+                     </td>
+              </tr>
+           <!-- ko foreach: {data:operationsList,as:'oper'} -->
+              <tr>
+               <td> 
+                     <!--ko text:oper.fdOperName--> <!--/ko-->                                         
+                   </td> 
+                   <td> 
+                       <span>   <!--ko text:oper.fdOperName--> <!--/ko-->    </span>  
+                   </td> 
+                    <td>
+                   </td>
+              </tr>
+               <!-- /ko -->
+               </tbody>
+               
+             <!-- 自定义 -->  
+             <tbody data-bind="if:!getRefId()">   
+	          <tr>
+                   <td class="left_td">
+                       <label>操作方式</label>  
+                   </td>
+                   <td colspan="3"> 
+                   <select id="operater" name="operater" data-bind="options: operaterArr, 
+                     optionsCaption: '--自定义--',optionsText: 'fdName', 
+                     optionsValue: 'fdId', value:refIdVal, 
+                      event: { change: function(){changeOperList()}}" >  
+   				 	</select>  
+                   </td> 
+              </tr>  
+              <tr>
+              
+                   <td class="left_td" rowspan='99' id="createOperationTd">
+                       <label>创建人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，起草人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名  
+                   </td> 
+                   <td>
+                    <a href="#" data-bind="visible:!getRefId(),click: function(){addOperation('creatorOperation')}">添加</a>
+                     </td>
+              </tr>
+           <!-- ko foreach: {data:creatorOperations,as:'oper'} -->
+              <tr>
+               <td> 
+                   <input type="hidden" name="XMLNODENAME" data-bind="textInput:oper.XMLNODENAME" class="form-control">  
+                    <select  class="form-control" name="creatorOper" data-bind="value:oper.type,
+                    event:{change:function(){
+                    oper.name=$('select[name=&quot;creatorOper&quot;]').find('option:selected')[$index()].text;
+                    $('input[name=&quot;operName&quot;')[$index()].value=$('select[name=&quot;creatorOper&quot;]').find('option:selected')[$index()].text;}}">
+				            <option value="202" selected="selected">[[#{reminders}]]</option>
+				            <option value="203">[[#{withdraw}]]</option>
+				            <option value="204">[[#{abandoned}]]</option> 
+	        	   </select>                                      
+                   </td> 
+                   <td> 
+                     <input type="text" name="operName" id="operName" data-bind="textInput:name"     class="form-control">  
+                    
+                   </td> 
+                    <td>
+                       <a href="#" data-bind="click: function(){$parent.deleteOper('creatorOperation'+$index())}">[[#{delete}]]</a>
+                   </td>
+              </tr>
+               <!-- /ko -->
+               </tbody>
+           </table>
+           
+           
+           <table id="tbUser2" class="table table-bordered table-hover" data-bind="visible:XMLNODENAME!='signNode'">   
+          	<tbody data-bind="visible:getRefId()">    
+              <tr>
+                   <td class="left_td" rowspan="399" id="handlerOperationTd">
+                       <label>处理人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，处理人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名 
+                   </td> 
+                   <td>
+                   </td>
+              </tr>
+              <!-- ko foreach: {data:operationsListTwo,as:'oper'} -->
+              <tr>
+               <td> 
+                     <!--ko text:oper.fdOperName--> <!--/ko-->                                         
+                   </td> 
+                   <td> 
+                       <span>   <!--ko text:oper.fdOperName--> <!--/ko-->    </span>  
+                   </td> 
+                   <td>
+                   </td>
+              </tr>
+               <!-- /ko -->
+            </tbody>
+            
+              <!-- 自定义 -->  
+            <tbody data-bind="visible:!getRefId()">    
+              <tr>
+                   <td class="left_td" rowspan="399" id="handlerOperationTd">
+                       <label>处理人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，处理人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名 
+                   </td> 
+                   <td>
+                  <a href="#" data-bind="click: function(){addOperation('handlerOperation')}">添加</a>
+                   </td>
+              </tr>
+              <!-- ko foreach: {data:handlerOperations ,as:'oper'} -->
+              <tr>
+               <td> 
+                   <input type="hidden" name="XMLNODENAME" data-bind="textInput:oper.XMLNODENAME" class="form-control">  
+	        	    <select class="form-control" name="handlerOper" data-bind="value: oper.type,
+	        	     event:{change:function(){
+                    oper.name=$('select[name=&quot;handlerOper&quot;]').find('option:selected')[$index()].text;
+                    $('input[name=&quot;operNameH&quot;')[$index()].value=$('select[name=&quot;handlerOper&quot;]').find('option:selected')[$index()].text;}}">
+							            <option value="101" selected="selected">[[#{pass}]]</option>
+							            <option value="102">[[#{reject}]]</option>
+							            <option value="103">[[#{turnToDo}]]</option>
+							            <option value="104">[[#{communicate}]]</option>
+							            <option value="105">[[#{abandoned}]]</option> 
+							        </select>  
+               </td>                                  
+                   <td> 
+                      <input type="text" name="operNameH" data-bind="textInput:oper.name" class="form-control"> 
+                   </td> 
+                   <td>
+                   <a href="#" data-bind="click: function(){$parent.deleteOper('handlerOperation'+$index())}">[[#{delete}]]</a>
+                   </td>
+              </tr>
+               <!-- /ko -->
+            </tbody>
+		 
+            
+	       
+	   	   </table> 
+	   	     <input type="hidden" name="operationVal" id="operationVal"   />
+	   	       <span hidden="hidden" id="deleteOper" data-bind="click: deleteOper.bind($data,$('#operationVal').val())"></span> 
+	   	   
+	</form>
+	
+	
+	
+	
+	
+	
+	<!-- ko if: !$parent.editFlag  -->
+	<!-- 查看内容 -->
+	<form class="form-horizontal" role="form" > 
+	   <table id="tbUser" class="table table-bordered table-hover" > 
+	       <tbody data-bind="if:getRefId()">   
+	          <tr>
+                   <td class="left_td">
+                       <label>操作方式</label>  
+                   </td>
+                   <td colspan="3"> 
+                    <select id="operater" name="operater" disabled="disabled" data-bind="options: operaterArr, 
+                     optionsCaption: '--自定义--',optionsText: 'fdName', 
+                     optionsValue: 'fdId', value:refIdVal, 
+                     event: { change: function(){changeOperList()}}"
+                      >  
+   				 	</select>  
+                   </td> 
+              </tr>  
+              <tr>
+              
+                   <td class="left_td" rowspan='99' id="createOperationTd">
+                       <label>创建人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，起草人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名
+                   </td> 
+                   <td>
+                     </td>
+              </tr>
+           <!-- ko foreach: {data:operationsList,as:'oper'} -->
+              <tr>
+               <td> 
+                     <!--ko text:oper.fdOperName--> <!--/ko-->                                         
+                   </td> 
+                   <td> 
+                       <span>   <!--ko text:oper.fdOperName--> <!--/ko-->    </span>  
+                   </td> 
+                    <td>
+                   </td>
+              </tr>
+               <!-- /ko -->
+               </tbody>
+               
+             <!-- 自定义 -->  
+             <tbody data-bind="if:!getRefId()">   
+	          <tr>
+                   <td class="left_td">
+                       <label>操作方式</label>  
+                   </td>
+                   <td colspan="3"> 
+                   <select id="operater" name="operater" disabled="disabled" data-bind="options: operaterArr, 
+                     optionsCaption: '--自定义--',optionsText: 'fdName', 
+                     optionsValue: 'fdId', value:refIdVal, 
+                      event: { change: function(){changeOperList()}}" >  
+   				 	</select>  
+                   </td> 
+              </tr>  
+              <tr>
+              
+                   <td class="left_td" rowspan='99' id="createOperationTd">
+                       <label>创建人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，起草人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名  
+                   </td> 
+              </tr>
+           <!-- ko foreach: {data:creatorOperations,as:'oper'} -->
+              <tr>
+               <td> 
+                   <input type="hidden" name="XMLNODENAME" data-bind="textInput:oper.XMLNODENAME" class="form-control">  
+                    <select  class="form-control" name="creatorOper" disabled="disabled" data-bind="value:oper.type,
+                    event:{change:function(){
+                    oper.name=$('select[name=&quot;creatorOper&quot;]').find('option:selected')[$index()].text;
+                    $('input[name=&quot;operName&quot;')[$index()].value=$('select[name=&quot;creatorOper&quot;]').find('option:selected')[$index()].text;}}">
+				            <option value="202" selected="selected">[[#{reminders}]]</option>
+				            <option value="203">[[#{withdraw}]]</option>
+				            <option value="204">[[#{abandoned}]]</option> 
+	        	   </select>                                      
+                   </td> 
+                   <td> 
+                     <input type="text" name="operName" id="operName" data-bind="textInput:name" disabled="disabled" class="form-control">  
+                    
+                   </td> 
+              </tr>
+               <!-- /ko -->
+               </tbody>
+           </table>
+           
+           
+           <table id="tbUser2" class="table table-bordered table-hover" data-bind="visible:XMLNODENAME!='signNode'">   
+          	<tbody data-bind="visible:getRefId()">    
+              <tr>
+                   <td class="left_td" rowspan="399" id="handlerOperationTd">
+                       <label>处理人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，处理人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名 
+                   </td> 
+                   <td>
+                   </td>
+              </tr>
+              <!-- ko foreach: {data:operationsListTwo,as:'oper'} -->
+              <tr>
+               <td> 
+                     <!--ko text:oper.fdOperName--> <!--/ko-->                                         
+                   </td> 
+                   <td> 
+                       <span>   <!--ko text:oper.fdOperName--> <!--/ko-->    </span>  
+                   </td> 
+                   <td>
+                   </td>
+              </tr>
+               <!-- /ko -->
+            </tbody>
+            
+              <!-- 自定义 -->  
+            <tbody data-bind="visible:!getRefId()">    
+              <tr>
+                   <td class="left_td" rowspan="399" id="handlerOperationTd">
+                       <label>处理人</label>  
+                   </td>
+                   <td colspan="3"> 
+                       <span>注：流程流转到当前节点时，处理人可执行的操作</span>
+                   </td> 
+              </tr>   
+              <tr> 
+                   <td> 
+                                                                                  操作类型 
+                   </td> 
+                   <td> 
+                                                                                  操作名 
+                   </td> 
+              </tr>
+              <!-- ko foreach: {data:handlerOperations ,as:'oper'} -->
+              <tr>
+               <td> 
+                   <input type="hidden" name="XMLNODENAME" data-bind="textInput:oper.XMLNODENAME" class="form-control">  
+	        	    <select class="form-control" name="handlerOper" disabled="disabled" data-bind="value: oper.type,
+	        	     event:{change:function(){
+                    oper.name=$('select[name=&quot;handlerOper&quot;]').find('option:selected')[$index()].text;
+                    $('input[name=&quot;operNameH&quot;')[$index()].value=$('select[name=&quot;handlerOper&quot;]').find('option:selected')[$index()].text;}}">
+							            <option value="101" selected="selected">[[#{pass}]]</option>
+							            <option value="102">[[#{reject}]]</option>
+							            <option value="103">[[#{turnToDo}]]</option>
+							            <option value="104">[[#{communicate}]]</option>
+							            <option value="105">[[#{abandoned}]]</option> 
+							        </select>  
+               </td>                                  
+                   <td> 
+                      <input type="text" name="operNameH" data-bind="textInput:oper.name" disabled="disabled" class="form-control"> 
+                   </td> 
+              </tr>
+               <!-- /ko -->
+            </tbody>
+		 
+            
+	       
+	   	   </table> 
+	   	     <input type="hidden" name="operationVal" id="operationVal"   />
+	   	       <span hidden="hidden" id="deleteOper" data-bind="click: deleteOper.bind($data,$('#operationVal').val())"></span> 
+	   	   
+	</form>
+	   	    <!-- /ko -->
+</div>

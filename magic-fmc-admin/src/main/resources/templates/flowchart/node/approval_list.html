@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">    
+</head>
+<body>  
+    <div class="page-title-box">
+		审批节点
+		<span class="pull-right page-title-operating">
+			<a href="#"><i class="fa fa-home"></i></a>
+			<a href="#"><i class="fa fa-refresh"></i></a>
+			<a href="#"><i class="fa fa-reply"></i></a>
+			<a href="#"><i class="fa fa-close"></i></a>
+		</span>
+	</div> 
+	
+     <div> 
+		 <ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#basicTab" data-toggle="tab">基本 </a></li>
+			<li><a href="#operateTab" data-toggle="tab">操作</a></li> 
+			<li><a href="#seniorTab" data-toggle="tab">高级</a></li> 
+			<li><a href="#jurisdictionTab" data-toggle="tab">权限</a></li>
+			<li><a href="#logicTab" data-toggle="tab">前后置逻辑</a></li> 
+		</ul>
+		
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade in active" id="basicTab" style="width:50%"> 
+				<div id="basic_Form" data-bind="template:{name:'flowchart_approvalNode_editBasicForm_html', data: basicForm}"></div>  
+			</div> 
+	
+			<div class="tab-pane fade" id="operateTab" style="margin-top:20px;width:50%">
+				 <div id="operate_Form" data-bind="template:{name:'flowchart_approvalNode_editOperateForm_html', data: operateForm}"></div> 
+			</div>
+			
+			<div class="tab-pane fade" id="seniorTab" style="margin-top:20px;width:50%">
+				 <div id="senior_Form" data-bind="template:{name:'flowchart_approvalNode_editSeniorForm_html', data: seniorForm}"></div> 
+			</div>
+			
+			<div class="tab-pane fade" id="jurisdictionTab" style="margin-top:20px;width:50%">
+				 <div id="jurisdiction_Form" data-bind="template:{name:'flowchart_approvalNode_editJurisdictionForm_html', data: jurisdictionForm}"></div> 
+			</div>
+			
+			<div class="tab-pane fade" id="logicTab" style="margin-top:20px;width:50%">
+				 <div id="logic_Form" data-bind="template:{name:'flowchart_approvalNode_editLogicForm_html', data: logicForm}"></div> 
+			</div>
+
+			<script th:src="@{/js/flowchart/approvalNode/main.js}"
+				 src="/js/flowchart/approvalNode/main.js"></script> 
+	            
+		</div>
+		
+	 </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<div class="pull-left">
+	共 <span data-bind="text:totalPages()"></span>页
+</div>
+<div class="pull-right">
+	<ul class="pagination pagination-sm">
+		<li data-bind="css:{disabled:startPage()==0}">
+			<a href="#" data-bind="click: function(){if(ko.utils.unwrapObservable(startPage)==0){return false};$parent.previous(ko.utils.unwrapObservable(startPage)-10)}">&laquo;
+			</a>
+		</li>
+		<!-- ko foreach: ko.utils.range(startPage, endPage) -->
+		<li data-bind="css: { active: $data == ko.utils.unwrapObservable($parent.number)}">
+			<a href="#" 
+				data-bind="text: $data + 1, click: function(){$parent.toPage($data)}">1</a>
+		</li>
+		<!-- /ko -->
+		<li data-bind="css:{disabled:ko.utils.unwrapObservable(endPage)+1== ko.utils.unwrapObservable(totalPages)}">
+			<a href="#" 
+				data-bind="click: function(){if(ko.utils.unwrapObservable(endPage)+1== ko.utils.unwrapObservable(totalPages)){return false};$parent.next(ko.utils.unwrapObservable(endPage))}">&raquo;
+			</a>
+		</li>
+	</ul>
+</div>

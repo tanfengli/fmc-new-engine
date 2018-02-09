@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+
+<div class="btn-group">
+	<button type="button" class="btn btn-default"
+		data-bind="click: function(){addAfter()}">
+		<i class="fa fa-plus" aria-hidden="true"></i>[[#{add}]]同级
+	</button>
+	<button type="button" class="btn btn-default"
+		data-bind="click: function(){addChild()}">
+		<i class="fa fa-plus" aria-hidden="true"></i>[[#{add}]]下级
+	</button>
+	<button type="button" class="btn btn-default"
+		data-bind="click: removeNode">
+		<i class="fa fa-trash-o" aria-hidden="true"></i>[[#{delete}]]
+	</button>
+</div>
+

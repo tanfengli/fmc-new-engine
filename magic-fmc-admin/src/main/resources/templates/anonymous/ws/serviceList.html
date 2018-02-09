@@ -1,0 +1,33 @@
+<meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" href="/webjars/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet"  th:href="@{/css/common.css}"  href="/css/common.css" />
+	</head>
+	<body>
+		<div style="padding:5px;text-align:center">
+			<h2>流程接口列表</h2>
+			<table class="table table-bordered table-hover table-striped" border="1" style="width:100%;">
+				<thead>
+				    <tr>
+			      		<th>编码</th>
+				      	<th>名称</th>
+				      	<th>地址</th>
+				    </tr>
+		  		</thead>
+				<tbody>
+					<tr th:each="ws : ${wsList}">
+						<td th:text="${ws.fdCode}">1</td>
+						<td th:text="${ws.fdName}">1</td>
+						<td>
+							<a href="details.html" th:href="@{${ws.fdUrl}}">
+								<span th:text="${ws.fdUrl}"></span>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

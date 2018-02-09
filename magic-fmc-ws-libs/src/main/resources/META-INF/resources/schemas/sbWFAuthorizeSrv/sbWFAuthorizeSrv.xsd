@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:nsm="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_AuthorizeSrv" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://csb.fmc.vispractice.com/SB_WF_AuthorizeSrv">
+
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation="../../schemas/fmcMsgHeader.xsd" />
+
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request" type="tns:SB_WF_AuthorizeSrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="processResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return" type="tns:SB_WF_AuthorizeSrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="SB_WF_AuthorizeSrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="nsm:MsgHeader" />
+			<xs:element name="WF_AUTHORIZE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUTHORIZE_TYPE" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUTHORIZER_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUTHORIZED_PERSON_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_START_TIME" nillable="true" type="xs:dateTime" />
+			<xs:element name="WF_END_TIME" nillable="true" type="xs:dateTime" />
+			<xs:element name="WF_AUTHORIZE_SCOPE_COLLECTION" type="tns:Wf_Authorize_Scope_Collection" />
+			<xs:element name="WF_IS_EXPIRE_DELETED" nillable="true" type="xs:integer" />
+			<xs:element name="WF_AUTHORIZE_EXTEND_COLLECTION" type="tns:Wf_Authorize_Extend_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Authorize_Scope_Collection">
+		<xs:sequence>
+			<xs:element name="WF_TEMPLATE_ID" minOccurs="0" maxOccurs="unbounded" type="xs:string" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Authorize_Extend_Collection">
+		<xs:sequence>
+			<xs:element name="WF_AUTHORIZE_EXTEND_ITEM" minOccurs="0" maxOccurs="unbounded" type="tns:Wf_Authorize_Extend_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Authorize_Extend_Item">
+		<xs:sequence>
+			<xs:element name="FD_BOE_TYPE" nillable="true" type="xs:string" />
+			<xs:element name="FD_BUSS_TYPE" nillable="true" type="xs:string" />
+			<xs:element name="FD_DEPT_ID" nillable="true" type="xs:string" />
+			<xs:element name="MIN_AMOUNT" nillable="true" type="xs:string" />
+			<xs:element name="MAX_AMOUNT" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SB_WF_AuthorizeSrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUTHORIZE_ID" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

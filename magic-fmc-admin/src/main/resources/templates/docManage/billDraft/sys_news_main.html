@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+	</head>
+	<body>
+		<div id="draft">
+			<div data-bind="component:{name:'page-title'}">流程起草</div>
+			<div data-bind="visible:chooseView()=='list'">
+				<div data-bind="component:{name:'searchForm-panel',params:{data:searchForm}}">
+					<!-- ko template:{name:'docManage_billDraft_searchForm_html',data:searchForm} -->
+					<!-- /ko -->
+				</div>
+				
+				<!-- ko template:{name:'docManage_billDraft_datagrid_html',data:docSubmitId} -->
+				<!-- /ko -->
+	
+				<!--ko template:{name:'docManage_billDraft_editWindow_html',data:editForm} -->
+				<!--/ko-->
+			</div>
+
+			<div data-bind="visible:chooseView()=='detail'">
+				<div data-bind='component:{name:"billDetail",params:{data:wfInstanceId,callFunc:toList,initSuccess:toDetailPage}}'></div>
+			</div>
+
+			<div data-bind="visible:chooseView()=='editor'">
+				<div data-bind='component:{name:"billEditor",params:{data:billEditor,callFunc:toList,initSuccess:toEditPage}}'></div>
+			</div>
+
+			<div data-bind='component:{name:"templateTree",params:{callFunc:selectTemplate,width:"100%",height:"500px"}}'></div>
+		</div>
+
+		<script type="text/javascript" th:src="@{/js/docManage/billDraft/main.js}" src="/js/docManage/billDraft/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<table class="table table-bordered" style="margin-top:-5px" data-backdrop="static" data-bind="with:processDefine,visible:processShow">
+	<tr>
+		<th class="col-xs-3">流程说明</th>
+		<td>
+			<textarea rows="2" cols="1" class="form-control" data-bind="textInput:description"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2"><span class="text-center">流程图</span></th>
+	</tr>
+</table>
+
+<div data-bind="template:{name:'flowchart_toolbar_toolbarEdit_html',data:flowchart.toolbar}"></div>
+
+<div id="flowchart" tabindex="0" class="flowchart" style="width:100%; height:500px;"></div>
+
+<div data-bind="visible:processShow">
+	<div data-bind="template:{name:'flowchart_setting_processForm_html',data:processDefine}"></div>
+</div>
+
+<div data-bind="visible:processShow()!=true">
+	<a id="setAuthority" href="#" data-bind='click:setAuthorty'>设置节点权限</a>
+</div>
+
+<div data-bind='component:{name:"authorityNode",params:{data:authorityForm,callFunc:confirmAuthority,width:"600px",height:"540px"}}'></div>
+<div data-bind='component:{name:"groupMember",params:{data:elementForm,callFunc:selectNewElement,height:"280px"}}'></div>
+<div data-bind='component:{name:"flowchartEdit",params:{data:flowchartData,callFunc:editWindowClose,nameFunc:setElement}}'></div>  

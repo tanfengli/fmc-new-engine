@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:nsm="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_InquiryTaskDoneSrv"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://csb.fmc.vispractice.com/SB_WF_InquiryTaskDoneSrv">
+
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation="../../schemas/fmcMsgHeader.xsd" />
+
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request"
+					type="tns:SB_WF_InquiryTaskDoneSrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="processResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return"
+					type="tns:SB_WF_InquiryTaskDoneSrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="SB_WF_InquiryTaskDoneSrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="nsm:MsgHeader" />
+			<xs:element name="WF_TASK_USER_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_CODE" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_USER_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_TEMPLATE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_START_DATE" nillable="true" type="xs:dateTime" />
+			<xs:element name="WF_APPLY_END_DATE" nillable="true" type="xs:dateTime" />
+			<xs:element name="WF_APPLY_TITLE" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_REASON" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_CONTENT" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_URGENT_LEVEL" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_InquiryTaskDoneSrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element name="TOTAL_RECORD" nillable="true" type="xs:decimal" />
+			<xs:element name="TOTAL_PAGE" nillable="true" type="xs:decimal" />
+			<xs:element name="PAGE_SIZE" nillable="true" type="xs:decimal" />
+			<xs:element name="CURRENT_PAGE" nillable="true" type="xs:decimal" />
+			<xs:element name="WF_PROCESS_TASK_COLLECTION" type="tns:Wf_Process_Task_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Process_Task_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_PROCESS_TASK_ITEM" type="tns:Wf_Process_Task_Item" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Process_Task_Item">
+		<xs:sequence>
+			<xs:element name="WF_INSTANCE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_TOKEN_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_CODE" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_USER_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_USER_NAME" nillable="true" type="xs:string" />
+			<xs:element name="WF_TEMPLATE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_BUSI_LINK" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_DATE" nillable="true" type="xs:dateTime" />
+			<xs:element name="WF_APPLY_STATUS" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_SUBJECT" nillable="true" type="xs:string" />
+			<xs:element name="WF_APPLY_URGENT_LEVEL" nillable="true" type="xs:string" />
+			<xs:element name="WF_DESCRIPTION" nillable="true" type="xs:string" />
+			<xs:element name="WF_CURRENT_NODE_NAME" nillable="true" type="xs:string" />
+			<xs:element name="WF_WAIT_AUDIT_TIP" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

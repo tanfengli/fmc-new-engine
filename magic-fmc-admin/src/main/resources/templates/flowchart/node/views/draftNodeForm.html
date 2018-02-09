@@ -1,0 +1,94 @@
+<meta charset="utf-8" />   
+<style>
+ .class_input{
+              border: 1px solid #ccc;border-radius: 4px;height: 25px;
+             }
+ .left_td{
+     background: #f5f5f5;
+     text-align: left;
+     width:15%
+ }   
+</style>
+<div> 
+	<form class="form-horizontal" role="form" data-bind="if:$parent.editFlag"  > 
+	   <table id="tbUser" class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>节点名<span style="color:red">*</span></label>  
+                   </td>
+                   <td>
+                  
+                       <input type="text" class="class_input" id="name" data-bind="textInput: name" style="width: 250px;">   
+                      <!--  <select class="class_input" style="width: 150px;" id="selectNodes" 
+                       data-bind="foreach:{data:selectNodes , as: 'one'};">
+                       	<option data-bind="text: $data, click: function(one){alert();}"  ></option>   
+				       </select>   -->
+				       
+				        <select id="selectNodes"  data-bind="options: $parent.selectNodes, value:$parent.selectNode,optionsCaption: '--请选择--', event: { change: $parent.selectNodeName }"></select>
+				       
+                   </td> 
+              </tr>  
+                <tr>
+                   <td class="left_td">
+                       <label>过期处理</label>  
+                   </td>
+                   <td> 
+		流程驳回        <input type="text" class="class_input" id="rejectNotifyDraft" data-bind="textInput: rejectNotifyDraft" style="width: 50px;">         天未处理通知起草人（0表示不处理）
+                   </td> 
+               </tr>  
+                <tr>
+                   <td class="left_td">
+                       <label>节点帮助</label>  
+                   </td>
+                   <td> 
+                       <textarea style="height:40px;width:400px;" name="description" data-bind="textInput: description"></textarea><br/>
+                   	 支持UBB格式超链接 例如：[url=http://www.baidu.com]百度[/url] 
+                   </td> 
+               </tr> 
+	       </tbody>
+	   </table>    
+	</form>
+	
+	
+	<!-- ko if: !$parent.editFlag  -->
+	<form class="form-horizontal" role="form"  data-bind="if:!$parent.editFlag"  > 
+	   <table id="tbUser" class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>节点名<span style="color:red">*</span></label>  
+                   </td>
+                   <td>
+                  
+                       <input type="text" class="class_input" id="name" data-bind="textInput: name" style="width: 250px;" disabled="disabled">   
+                      <!--  <select class="class_input" style="width: 150px;" id="selectNodes" 
+                       data-bind="foreach:{data:selectNodes , as: 'one'};">
+                       	<option data-bind="text: $data, click: function(one){alert();}"  ></option>   
+				       </select>   -->
+				       
+				       
+                   </td> 
+              </tr>  
+                <tr>
+                   <td class="left_td">
+                       <label>过期处理</label>  
+                   </td>
+                   <td> 
+		流程驳回        <input type="text" class="class_input" id="rejectNotifyDraft" data-bind="textInput: rejectNotifyDraft" style="width: 50px;" disabled="disabled">         天未处理通知起草人（0表示不处理）
+                   </td> 
+               </tr>  
+                <tr>
+                   <td class="left_td">
+                       <label>节点帮助</label>  
+                   </td>
+                   <td> 
+                       <textarea style="height:40px;width:400px;" name="description" data-bind="textInput: description" disabled="disabled"></textarea><br/>
+                   	 支持UBB格式超链接 例如：[url=http://www.baidu.com]百度[/url] 
+                   </td> 
+               </tr> 
+	       </tbody>
+	   </table>    
+	</form>
+	 <!-- /ko -->
+</div>

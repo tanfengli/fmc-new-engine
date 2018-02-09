@@ -1,0 +1,29 @@
+
+<meta charset="UTF-8">
+		<form data-bind="with: formItem">
+			<div class="form-group col-xs-4">
+				<label class="control-label col-xs-3" for="ds_username">角色名称</label>
+				<div class="col-xs-9">
+					<input class="form-control" data-bind="textInput: fdName">
+				</div>
+			</div>
+			<div class="form-group col-xs-4">
+				<label class="control-label col-xs-3" for="ds_username">[[#{roleCate}]]</label>
+				<div class="col-xs-9">
+					<select class="form-control" data-bind="textInput: categoryId">
+						<option value="" selected="selected">全部分类</option>
+						<option value="未分类">未分类</option>
+					</select>
+				</div>
+			</div>
+			<div class="fti-xs-12 text-right">
+				<button type="submit" class="btn btn-primary"
+					data-bind="click: $parent.search">
+					<i class="fa fa-search"></i>[[#{search}]]
+				</button>
+				<button class="btn btn-default" data-bind="click: $parent.reset">
+					<i class="fa fa-eraser"></i>[[#{reset}]]
+				</button>
+			</div>
+		</form>
+

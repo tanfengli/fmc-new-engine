@@ -1,0 +1,64 @@
+<meta charset="utf-8" />
+
+<!-- header -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default"
+		data-bind="click: $parent.toAdd">
+		<i class="fa fa-plus" aria-hidden="true"></i>[[#{add}]]
+	</button>
+	<!-- <button type="button" class="btn btn-default"
+		data-bind="click: $parent.delDbcp">
+		<i class="fa fa-pencil" aria-hidden="true"></i>[[#{delete}]]
+	</button> -->
+</div>
+
+<div>
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+			<th><input type="checkbox"></th>
+			<th>[[#{serialNumber}]]</th>
+			<th data-bind="">[[#{posName}]]</th>
+			<th data-bind="">[[#{dataBase}]]</th>
+			<th>[[#{describe}]]</th>
+			<th width="160px">[[#{operation}]]</th>
+		</tr>
+	</thead>
+	<!-- <tr data-bind="click:$root.goToView.bind($data,fdId)"> -->
+	<tbody data-bind="foreach: {data: data.content, as: 'sysUser'}">
+		<tr>
+			<td><input type="checkbox" name="fdIdArr" data-bind="value:fdId"></td>
+			<td data-bind="text:$index()+1"></td>
+			<td data-bind="text:fdName"></td>
+			<td data-bind="text:fdType"></td>
+			<td data-bind="text:fdDescription"></td>
+			<td width="160px"><div class="btn-group">
+					<button type="button" class="btn btn-default btn-xs"
+						data-bind="click: function(){$parent.editOne(sysUser)}">
+						<i class="fa fa-pencil" aria-hidden="true"></i>[[#{edit}]]
+					</button>
+					<button type="button" class="btn btn-default btn-xs"
+						data-bind="click: function(){$parent.deleteOne(sysUser)}">
+						<i class="fa fa-trash-o" aria-hidden="true"></i>[[#{delete}]]
+					</button>
+					<!-- <button type="button" class="btn btn-default btn-xs"
+						data-bind="click: function(){$parent.setOne(sysUser)}">
+						<i class="fa fa-server" aria-hidden="true"></i>[[#{detail}]]
+					</button>  -->
+				</div></td>
+		</tr>
+	</tbody>
+	<tfoot data-bind="visible: !data.content().length > 0">
+		<tr>
+			<td colspan="10">[[#{nodata}]]</td>
+		</tr>
+	</tfoot>
+</table>
+<div
+	data-bind='visible: data.content().length > 0,
+				component: {name: "grid-pagination", params:{data: data, toPage: toPage}}'></div>
+				</div>
+
+
+<!-- header -->
+

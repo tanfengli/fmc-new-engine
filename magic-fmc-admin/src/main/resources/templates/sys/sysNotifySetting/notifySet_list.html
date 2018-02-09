@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">    
+</head>
+<body>  
+    <div class="page-title-box">
+		通知配置
+		<span class="pull-right page-title-operating">
+			<a href="#"><i class="fa fa-home"></i></a>
+			<a href="#"><i class="fa fa-refresh"></i></a>
+			<a href="#"><i class="fa fa-reply"></i></a>
+			<a href="#"><i class="fa fa-close"></i></a>
+		</span>
+	</div> 
+	
+    <div data-bind='component: {name: "groupMember", params:{data: elementForm ,callFunc: selectNewElement, width: "200px", height: "280px"}}'></div>
+			
+	<div id="datagrid_Form" data-bind="template:{name:'sys_sysNotifySetting_editForm_html', data: form}"></div> 
+
+	<script th:src="@{/js/sys/sysNotifySetting/main.js}"
+		 src="/js/sys/sysNotifySetting/main.js"></script> 
+</body>
+</html>

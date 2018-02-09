@@ -1,0 +1,195 @@
+<meta charset="UTF-8">
+<!-- 修改处理人组件 -->
+<div data-bind='component:{name:"addressBook",params:{data:$root.elementForm,callFunc:$root.selectElement,width:"200px",height:"280px"}}'></div> 
+
+<!-- 特权人 弹框 -->
+<div id="proc-tqr" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">特权人处理</h4>
+			</div>
+			<div class="modal-body">
+				<form data-bind="with:formItem">
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th style="width:100px;">常用意见</th>
+								<td>
+									<select class="form-control" data-bind="options:$parents[1].approvalArray, 
+										optionsCaption:'--请选择--',
+										optionsText:'fdUsageContent',
+										optionsValue:'fdUsageContent',
+										value:$parents[1].wfOptionCon">
+									</select>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>处理意见</th>
+								<td>
+									<textarea class="form-control" rows="3" data-bind="value:wfOptionCon"></textarea>
+								</td>
+							</tr>
+							
+							<!-- ko if:$parents[1].isInBranch()==true -->
+							<tr>
+								<th>处理事务</th>
+								<td>
+									<select data-bind="options:$parents[1].sysWfBusinessForm().nodeList,
+									   optionsCaption:'--请选择--',
+							   		   optionsText:function(item){
+									   		return item.fdFactNodeName+':'+item.fdFactNodeId;
+									   },
+									   value:$parents[1].wfAffairId">
+									</select>
+								</td>
+							</tr>
+							<!-- /ko -->
+							
+							<tr>
+								<th>操作<span style="color:red">*</span></th>
+								<td>
+									<!-- ko if:$parents[1].isInBranch()==false||($parents[1].isInBranch()==true&&fdHandleNodeId()!=undefined) -->
+									<div data-bind="foreach:oprNames">
+										<!-- ko ifnot:$data.oprId=='304'||$data.oprId=='306'-->
+										<input type="radio" name="tqr-operation"
+											data-bind="checkedValue:$data.oprId,
+													checked:$parent.wfResult,
+													click:$parents[2].oprClick,attr:{'id':'tqr_'+$index()}">
+										<label data-bind="text:$data.oprName,attr:{'for':'tqr_'+$index()}"></label>
+										<!-- /ko -->
+										
+										<!-- ko if:$data.oprId=='304'&&$parent.fdHandleNodeId()!=undefined&&$parent.fdHandleNodeId()!=''-->
+										<input type="radio" name="tqr-operation"
+											data-bind="checkedValue:$data.oprId,
+													checked:$parent.wfResult,
+													click:$parents[2].oprClick,attr:{'id':'tqr_'+$index()}">
+										<label data-bind="text:$data.oprName,attr:{'for':'tqr_'+$index()}"></label>
+										<!-- /ko -->
+										
+										<!-- ko if:$data.oprId=='306'&&$parents[2].showSubprocess() -->
+										<input type="radio" name="tqr-operation"
+											data-bind="checkedValue:$data.oprId,
+													checked:$parent.wfResult,
+													click:$parents[2].oprClick,attr:{'id':'tqr_'+$index()}">
+										<label data-bind="text:$data.oprName,attr:{'for':'tqr_'+$index()}"></label>
+										<!-- /ko -->
+									</div>
+									<!-- /ko -->
+									
+									<!-- ko if:$parents[1].isInBranch()==true&&fdHandleNodeId()==undefined -->
+									<label>
+										<input type="radio" name="tqr_operation" value="301" 
+											data-bind="checked:wfResult,click:$parents[1].oprClick">终审通过
+									</label>
+									
+									<label>
+										<input type="radio" name="tqr_operation" value="303"
+											data-bind="checked:wfResult,click:$parents[1].oprClick">直接废弃
+									</label>
+									
+									<label>
+										<input type="radio" name="tqr_operation" value="305"
+											data-bind="checked:wfResult,click:$parents[1].oprClick">修改流程
+									</label>
+									<!-- /ko -->
+								</td>
+							</tr>
+							
+							<tr data-bind="visible:wfResult()=='302'">
+								<th>重新定位<span style="color:red">*</span></th>
+								<td>
+									<!-- ko if:$parents[1].flowNodeList().length>0 -->
+									<div class="form-group">
+										<select class="form-control"
+											data-bind="options:$parents[1].flowNodeList,
+										   	optionsText:'name',optionsValue:'id',value:futureNodeId">
+										</select>
+										
+										<!-- ko if:$parents[1].showSubprocess() -->
+										<input type="checkbox" name="isRecoverPassedSubprocess"
+											data-bind="checked:isRecoverPassedSubprocess">跳转后流经子流程重新流转
+										<!-- /ko -->
+									</div>
+									<!-- /ko -->
+									
+									<!-- ko if:$parents[1].flowNodeList().length==0 -->
+									<span>无可驳回节点</span>
+									<!-- /ko -->
+								</td>
+							</tr>
+							
+							<tr data-bind="visible:wfResult()=='304'">
+								<th>处理人<span style="color:red">*</span></th>
+								<td>
+									<div class="col-xs-4">
+										<input class="form-control" type="text" data-bind="value:toOtherHandlerNames">
+									</div>
+									<button type="button" class="btn btn-default" data-bind="click:$parents[1].handlerClick">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+									</button>
+								</td>
+							</tr>
+							
+							<tr data-bind="visible:wfResult()=='305'">
+								<th>修改流程信息</th>
+								<td>
+									<a data-bind="click:$parents[1].flowchartEdit">修改流程信息</a>
+								</td>
+							</tr>
+							
+							<tr data-bind="visible:wfResult()=='306'">
+								<th>子流程</th>
+								<td>
+									<div class="col-xs-4">
+										<input class="form-control" type="text" data-bind="value:recoverProcessNames">
+									</div>
+									<button type="button" class="btn btn-default" data-bind="click:$parents[1].subProcessEdit">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+									</button>
+									<input class="form-control" type="hidden" data-bind="value:recoverProcessIds">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>当前处理人</th>
+								<td>
+									<div class="padding-0">
+										<span data-bind="text:toOtherHandlerNames"></span>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>已经处理人</th>
+								<td>
+									<div class="padding-0">
+										<span data-bind="text:$parents[1].sysWfBusinessForm().historyHandlerNames"></span>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+								<th></th>
+								<td>
+									<input type="button" class="btn btn-base btn-sm" value="提交" aria-hidden="true" 
+										data-dismiss="modal" data-bind="click:$parent.saveOrUpdateList"> 
+									<input type="button" class="btn btn-base btn-sm" value="关闭"
+										data-dismiss="modal" aria-hidden="true">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 修改流程图 -->
+<div data-bind="template:{name:'docManage_billProcess_flowchartWindow_html'}"></div>
+
+<!-- 选择子流程 -->
+<div data-bind="template:{name:'docManage_billProcess_subProcessWindow_html'}"></div>

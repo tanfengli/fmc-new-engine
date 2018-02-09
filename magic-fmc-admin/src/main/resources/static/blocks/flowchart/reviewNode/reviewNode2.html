@@ -1,0 +1,93 @@
+<meta charset="UTF-8">
+
+<div class="modal fade" id="reviewNodeWin2" tabindex="-1" data-backdrop="static"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+	style="z-index: 9911;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" >节点选择</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<div class="select-people-right"  style="margin-left:0px">
+					<div class="search-box">
+						<form>
+							<div class="col-xs-12 select-people-info" >
+								<table class="table table-bordered " >
+									<tbody>
+										<tr>
+											<td colspan="3" style="height: 43px">描述： <div data-bind="text: description"></div></td>
+										</tr>
+										<tr>
+											<td class="text-center">待选列表</td>
+											<td></td>
+											<td class="text-center">已选列表 <i
+												class="fti-icon-long-arrow-down"></i></td>
+										</tr>
+										<tr>
+											<td>
+											   <select id="selected11" class="select-people-list select-pp-left" multiple="multiple" 
+												data-bind="foreach: {data:leftNodes, as: 'one'}, selectedOptions: chosenLeftOptions" style="width:250px">
+													<option data-bind="text: id+'.'+name  , value: one,click: function(one){$parent.clickMember(one);}" ></option> 
+												</select> 
+												
+											<!-- 	<select  id="selected1" class="form-control select-people-list select-pp-left" multiple="multiple"  style="width:250px"
+														data-bind="foreach: {data:leftNodes,  as: 'one'}, selectedOptions: chosenLeftOptions  ">
+													<option data-bind="text: id+'.'+name ,
+																	   value: one , 
+																	   click: function(one){$parent.clickMember(one);return true;},
+																	     }
+																	   " >
+													</option> 
+												</select> -->
+											</td>
+											<td>
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: add">添加</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: del">删除</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: addAll">全部添加</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default" data-bind="click: delAll">全部删除</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default">上移</button>
+												</p>
+												<p class="text-center">
+													<button type="button" class="btn btn-default">下移</button>
+												</p>
+											</td>
+											<td>
+												<select id="selected22" class="select-people-list select-pp-left" multiple="multiple" 
+												data-bind="foreach: {data:rightNodes , as: 'one'}, selectedOptions: chosenRightOptions" style="width:250px">
+													<option data-bind="text: id+'.'+name , value: one,click: function(one){$parent.clickNewMember(one)}"></option> 
+												</select>
+											</td>
+										</tr>
+
+										<tr>
+											<td colspan="3" class="text-right">
+												<button type="submit" class="btn btn-base"   data-bind="click: passSelectNode">确定</button>
+												<button type="submit" class="btn btn-base" data-dismiss="modal">取消</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+

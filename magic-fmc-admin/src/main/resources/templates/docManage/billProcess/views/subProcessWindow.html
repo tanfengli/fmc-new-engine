@@ -1,0 +1,38 @@
+<meta charset="UTF-8">
+
+<div id="subProcessWindow" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-bind="click:function(){$('#subProcessWindow').modal('hide')}" aria-hidden="true">×</button>
+				<h4 class="modal-title">选择子流程</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<th>
+								<input type="checkbox" data-bind="click:$root.checkboxSelect">
+							</th>
+							<th>序号</th>
+							<th>启动子流程节点编号</th>
+						</tr>
+						<tr data-bind="foreach:{data:$root.subProcesses,as:'subProcess'}">
+							<td>
+								<input type="checkbox" name="subProcessId" data-bind="checkedValue:$data,checked:$root.checkedData" />
+							</td>
+							
+							<td data-bind="text:$index()+1"></td>
+							<td data-bind="text:fdParentNodeid"></td>
+						</tr>
+					</tbody>
+				</table>
+			
+				<div class="text-right">
+					<input type="button" class="btn btn-base btn-sm" value="确定" aria-hidden="true" data-bind="click:$root.subProcessSubmit"> 
+					<input type="button" class="btn btn-base btn-sm" value="关闭" data-bind="click:function(){$('#subProcessWindow').modal('hide')}" aria-hidden="true">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<style type="text/css">
+    textarea{ resize:none; }
+</style>
+<div class="modal fade" id="reasonWindow" tabindex="-1" role="dialog" 
+	aria-labelledby="myModalLabel">
+	<form class="form-horizontal" role="form">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">错误原因详情</h4>
+				</div>
+				<div class="modal-body">
+				<table class="table table-bordered">
+					<tr>
+						<th class="col-xs-2" width="10%">错误原因</th>
+						<td><textarea rows="2" class="form-control" readonly="readonly" id="exceptionReason" ></textarea></td>
+					</tr>
+					<tr>
+						<th class="col-xs-2" width="10%">错误信息</th>
+						<td><textarea rows="5" class="form-control" readonly="readonly" id="exceptionMes"></textarea></td>
+					</tr>
+					<tr>
+						<th class="col-xs-2" width="10%">错误代码</th>
+						<td><textarea rows="8" class="form-control" readonly="readonly" id="exceptionCode"></textarea></td>
+					</tr>
+				</table>
+				</div>
+				<div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+	            </div>
+			</div>
+		</div>
+	</form>
+</div>

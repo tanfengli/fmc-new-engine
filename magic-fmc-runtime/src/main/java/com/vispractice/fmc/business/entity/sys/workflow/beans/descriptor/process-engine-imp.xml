@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="gbk"?>
+<process id="wf01" name="请假流程" parent="oa">
+	<initial-node id="1" name="开始" parent="oaInitNode">
+        <results>
+			<result target="2"/>
+        </results>
+    </initial-node>
+
+	<nodes>
+		<node id="2" name="起草节点" parent="oaDraftNode">
+			<results>
+				<result target="3"/>
+			</results>
+		</node>
+		<node id="3" name="部门审批" parent="oaAuditNode">
+			<results>
+				<result target="4"/>
+			</results>
+		</node>
+		<node id="4" name="总经理签字" parent="oaSignNode">
+			<results>
+				<result target="5"/>
+			</results>
+		</node>
+		<node id="5" name="抄送" parent="oaSendNode">
+			<results>
+				<result target="6"/>
+			</results>
+		</node>
+	</nodes>
+
+	<finally-node id="6" name="结束" parent="oaFinalNode"/>
+
+</process>

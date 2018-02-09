@@ -1,0 +1,152 @@
+<meta charset="utf-8" />   
+<style>
+  td {
+    text-align: center
+  }
+</style>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  data-backdrop="static"> 
+	<form class="form-horizontal" role="form" data-bind="with: formItem">
+		<div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">系统任务设置</h4>
+	            </div>
+	            <div class="modal-body">
+	                <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control" id="fdId">   
+	                <table id="tbUser" class="table table-striped table-bordered table-hover"> 
+                        <tbody> 
+                            <tr>
+                                <td class="col-md-2">
+                                    <label for="taskName">[[#{taskName}]]</label>  
+                                </td>
+                                <td colspan="3" style="text-align: left;">
+                                     <input type="text" name="fdSubject" data-bind="textInput:fdSubject" class="form-control" id="fdSubject">  
+                                </td> 
+                                
+                             </tr>
+                             <tr> 
+                                <td>
+                                    <label for="triggerTime">[[#{triggerTime}]]</label>  
+                                 </td>
+                                <td>
+                              <!--   <input type="text" class="form-control quartzJobTime" data-bind="textInput:$root.changeCronTrigger(fdCronExpression)" >
+                                --> 
+                                 <input type="text" name="triggerTime" data-bind="textInput:$root.changeCronTrigger(fdCronExpression)" readOnly class="form-control" id="triggerTime">  
+                                 
+                                </td> 
+                                 <td colspan="1" style="text-align: left;">
+                                 <label for="triggerTime">[[#{nextRunTime}]]</label>  
+                                </td> 
+                                <td>
+                                
+                                  <input type="text" name="fdRunTime" data-bind="textInput:fdRunTime" class="form-control quartzJobTime" id="fdRunTime">  
+                                
+                                </td> 
+                             </tr>
+                              <tr> 
+                                <td>
+                                    <label for="triggerTime">[[#{runType}]]</label>  
+                                 </td>
+                                <td>
+                                	<select class="class_input" style="width: 150px;" name="fdRunType" data-bind="value: fdRunType" > 
+							            <option value="">---请选择---</option>
+							            <option value="2">指定节点</option>
+							            <option value="4">单个节点</option>
+				      				</select>  
+                                </td> 
+                                 <td colspan="1" style="text-align: left;">
+                                 <label for="triggerTime">触发时间输入方式</label>  
+                                </td> 
+                                <td>
+                                <input type="radio" value="0" name="inputType"  data-bind="checked:inputType,click:setExpression(true)"     /> 常用方式 &nbsp;&nbsp;
+	                  	 		<input type="radio" value="1" name="inputType"  data-bind="checked:inputType,click:setExpression(false)"  /> Cron表达式  &nbsp;&nbsp;
+                                </td> 
+                             </tr>
+                             <tr data-bind="visible:inputType()=='0'"> 
+                                <td>
+                                    <label for="triggerTime">运行频率</label>  
+                                 </td>
+                                <td>
+                                	<select class="class_input" style="width: 150px;" name="fdFrequency" data-bind="value: fdFrequency,event{change:function(){setType()}}" > 
+							            <option value="">---请选择---</option>
+							            <option value="once">仅一次</option>
+							            <option value="year">每年</option>
+							            <option value="month">每月</option>
+							            <option value="week">每周</option>
+							            <option value="day">每天</option>
+							            <option value="hour">每小时</option>
+							            <option value="every">每隔几分钟</option>
+				      				</select>  
+                                </td> 
+                                 <td colspan="1" style="text-align: left;">
+                                		运行时间
+                                </td> 
+                                <td>
+                                <div style="display:inline">
+                                 <span data-bind="visible:getFrequency('week')">
+                                 <select class="class_input" style="width: 150px;" name="week"  > 
+							            <option value="1">星期一</option>
+							            <option value="2">星期二</option>
+							            <option value="3">星期三</option>
+							            <option value="4">星期四</option>
+							            <option value="5">星期五</option>
+							            <option value="6">星期六</option>
+							            <option value="7">星期天</option>
+				      				</select>  
+                                 </span>
+                                 <span data-bind="visible:getFrequency('year')"><input type="text" class="class_input" data-bind="value:year" style="width:45px">年 </span>
+                                 <span data-bind="visible:getFrequency('month')"><input type="text" class="class_input" data-bind="value:month"  style="width:45px">月 </span>
+                                 <span data-bind="visible:getFrequency('day')"><input type="text" class="class_input"  data-bind="value:day" style="width:45px">日 </span>
+                                 <br data-bind="visible:getFrequency('br')" />
+                                 <span data-bind="visible:getFrequency('hour')"><input type="text" class="class_input" data-bind="value:hour" style="width:45px">时</span> 
+                                 <span data-bind="visible:getFrequency('min')"><input type="text" class="class_input" data-bind="value:min" style="width:45px">分 </span>
+                                 <span data-bind="visible:getFrequency('second')"><input type="text" class="class_input" data-bind="value:second" style="width:45px">秒
+                               	 </span>
+                                 <span data-bind="visible:getFrequency('every')"><input type="text" class="class_input" data-bind="value:second" style="width:45px">秒 每隔
+                                 <select class="class_input" style="width: 50px;" name="every" data-bind="value:every"  > 
+							            <option value="5">5</option>
+							            <option value="10">10</option>
+							            <option value="15">15</option>
+							            <option value="20">20</option>
+							            <option value="30">30</option>
+				      				</select>分钟
+                                 </span>
+                                 </div>
+                                 </td> 
+                             </tr>
+                             
+                             <tr data-bind="visible:inputType()=='1'"> 
+                                <td>
+                                    <label for="triggerTime">Cron表达式</label>  
+                                 </td>
+                                 <td colspan="3" style="text-align: left;">
+                                       <input type="text" name="fdCronExpression" data-bind="value:fdCronExpression" class="form-control" id="fdCronExpression">  
+                                </td> 
+                             </tr>
+                             <tr> 
+                                <td>
+                                    <label for="triggerTime">启用状态</label>  
+                                 </td>
+                                <td>
+                                	<select class="class_input" style="width: 150px;" name="fdEnabled" data-bind="value: fdEnabled" > 
+							            <option value="0">禁用</option>
+							            <option value="1">启用</option>
+				      				</select>  
+                                </td> 
+                                 <td colspan="1" style="text-align: left;">
+                                </td> 
+                                <td>
+                                </td> 
+                             </tr>
+                        </tbody>
+                    </table>   
+	            </div>
+	            <div class="modal-footer">
+	                <button type="submit" id="btn_submit" data-bind="click: function(){if(buildCronExpression()){$parent.saveOrUpdate();$('#myModal').modal('hide')}}" class="btn btn-primary"  > [[#{save}]]</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal"> [[#{close}]]</button>
+	            </div>
+	        </div>
+		</div>  
+	</form>
+</div>

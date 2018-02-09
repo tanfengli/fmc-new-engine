@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>magic-fmc-ws-parent</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>magic-fmc-ws-libs</module>
+		<module>magic-fmc-ws</module>
+		<module>magic-fmc-ws-simulate</module>
+    <module>webservice</module>
+    <module>magic-fmc-license</module>
+  </modules>
+	<parent>
+		<groupId>com.vispractice</groupId>
+		<artifactId>magic-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+</project>

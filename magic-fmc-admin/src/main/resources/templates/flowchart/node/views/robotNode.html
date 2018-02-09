@@ -1,0 +1,377 @@
+<meta charset="utf-8" />   
+<style>
+	.class_input{
+       	border:1px solid #ccc;border-radius: 4px;height:25px;
+  	}
+  	
+ 	.left_td{
+	     background: #f5f5f5;
+	     text-align: left;
+	     width:15%
+	 }   
+ 
+	 .td_block{
+	 	display:block;
+	 }
+ 
+  	 .td_display{
+	 	display:none;
+	 }
+</style>
+<div> 
+	<form class="form-horizontal" role="form" data-bind="if:$parent.editFlag" >
+	   <div style="text-align:left;">
+	       <h4 style="font-weight:bold;">机器人节点</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>机器人类型<span style="color:red">*</span></label>  
+                   </td>
+                   <td>
+	                   <input type="hidden" data-bind='value:content'>
+	                   <span hidden="hidden" id="robLogicField" data-bind=""></span> 
+	                   <span hidden="hidden" id="robLogicFormula" data-bind="click:robotHandler.bind($data,$('#robotIndex').val())"></span>
+	                   <span hidden="hidden" id="formulaContent"></span> 
+	                   <span hidden="hidden" id="formulaClick" data-bind="click:$parent.formulaHandler.bind($data,'')"></span> 
+	                   <span hidden="hidden" id="deleteFormula" data-bind="click:$parent.formulaHandler.bind($data,'')"></span>   
+	           		   <input type="hidden" name="robotIndex" id="robotIndex" />
+	            	   <input type="hidden" name="robotNodeFlag" id="robotNodeFlag" value="true" />
+	                   <select class="form-control" name="category" id="category" style="width:200px;float:left"
+							data-bind="value:category,event:{change:changeRobot}">
+							<option value="RDB">RDB</option>
+							<option value="other">其他</option>
+							<option value="java">java程序片段</option>
+					   </select>
+					   <select class="form-control" name="unid" id="unid" style="width:200px;margin-left:20px"
+							data-bind="options:robotOption,  optionsText: 'name', 
+							optionsValue: 'value',value:showUnid" >
+					   </select>
+                   </td>
+              </tr>  
+              <tr>
+                   <td class="left_td">
+                       <label>节点名<span style="color:red">*</span></label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name" > 
+                   </td> 
+              </tr>  
+           </tbody> 
+              
+           <tbody data-bind="visible:getCategory()=='RDB'"> 
+              <tr>
+                   <td class="left_td"><label>数据库链接</label></td>
+                   <td>
+					<select id="dbConnect" name="dbConnect" data-bind="options:compDbcpArr,optionsText:'fdName',optionsValue:'fdName',value:dbConnect,   
+        				event:{  }">  
+   				 	</select> 
+                   </td> 
+              </tr> 
+              <tr>
+                   <td class="left_td"><label>SQL语句</label></td>
+                   <td>
+                       <textarea style="height:100px;width:400px;" name="sql" data-bind="value:sql" ></textarea><br/>
+                  	   <div data-bind="visible:getUnid()=='*@Robot@ReadUseSQL'">样例:select * from my_table where id=:id<br/>
+				        	样例:select id, name from my_table where id=:id
+					   </div>
+						
+					   <div data-bind="visible:getUnid()!='*@Robot@ReadUseSQL'">样例:insert my_table(id, name) values(:id,:name)<br/>
+							样例:update my_table set id=:id, name=:name where id=:id
+					   </div>
+                   </td> 
+              </tr>  
+               <tr>
+                   <td class="left_td">
+                       <label>输入参数<a href="#" data-bind="click:fetchParam" style="color:blue">[获取]</a></label>  
+                   </td>
+                   <td>
+                        <table class="table table-bordered table-hover">
+	                        <tr>
+	                        	<td class="left_td">参数名</td>
+	                        	<td class="left_td">参数类型</td>
+	                        	<td class="left_td">读取表单字段</td>
+	                        </tr>
+	                        <tbody data-bind="foreach:{data:inputParams,as:'param'}">
+	                        	<tr>
+		                        	<td data-bind="text:name"></td>
+		                        	<td>
+		                         		<select id="dataType" name="dataType" 
+		                          			data-bind="options:$parent.dataTypeArr,optionsText:'name',optionsValue:'value',value:param.dataType">  
+					   					</select>  
+		                        	</td>
+		                        	<td> 
+		                        	   <input type="hidden" class="form-control" id="idField" data-bind="value:idField"> 
+				                       <input type="text" class="class_input" id="nameField" data-bind="value:nameField" style="width:150px"> 
+				                       <input type="button" value="选择" data-bind="click:function(){
+					                       $('#robotIndex').val('robLogic'+$index()) ; 
+					                       $('#formulaClick').click();
+					                       $('#robLogicFormula').click()};">
+		                        	</td>
+	                        	</tr>
+	                        </tbody>
+                        </table>
+                   </td> 
+              </tr>  
+               <tr data-bind="visible:getUnid()=='*@Robot@ReadUseSQL'">
+                   <td class="left_td" >
+                       <label>输出参数<a href="#" data-bind="click:fetchOutParam" style="color:blue">[获取]</a></label>  
+                   </td>
+                   <td>
+                       <table class="table table-bordered table-hover">
+	                       <tr>
+	                       	   <td class="left_td">名称</td>
+	                           <td class="left_td">是否使用</td>
+	                           <td class="left_td">写入表单字段</td>
+	                       </tr>
+	                       <tbody data-bind="foreach:{data:outParams,as:'param'}">
+		                       <tr>
+		                           <td data-bind="text:name"></td>
+		                           <td>
+			                           <select id="dataType" name="dataType" 
+			                          		data-bind="options:$parent.dataTypeArr,optionsText:'name',optionsValue:'value',value:param.dataType">  
+						   			   </select>  
+		                           </td>
+		                           <td> 
+		                        	   <input type="hidden" class="form-control" id="nameField" data-bind="value:nameField"> 
+					   				   <select id="variable" name="variable" 
+		                          			data-bind="options:$parent.varArr,optionsText:'varName',optionsValue:'fdId',value:param.idField"  >  
+					   				   </select>  
+		                           </td>
+		                       </tr>
+	                       </tbody>
+                       </table>
+                   </td> 
+              </tr> 
+              <tr>
+              <tr>
+                   <td class="left_td">
+                       <label>功能说明</label>  
+                   </td>
+                   <td colspan="">
+                       <span>该机器人根据您提供的SQL语句，将表单的数据，写入到您指定的数据库表中</span>    
+                   </td> 
+               </tr>  
+           </tbody>
+           
+           <tbody data-bind="visible:getCategory()=='java'"> 
+              <tr>
+                   <td class="left_td"><label>java程序片段</label></td>
+                   <td>
+                       <textarea style="height:300px;width:580px;" name="sql" data-bind="value:disContent"></textarea><br/>
+                   </td> 
+              </tr> 
+              <tr>
+                  <td class="left_td">
+                      <label>功能说明</label>  
+                  </td>
+                  <td colspan="">
+                   	  <a href="#" data-bind="click:fetchJavaExp" style="color:blue">样列代码</a>该机器人将执行您提供的java程序片段.
+                  </td> 
+              </tr>  
+           </tbody>
+              
+           <tbody data-bind="visible:getCategory()=='other'"> 
+              <tr>
+                  <td class="left_td" colspan=2>
+                      <table class="table table-bordered table-hover"> 
+                      	 <tr>
+                      		<td>表单字段名</td>
+                      		<td>更新值</td>
+                      		<td> 
+                      			<a href="#" data-bind="click: function(){addField('handlerOperation')}">添加</a>
+							</td>
+                      	 </tr>
+                         <tbody data-bind="foreach:{data:fieldArr,as:'param'}">
+                      	 	<tr>
+                      	   		<td>
+		                      		<select id="variable" name="variable" 
+		                          		data-bind="options:$parent.varArr,optionsText:'varName',optionsValue:'fdId',value: param.field">  
+					   				</select>  
+                      	   		</td>
+                      	   		<td>
+                      	   	  		<input type="hidden" class="form-control" id="idField" data-bind="value:idField"> 
+		                       		<input type="text" class="class_input"  id="nameField" data-bind="value:nameField" style="width:150px" > 
+                      	   	 		<input type="button" value="选择" data-bind="click:function(){
+				                       $('#robotIndex').val('robotField'+$index()) ; 
+				                       $('#formulaClick').click();
+				                       $('#robLogicFormula').click()};">
+                      	   		</td>
+                      	   		<td>
+                      	   			<a href="#" data-bind="click:function(){$parent.deleteFiled($index());}">删除</a>
+                      	   		</td>
+                      	   	 </tr>
+                      	</tbody>
+                      </table>
+                   </td>
+              </tr> 
+              <tr>
+                  <td class="left_td"><label>功能说明</label></td>
+                  <td colspan="">该机器人可以帮你修正表单中的一些字段值</td>
+              </tr>  
+           </tbody>
+        </table>
+	</form>
+	
+	<!-- ko if: !$parent.editFlag  -->
+	<form class="form-horizontal" role="form"  data-bind="visible:!$parent.editFlag" >
+	   <div style="text-align:left;">
+	       <h4 style="font-weight: bold;">机器人节点</h4>
+	   </div> 
+	   <table class="table table-bordered table-hover"> 
+	       <tbody> 
+	          <tr>
+                   <td class="left_td">
+                       <label>机器人类型<span style="color:red">*</span></label>  
+                   </td>
+                   <td>
+	                   <select class="form-control" name="category" id="category" style="width:200px;float:left" disabled="disabled"
+							data-bind="value:category,event: {change:changeRobot}">
+							<option value="RDB">RDB</option>
+							<option value="other">其他</option>
+							<option value="java">java程序片段</option>
+					   </select>
+					   <select class="form-control" name="unid" id="unid" disabled="disabled" style="width:200px;margin-left:20px"
+							data-bind="options:robotOption,optionsText:'name', 
+							optionsValue:'value',value:showUnid">
+					   </select>
+                   </td> 
+              </tr>  
+              <tr>
+                   <td class="left_td">
+                       <label>节点名<span style="color:red">*</span></label>  
+                   </td>
+                   <td>
+                       <input type="text" class="form-control" name="name" data-bind="textInput: name"  disabled="disabled"> 
+                   </td> 
+              </tr>  
+           </tbody> 
+              
+           <tbody data-bind="visible:getCategory()=='RDB'"> 
+              <tr>
+                  <td class="left_td"><label>数据库链接</label></td>
+                  <td>
+					  <select id="dbConnect" name="dbConnect" disabled="disabled" 
+							data-bind="options:compDbcpArr,optionsText:'fdName',optionsValue:'fdId',value:'',   
+	        			  	event: {  }">  
+	   				  </select> 
+                  </td> 
+              </tr> 
+              <tr>
+                  <td class="left_td"><label>SQL语句</label></td>
+                  <td>
+                      <textarea style="height:100px;width:400px;" name="sql" data-bind="value:sql" disabled="disabled"></textarea><br/>
+                  		样例: select * from my_table where id=:id<br/>
+						样例: select id, name from my_table where id=:id
+                  </td> 
+              </tr>  
+              <tr>
+                  <td class="left_td"><label>输入参数 </label></td>
+                  <td>
+                      <table class="table table-bordered table-hover">
+                         <tr>
+                        	<td class="left_td">参数名</td>
+                        	<td class="left_td">参数类型</td>
+                        	<td class="left_td">读取表单字段</td>
+                         </tr>
+                         <tbody data-bind="foreach: {data:inputParams,as:'param'}">
+                         	<tr>
+                        		<td data-bind="text:name"></td>
+                        		<td>
+		                        	<select id="dataType" name="dataType" disabled="disabled"
+		                          		data-bind="options:$parent.dataTypeArr,optionsText:'name',optionsValue:'value',value:param.dataType"  >  
+					   				</select>  
+                        		</td>
+	                        	<td> 
+			                       <input type="text" class="class_input"  disabled="disabled"	 id="nameField" data-bind="value:nameField" style="width:150px" > 
+	                        	</td>
+                        	</tr>
+                        </tbody>
+                      </table>
+                  </td> 
+              </tr>  
+              <tr data-bind="visible:getUnid()=='*@Robot@ReadUseSQL'">
+                   <td class="left_td"><label>输出参数 </label></td>
+                   <td>
+                       <table class="table table-bordered table-hover">
+                       	  <tr>
+                        	 <td class="left_td">名称</td>
+                        	 <td class="left_td">是否使用</td>
+                        	 <td class="left_td">写入表单字段</td>
+                          </tr>
+                          <tbody data-bind="foreach:{data:outParams,as:'param'}">
+                         	 <tr>
+                        	    <td data-bind="text:name"></td>
+                        		<td>
+		                        	<select id="dataType" name="dataType" disabled="disabled"
+		                          		data-bind="options:$parent.dataTypeArr,optionsText:'name',optionsValue:'value',value: param.dataType">  
+					   				</select>  
+                        		</td>
+                        		<td> 
+			   				   		<select id="variable" name="variable" disabled="disabled"
+                          				data-bind="options:$parent.varArr,optionsText:'varName',optionsValue:'fdId',value:param.idField"  >  
+			   				   		</select>  
+                        		</td>
+                        	 </tr>
+                          </tbody>
+                       </table>
+                   </td> 
+              </tr> 
+              <tr>
+              <tr>
+                   <td class="left_td">
+                       <label>功能说明</label>  
+                   </td>
+                   <td colspan="">
+                       <span>该机器人根据您提供的SQL语句，将表单的数据，写入到您指定的数据库表中</span>    
+                   </td> 
+              </tr>  
+           </tbody>
+           
+           <tbody data-bind="visible:getCategory()=='java'"> 
+              <tr>
+                  <td class="left_td"><label>java程序片段</label></td>
+                  <td>
+                       <textarea style="height:300px;width:580px;" name="sql" data-bind="value:disContent" disabled="disabled"></textarea><br/>
+                  </td> 
+              </tr> 
+              <tr>
+                  <td class="left_td"><label>功能说明</label></td>
+                  <td colspan="">该机器人将执行您提供的java程序片段.</td>
+              </tr>  
+           </tbody>
+              
+           <tbody data-bind="visible:getCategory()=='other'"> 
+              <tr>
+                  <td class="left_td" colspan=2>
+                   	 <table class="table table-bordered table-hover"> 
+                      	<tr>
+                      		<td>表单字段名</td>
+                      		<td>更新值</td>
+                      		<td></td>
+                      	</tr>
+                        <tbody data-bind="foreach: {data:fieldArr,as:'param'}">
+                      	   <tr>
+                      	   	  <td>
+		                      	  <select id="variable" name="variable" disabled="disabled"
+		                          	 data-bind="options:$parent.varArr,optionsText:'varName',optionsValue:'fdId',value:param.field">  
+					   			  </select>  
+                      	   	  </td>
+                      	   	  <td>
+		                          <input type="text" class="class_input" disabled="disabled" id="nameField" data-bind="value:nameField" style="width:150px"> 
+                      	   	  </td>
+                      	   </tr>
+                      	</tbody>
+                     </table>
+                  </td>
+              </tr> 
+              <tr>
+                   <td class="left_td"><label>功能说明</label></td>
+                   <td colspan="">该机器人可以帮你修正表单中的一些字段值</td>
+              </tr>  
+           </tbody>
+        </table>
+	</form>
+	<!-- /ko -->
+</div>

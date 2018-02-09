@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+
+<div class="btn-group margin-right-sm">
+
+	<button type="button" class="btn btn-default" data-bind="click: function(){addChild()}">
+		<i class="fa fa-plus"></i>[[#{newLowerLevel}]]
+	</button>
+	<button type="button" class="btn btn-default" data-bind="click: function(){editNode()}">
+		<i class="fa fa-pencil"></i>[[#{edit}]]
+	</button>
+	<button type="button" class="btn btn-default" data-bind="click: function(){removeNode()}">
+		<i class="fa fa-trash-o"></i>[[#{delete}]]
+	</button>
+	<button type="button" class="btn btn-default" data-bind="click: $parent.checkRepeatVM.openWindow">
+		<i class="fa fa-repeat" aria-hidden="true"></i>[[#{checkRepeat}]]
+	</button>
+	<button type="button" class="btn btn-default" data-bind="click: $root.addQuickly">
+		<i class="fa fa-plus-circle"></i>[[#{addNextNodeQuickly}]]
+	</button>
+</div>
+

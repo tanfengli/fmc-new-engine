@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js}" 
+		src="/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js"></script> 
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css}"
+ 		href="/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css">
+	<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js}"
+ 		src="/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+</head>
+
+<body>
+    <div data-bind="component: {name: 'page-title'}">系统任务</div>   
+	 
+	<div class="row" data-bind="if: visibleCatalog"> 
+	<div data-bind="component:{name:'searchForm-panel',params:{data:sysQuartzJobSearchForm}}">
+		<div data-bind="template:{name:'sys_quartzJob_searchForm_html', data:searchForm}"></div> 
+	</div>
+ 		<div data-bind="template:{name:'sys_quartzJob_gridToolbar_html'}"></div> 
+		<div id="datagrid_panel" data-bind="template:{name:'sys_quartzJob_datagrid_html',data: grid}"></div>
+	</div> 
+	
+    <div id="datagrid_Form" data-bind="template:{name:'sys_quartzJob_editWindow_html', data: quartzForm}"></div>
+     
+	<script th:src="@{/js/sys/quartzJob/main.js}"
+		 src="/js/sys/quartzJob/main.js"></script>
+
+</body>
+</html>

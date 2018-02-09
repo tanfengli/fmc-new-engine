@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<div th:fragment="menuTree">
+			<div id="sys_menu_tree" class="nav-left pull-left menu-left">
+				<div id="treeDemo" class="ztree"></div>
+			</div>
+		</div>
+		
+		<span class="btn btn-primary" id="leftListswitch" style="position: fixed; display: none">
+		  <i class="glyphicon glyphicon-chevron-left"></i>
+		</span>
+			
+		<script type="text/javascript" th:src="@{/js/admin/menuVO.js}" src="/js/admin/menuVO.js"></script>
+	</body>
+</html>

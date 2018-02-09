@@ -1,0 +1,67 @@
+<meta charset="utf-8" />
+<style  type="text/css">
+  td{text-align: center}
+</style>
+<div class="modal fade" id="checkRepeatModal" data-backdrop="static" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">[[#{roleMember}]][[#{checkRepeat}]]</h4>
+				</div>
+				<div class="modal-body">
+					<!-- ko ifnot: repeatList().length>0 -->
+					<span>没有出现人员角色重复的情况  </span>
+					<!-- /ko -->
+					<!-- ko if: repeatList().length>0 -->
+					<span>以下人员一人处于了多个已定义的岗位，请为其选一个默认岗位  </span>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>[[#{index}]]</th>
+								<th>[[#{person}]]</th>
+								<th>[[#{roleBelong}]]</th>
+								<th>[[#{generalPost}]]</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- ko foreach: {data: repeatList ,as: 'one'} -->
+							<tr>
+								<td data-bind="text: $index()+1"></td>
+								<td>
+									<span data-bind="text: personName"></span>
+									<input type="hidden" data-bind="value: personId,attr: {id: 'personId_'+$index()}">
+								</td>
+								<td data-bind="foreach: postList">
+									<p data-bind="text: postName"></p>
+								</td>
+								<td>
+									<select class="form-control" 
+											data-bind="options: postList,
+													   optionsText: 'postName',
+													   optionsValue: 'postId',
+													   value: $parents[0].defaultRoleList[$index()].fdPostId,
+													   attr: {id : 'postId_'+$index()}
+											">
+									</select>
+								</td>
+							</tr>
+							<!-- /ko -->
+						</tbody>
+					</table>
+					<!-- /ko -->
+				</div>
+
+				<div class="modal-footer">
+					<!-- ko if: repeatList().length>0-->
+					<button type="submit" id="btn_submit" data-bind="click: defaultRoleForm.saveOrUpdateList" class="btn btn-primary">[[#{save}]]</button>
+					<!-- /ko -->
+					<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+				</div>
+			</div>
+		</div>
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+	</head>
+	<body>
+		<div data-bind="component:{name:'page-title'}">
+			[[#{myPendingRead}]](<span>[[#{unread}]]:</span><span id="unreadCount"></span>
+			<span>[[#{read}]]:</span><span id="readCount"></span>
+			<span>[[#{totalNum}]]:</span><span id="allCount"></span>)
+		</div>
+		
+		<div data-bind="visible: chooseView()=='list'">
+			<div data-bind="component:{name:'searchForm-panel',params:{data:searchForm}}">
+				<div data-bind="template:{name:'aboutMyself_myPendingRead_searchForm_html',data:searchForm}"></div>
+			</div>
+			<div data-bind="template:{name:'aboutMyself_myPendingRead_datagrid_html',data:processReadVGrid}"></div>
+		</div>
+
+		<div data-bind="visible:chooseView()=='detail'">
+			<div data-bind='component:{name:"billDetail",params:{data:wfInstanceId,callFunc:toList,initSuccess:toDetailPage}}'></div>
+		</div>
+
+		<script type="text/javascript" th:src="@{/js/aboutMyself/myPendingRead/main.js}" src="/js/aboutMyself/myPendingRead/main.js"></script>
+	</body>
+</html>

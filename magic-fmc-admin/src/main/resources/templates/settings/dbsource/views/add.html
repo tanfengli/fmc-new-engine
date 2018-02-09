@@ -1,0 +1,111 @@
+<meta charset="utf-8" />
+
+<style type="text/css">
+    .validationMessage {
+        clear: both;
+        color: #FF000A;
+        display: inline;
+    }
+
+    .validationSuccess {
+        clear: both;
+        color: green;
+        widows: inherit;
+        display: inline;
+    }
+
+    .validationWarn {
+        clear: both;
+        color: #ccc;
+        height: 26px;
+        line-height: 26px;
+        padding-left: 20px;
+        padding-top: 7px;
+        display: inline;
+        float: right;
+    }
+</style>
+
+
+<!-- 模态框（Modal）Start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">[[#{add}]]/[[#{edit}]]</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<form class="form-horizontal" role="form"
+						data-bind="with: formItem">
+						<table class="table table-bordered table-hover">
+							<tr>
+								<th>[[#{posName}]]<span style="color: red">*</span></th>
+								<td><input type="text" class="col-xs-6 form-control" data-bind="textInput: fdName">
+								</td>
+							</tr>
+							<tr>
+								<th>[[#{dbType}]]<span style="color: red">*</span></th>
+								<td><div class="col-xs-4">
+									<select  name="fdType" id="fdType" 
+									data-bind="textInput: fdType" class="form-control">
+										<option value="" selected="selected">[[#{pleaseSelected}]]</option>
+										<option value="Oracle">Oracle</option>
+										<option value="MS SQL Server">MS SQL Server</option>
+										<option value="DB2">DB2</option>
+										<option value="My SQL">My SQL</option>
+										<option value="Sybase">Sybase</option>
+										<option value="Informix">Informix</option>
+										<option value="PostgreSQL">PostgreSQL</option>
+										<option value="ODBC">ODBC</option>
+										<option value="其他">其他</option>
+									</select></div>
+									<span class="col-xs-8">&nbsp;&nbsp;改变该项值，相应修改“JDBC驱动”和“连接URL” </span>
+								</td>
+							</tr>
+							<tr>
+								<th>JDBC[[#{driver}]]<span style="color: red">*</span></th>
+								<td><input class="form-control" type="text" data-bind="textInput: fdDriver">
+									<span data-bind="if: fdType()=='Oracle'">示例：oracle.jdbc.driver.OracleDriver</span>
+								</td>
+							</tr>
+							<tr>
+								<th>[[#{link}]]URL<span style="color: red">*</span></th>
+								<td><input class="form-control" type="text" data-bind="textInput: fdUrl">
+									<span data-bind="if: fdType()=='Oracle'">示例：jdbc:oracle:thin:@10.204.115.27:1521/orcl</span>
+								</td>
+							</tr>
+							<tr>
+								<th>[[#{username}]]<span style="color: red">*</span></th>
+								<td><input class="form-control" type="text" data-bind="textInput: fdUsername"></td>
+							</tr>
+							<tr>
+								<th>[[#{password}]]<span style="color: red">*</span></th>
+								<td><input class="form-control" type="password" data-bind="textInput: fdPassword"></td>
+							</tr>
+							<tr>
+								<th>[[#{describe}]]：</th>
+								<td>
+									<textarea rows="2" cols="1" class="form-control" data-bind="textInput: fdDescription"></textarea>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-loading-text="测试中..." id="testConnection" style="float: left;"
+					data-bind="click: $root.testConnection">测试连接</button>
+				<button type="submit" class="btn btn-primary" 
+					data-bind="click: saveOrUpdate">[[#{save}]]</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<!-- 模态框（Modal）End -->

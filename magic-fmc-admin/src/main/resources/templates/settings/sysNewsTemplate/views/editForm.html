@@ -1,0 +1,203 @@
+<!-- ko if: $parent.tab()=='basic' -->
+<div data-bind='component:{name:"groupMember",params:{data:$parent.elementForm,callFunc:$parent.selectNewElement,width:"200px",height:"280px"}}'></div> 
+<!-- /ko -->
+<!-- ko if: formItem()!=undefined&&formItem().pattern()=='other' -->
+<div data-bind='component:{name:"templateTree",params:{callFunc:$parent.selectTemplate,width:"100%",height:"500px"}}'></div> 
+<!-- /ko -->
+<meta charset="UTF-8">
+<div class="col-xs-12">
+	<div class="nav-tab-title">
+		<ul id="myTab" class="nav">
+			<li class="active"><a href="#basic" data-toggle="tab" data-bind="click: function(){$parent.tab('basic');return true;}">基本信息</a></li>
+			<li class=""><a id="lct_edit" href="#process" data-toggle="tab" data-bind="click: function(){$parent.tab('process');return true;}">流程配置</a></li>
+		</ul>
+		<form id="jsForm"  data-bind="with: formItem">
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane active in" id="basic">
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th>类别名称</th>
+								<td>
+									<div class="col-xs-10">
+										<input id="cate" type="text" class="form-control"
+											disabled="disabled" data-bind="textInput:categoryName">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default"
+											data-bind="click:function(){$('#templateSelectWindow').modal();}">
+											<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+										</button>
+									</div>
+								</td>
+								<th>模板名称<span style="color:red">*</span></th>
+								<td>
+									<input type="text" class="form-control" data-bind="value: fdName">
+								</td>
+							</tr>
+							<tr>
+								<th>所属业务系统<span style="color: red">*</span></th>
+								<td>
+									<select class="form-control" required name="busySys"
+										data-bind="options:busiSysArray,
+										optionsCaption:'--请选择--',
+										optionsText:'fdName',
+										optionsValue:'fdId',
+										value: busiSysId">
+									</select>
+								</td>
+								<th>编号前缀<span style="color:red">*</span></th>
+								<td>
+									<input type="text" class="form-control" name="prexic"
+									data-bind="textInput:fdNumberPrefix" required
+									data-rule-mobile="true">
+								</td>
+							</tr>
+							<tr data-bind="visible: $parents[1].curPage()=='edit'">
+								<th>模板ID</th>
+								<td colspan="3" data-bind="text: fdId"></td>
+							</tr>
+							<!-- <tr>
+								<th>可维护者</th>
+								<td colspan="3">
+									<div class="col-xs-10">
+										<input id="editor" class="form-control">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default"
+											data-bind="click:function(){clickType='editor';$('#memberSelectWindow').modal();}">
+											<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+										</button>
+									</div>
+								</td>
+							</tr> 
+							<tr>
+								<th>可使用者</th>
+								<td colspan="3">
+									<div class="col-xs-10">
+										<input id="reader" class="form-control">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default"
+											data-bind="click:function(){clickType='reader';$('#memberSelectWindow').modal();}">
+											<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+										</button>
+									</div>
+								</td>
+							</tr>
+							-->
+							<tr>
+								<th>创建人</th>
+								<td data-bind="text:docCreatorName"></td>
+								<th>创建时间</th>
+								<td data-bind="text:docCreateTime"></td>
+							</tr>
+							<tr>
+								<th>修改人</th>
+								<td data-bind="text:docAlterName"></td>
+								<th>修改时间</th>
+								<td data-bind="text:docAlterTime"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane" id="process">
+					<div class="proc-lc-box">
+						<table class="table table-bordered" >
+							<tr>
+								<th class="col-xs-3">流程运用方式</th>
+								<td>
+									<label> 
+										<input type="radio" name="design"
+											value="default" data-bind="checked:pattern">引用默认模板
+									</label> 
+									<label> 
+										<input type="radio" name="design" value="other"
+											data-bind="checked:pattern">引用其它模板
+									</label> 
+									<label> 
+										<input type="radio" name="design"
+											value="custom" data-bind="checked:pattern" checked="checked">自定义
+									</label>
+									<button type="button" class="btn btn-default"
+										data-bind="visible:pattern()=='custom',click:function(){$('#commonTemSelectWindow').modal();}">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>从模板中选择
+									</button>
+								</td>
+							</tr>
+							<tr data-bind="visible:pattern()=='other'">
+								<th>模板<span style="color:red">*</span></th>
+								<td>
+									<div class="col-xs-9">
+										<input type="text" class="form-control" readonly="readonly"
+											data-bind="value:$parents[1].otherTemName,attr:{required: $parents[1].test}">
+									</div> 
+									<span data-bind="text:$parents[1].test"></span>
+									<button type="button" class="btn btn-default"
+										data-bind="click:function(){$('#templateTreeWindow').modal();}">
+										<i class="fa fa-hand-rock-o" aria-hidden="true"></i>选择
+									</button>
+								</td>
+							</tr>
+							<!-- ko if:pattern()=='custom' -->
+							<tr>
+								<th>是否新版本</th>
+								<td>
+									<label><input type="radio" value="0" checked="checked" name="fdVersion" data-bind="checked: fdVersion">当前版本</label>
+									<label><input type="radio" value="1" name="fdVersion" data-bind="checked: fdVersion">新版本</label>
+								</td>
+							</tr>
+							<!-- /ko -->
+							<!-- ko if: fdVersion()=='1' -->
+							<tr>
+								<th>是否立即启用</th>
+								<td>
+									<label><input type="radio" value="1" checked="checked" name="fdStatus" data-bind="checked: fdStatus">立刻启用</label>
+									<label><input type="radio" value="0" name="fdStatus" data-bind="checked: fdStatus">稍后启用</label>
+								</td>
+							</tr>
+							<!-- /ko -->
+							<tr data-bind="visible: fdStatus()=='0'&&fdVersion()=='1'">
+								<th>启动时间</th>
+								<td>
+									<input type="text" class="form_datetime"  data-bind="textInput: enableTimeDate"><br>
+								</td>
+							</tr>
+						</table>
+						
+						<span data-bind="visible: pattern()=='default'" style="color: red;">默认模板：通用模板，是否默认设置为“是”，则为“默认模板”。</span>
+						
+						<!-- 流程图  -->
+						<div>
+							<div data-bind="if:pattern()=='custom'&&$parents[1].rendered()" style="margin-top:-10px;">
+								<div data-bind='component:{name:"flowchartDesigner",params:{"editFlowchart":$parents[1].editFlowchart,"xmlString":$parents[1].flowXml}}'></div>
+							</div>
+						</div>
+						
+						<!-- ko if:pattern()=='custom' -->
+						<table class="table table-bordered" style="margin-top:-5px">
+							<tr>
+								<th class="col-xs-3">显示历史版本</th>
+								<td><input type="checkbox" data-bind="checked: showVersion"></td>
+							</tr>
+						</table>
+						<div data-bind="visible: showVersion()==true">
+							<div data-bind="template:{name:'settings_sysNewsTemplate_datagridHistoryVersion_html',data: $parent.versionGridViewModel}"></div>
+						</div>
+						<!-- /ko -->
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="text-right" style="margin-top: 12px">
+				<button type="submit" class="submit btn btn-primary" data-bind="click:$parent.saveOrUpdateList">
+					<span aria-hidden="true">[[#{save}]]</span>
+				</button>
+				<button type="button" class="btn btn-primary" data-bind="click:$parents[1].showList">
+					<span aria-hidden="true">返回</span>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

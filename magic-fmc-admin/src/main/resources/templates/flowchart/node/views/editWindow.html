@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">    
+	</head>
+	<body>   
+	     <div> 
+			 <ul id="myTab" class="nav nav-tabs" >
+				<li data-bind="css:{active:getTab()=='basical'},click:function(){setTab('basical')}" id="basicalTabId" >
+					<a href="#basicalTab" data-toggle="tab">基本</a>
+				</li> 
+			    <li data-bind="css:{active:getTab()=='operator'},click:function(){setTab('operator')}" id="operatorTabId">
+			    	<a href="#operatorTab" data-toggle="tab">操作</a>
+			    </li> 
+				<li data-bind="css:{active:getTab()=='senior'},click:function(){setTab('senior')}" id="seniorTabId" >
+					<a href="#seniorTab" data-toggle="tab">高级</a>
+				</li> 
+				<li data-bind="css:{active:getTab()=='juris'},click:function(){setTab('juris')}" id="jurisdictionTabId">
+					<a href="#jurisdictionTab" data-toggle="tab">权限</a>
+				</li>
+				<li data-bind="css:{active:getTab()=='logic'},click:function(){setTab('logic')}" id="logicTabId">
+					<a href="#logicTab" data-toggle="tab">前后置逻辑</a>
+				</li> 
+				<li data-bind="css:{active:getTab()=='customProper'},click:function(){setTab('customProper')}" id="customProperTabId">
+					<a href="#customProperTab" data-toggle="tab">自定义变量</a>
+				</li> 
+			</ul>
+			
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade active in " id="basicalTab" data-bind="css:{'in':getTab()=='basical',active:getTab()=='basical'}">
+					 <div id="basic_Form" data-bind="template:{name:'flowchart_node_editBasicForm_html'}"></div> 
+				</div>
+				
+				<div class="tab-pane fade" id="operatorTab" data-bind="css:{'in':getTab()=='operator',active:getTab()=='operator'}">
+					 <div id="operate_Form" data-bind="template:{name:'flowchart_node_editOperateForm_html'}"></div> 
+				</div>
+				
+				<div class="tab-pane fade" id="seniorTab" data-bind="css:{'in':getTab()=='senior',active:getTab()=='senior'}">
+					 <div id="senior_Form" data-bind="template:{name:'flowchart_node_editSeniorForm_html'}"></div> 
+				</div>
+				
+				<div class="tab-pane fade" id="jurisdictionTab" data-bind="css: {'in':getTab()=='juris',active:getTab()=='juris'}">
+					 <div id="jurisdiction_Form" data-bind="template:{name:'flowchart_node_editJurisdictionForm_html'}"></div> 
+				</div>
+				
+				<div class="tab-pane fade" id="logicTab" data-bind="css:{'in': getTab()=='logic',active:getTab()=='logic'}">
+					 <div id="logic_Form" data-bind="template:{name:'flowchart_node_editLogicForm_html'}"></div>  
+				</div>
+				<div class="tab-pane fade" id="customProperTab" data-bind="css:{'in': getTab()=='customProper',active:getTab()=='CustomProper'}">
+					 <div id="customProper_Form" data-bind="template:{name:'flowchart_node_editCustomPropertiesForm_html'}"></div>  
+				</div>
+			</div>
+		 </div>
+	</body>
+</html>

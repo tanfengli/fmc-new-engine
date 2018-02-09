@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js}" 
+	src="/webjars/bootstrap-datetimepicker/2.3.8/js/bootstrap-datetimepicker.js"></script> 
+<link rel="stylesheet" th:href="@{/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css}"
+	 href="/webjars/bootstrap-datetimepicker/2.3.8/css/bootstrap-datetimepicker.css">
+<script type="text/javascript" th:src="@{/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js}"
+	 src="/webjars/bootstrap-datetimepicker/2.3.8/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+</head>
+<body>
+	
+	<div data-bind="component: {name: 'page-title'}">预警设置</div>
+
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'earlyWarning_sysWfDelay_searchForm_html', data: searchForm}"></div>
+		</div>
+
+		<div data-bind="template:{name:'earlyWarning_sysWfDelay_gridToolbar_html',data: gridToolbarForm}"></div>
+			
+		<div data-bind="template:{name:'earlyWarning_sysWfDelay_datagrid_html', data: gridViewModel}"></div>
+		
+		<div data-bind="template:{name:'earlyWarning_sysWfDelay_editWindow_html', data: editForm}"></div>
+
+	<script type="text/javascript" th:src="@{/js/earlyWarning/sysWfDelay/main.js}" src="/js/earlyWarning/sysWfDelay/main.js"></script>
+
+</body>
+</html>

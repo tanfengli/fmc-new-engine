@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<betwixt-config>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.beans.descriptor.AbstractProcessDescriptor">
+		<element name="process">
+			<element name="abstract-nodes">
+				<element
+					property="nodeDescriptors"
+					updater="addNodeDescriptor" />
+			</element>
+			<addDefaults
+				add-properties="true"
+				add-adders="false" />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.beans.descriptor.ProcessDescriptor">
+		<element name="process">
+			<element name="initial-node"
+					property="initialNodeDescriptor" />
+			<element name="nodes">
+				<element
+					property="nodeDescriptors"
+					updater="addNodeDescriptor" />
+			</element>
+			<element name="finally-node"
+					property="finallyNodeDescriptor" />
+			<addDefaults
+				add-properties="true"
+				add-adders="false" />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.beans.descriptor.AbstractNodeDescriptor">
+		<element name="abstract-node">
+			<element name="action"
+					property="actionDescriptor" />
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.beans.descriptor.NodeDescriptor">
+		<element name="node">
+			<element name="results">
+				<element
+					property="resultDescriptors"
+					updater="addResultDescriptor" />
+			</element>
+			<addDefaults
+				add-properties="true"
+				add-adders="false" />			
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.beans.descriptor.ActionDescriptor">
+		<element name="action">
+			<addDefaults />
+		</element>
+	</class>
+	<class name="com.vispractice.fmc.business.entity.sys.workflow.beans.descriptor.ResultDescriptor">
+		<element name="result">
+			<addDefaults />
+		</element>
+	</class>
+</betwixt-config>

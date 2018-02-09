@@ -1,0 +1,49 @@
+<meta charset="utf-8" />   
+<style>
+  td {
+    text-align: center
+  }
+</style> 
+<div class="col-xs-12"> 
+<form class="form-horizontal" role="form" data-bind="with: formItem">
+         
+   <input type="hidden" data-bind="textInput:fdId" class="form-control" >   
+   <table id="tbUser" class="table table-bordered"> 
+          <tbody>
+              <tr>
+                <th width="25%"> 
+         		<label for="fdName"><span style="color: red;">*</span>流程标题</label>  
+                </th>
+                <td colspan="5">
+                   <input type="text" name="fdName" data-bind="textInput:fdName" class="form-control" id="fdName"> 
+                </td>
+              </tr>
+              <tr>
+                  <th width="25%">
+                      <label for="fdNodeType">是否默认</label>  
+                  </th>
+                  <td colspan="5">
+                      <input type="radio" name="fdIsDefault" value="1" data-bind="checked: fdIsDefault"/> [[#{yes}]] 
+                      <input type="radio" name="fdIsDefault" value="0" data-bind="checked: fdIsDefault" style="margin-left: 15px"/>[[#{no}]] 
+                  </td> 
+               </tr>
+               </table>
+			   <div
+				data-bind='component: {name: "flowchartDesigner", params:{"editFlowchart": $root.editFlowchart, "xmlString": $root.flowXml}}'></div>
+               <table class="table table-bordered" style="margin-top: -5px">
+              <!--  <tr>
+                  <th>
+                      <label>显示历史版本</label>   
+                  </th>
+                  <td>
+                      <input type="checkbox">
+                  </td>
+               </tr>  --> 
+            </tbody>
+       </table>     
+<div class="modal-footer">
+    <button type="submit" id="btn_submit" data-bind="click: $parent.saveOrUpdateList" class="btn btn-primary">[[#{save}]]</button>
+    <button type="button" class="btn btn-default" data-bind="click: $root.returnForm">返回</button>
+</div> 
+	</form>
+</div>

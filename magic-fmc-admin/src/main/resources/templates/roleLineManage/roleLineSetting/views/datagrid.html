@@ -1,0 +1,55 @@
+<meta charset="UTF-8">
+
+<div >
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<td><input type="checkbox"></td>
+				<th>[[#{index}]]</th>
+				<!-- <th>角色线编码</th> -->
+				<th>[[#{posName}]]</th>
+				<th>是否有效</th>
+				<th class="col-xs-3">[[#{operation}]]</th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: {data: data.content, as: 'sysUser'}">
+			<tr>
+				<td><input type="checkbox" name="fdIdArr" data-bind="value: fdId"></td>
+				<td data-bind="text:$index()+1"></td>
+				<!-- <td></td> -->
+				<td data-bind="text: fdName"></td>
+				<td data-bind="text: (fdIsAvailable()==1)?'是':'否'"></td>
+				<td width="340px"><div class="btn-group">
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){$parent.editOne(sysUser)}">
+							<i class="fa fa-pencil" aria-hidden="true"></i>[[#{edit}]]
+						</button>
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){$parent.setOne(sysUser)}">
+							<i class="fa fa-star-o" aria-hidden="true"></i>配置角色关系
+						</button>
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: function(){copyOne(sysUser)}">
+							<i class="fa fa-star-o" aria-hidden="true"></i>复制
+						</button>
+						<!-- <button type="button" class="btn btn-default btn-xs"
+							data-bind="click: ">
+							<i class="fa fa-star-o" aria-hidden="true"></i>模拟器
+						</button>
+						<button type="button" class="btn btn-default btn-xs"
+							data-bind="click: ">
+							<i class="fa fa-star-o" aria-hidden="true"></i>角色线成员
+						</button> -->
+					</div></td>
+			</tr>
+		</tbody>
+		<tfoot data-bind="visible: !data.content().length > 0">
+			<tr>
+				<td colspan="10">[[#{nodata}]]</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div
+		data-bind='visible: data.content().length > 0,
+				component: {name: "grid-pagination", params:{data: data, toPage: toPage}}'></div>
+</div>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/flowchart.css}" href="/css/flowchart.css" />
+</head>
+<body>
+	
+<!-- 	<div data-bind="template:{name:'flowchart_setting_editWindow_html',data: nodeForm }"></div>
+	
+	<div data-bind='component: {name: "orgElementTree", params:{callFunc: selectNewOrg, width: "100%", height: "400px"}}'></div>
+    
+    <div data-bind='component: {name: "orgCommonTree", params:{callFunc: selectTypeFunc, width: "40%", height: "415px"}}'></div>
+ 	
+ 	<div data-bind='component: {name: "formulaModal", params:{data: formulaForm,callFunc: selectformula, width: "100%", height: "400px"}}'></div>
+    
+ 	 <div
+		data-bind='component: {name: "groupMember", params:{data: elementForm , callFunc: selectNewElement,  height: "280px"}}'></div>
+		 
+ 	<div data-bind='component: {name: "memberSelect", params:{data: elementForm, callFunc: selectNewElement, width: "440px", height: "280px"}}'></div>
+	  
+    <div data-bind='component: {name: "reviewNode", params:{data: reviewNodeForm, callFunc: selectReviewNode, width: "200px", height: "280px"}}'></div>
+ 
+    <div data-bind='component: {name: "robotNode", params:{data: robotNodeForm,callFunc: confirmRobot, width: "200px", height: "540px"}}'></div>
+   -->
+   <div data-bind='component: {name: "flowchartDesigner",params:{xmlString: flowXml}}'></div>
+  
+   <script type="text/javascript" th:src="@{/js/flowchart/setting/main.js}"
+   		 src="/js/flowchart/setting/main.js"></script>
+		
+</body>
+</html>

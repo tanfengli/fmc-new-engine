@@ -1,0 +1,32 @@
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>时间</th>
+			<th>节点名</th>
+			<th>操作者</th>
+			<th>操作</th>
+			<th>系统操作</th>
+			<th>下一节点通知方式</th>
+		</tr>
+	<thead>
+	<tbody data-bind="foreach:wfLog">
+		<tr>
+			<td data-bind="text:fdCreateDate"></td>
+			<td data-bind="text:fdFactNodeName"></td>
+			<td><span data-bind="text:fdName"></span>
+			<!-- ko if: fdActionId=='501' -->
+			<span>系统</span>
+			<!-- /ko -->
+			</td>
+			<td data-bind="text:fdActionInfo"></td>
+			<td data-bind="text:fdActionName"></td>
+			<td>
+				<div data-bind="visible:fdNotifyType=='todo'">
+					<input type="checkbox" disabled="disabled" checked="checked">待办
+				</div>
+				<span data-bind="visible: fdNotifyType!='todo'">N/A</span>
+			</td>
+		</tr>
+	</tbody>
+</table>

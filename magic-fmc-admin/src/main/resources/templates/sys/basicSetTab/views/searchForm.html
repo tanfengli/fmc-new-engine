@@ -1,0 +1,16 @@
+<form class="form-horizontal" role="form">
+	<div class="form-group">
+	    <label class="col-xs-1 control-label" style="margin-right: 0px;"
+			for="varName">备选名</label>
+		<div class="col-xs-3">  
+			<input type="text" data-bind="textInput: varName" class="form-control"/>
+		</div>   
+		<div class="col-xs-2">
+			<button type="submit" data-bind="click:$parent.grid.findAll" class="btn btn-primary btn-sm">
+				<i class="fa fa-search"></i>[[#{search}]]
+			</button>
+			<a href="#" class="btn btn-default btn-sm"><i
+				class="fa fa-eraser" aria-hidden="true"></i>[[#{reset}]]</a>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	
+	<div data-bind="component: {name: 'page-title'}">工作时间设置</div>
+
+		<div data-bind="component:{name:'searchForm-panel',params:{data: searchForm}}">
+			<div data-bind="template:{name:'earlyWarning_wfMonitorTime_searchForm_html', data: searchForm}"></div>
+		</div>
+
+		<div data-bind="template:{name:'earlyWarning_wfMonitorTime_gridToolbar_html',data: gridToolbarForm}"></div>
+			
+		<div data-bind="template:{name:'earlyWarning_wfMonitorTime_datagrid_html', data: gridViewModel}"></div>
+		
+		<div data-bind="template:{name:'earlyWarning_wfMonitorTime_editWindow_html', data: editForm,afterRender: editForm.getCalendarList}"></div>
+
+	<script type="text/javascript" th:src="@{/js/earlyWarning/wfMonitorTime/main.js}" src="/js/earlyWarning/wfMonitorTime/main.js"></script>
+
+</body>
+</html>

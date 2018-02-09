@@ -1,0 +1,65 @@
+/**
+ * Created by Administrator on 2016/4/12.
+ */
+/* CSS Document */
+/* line 9, ../sass/login.scss */
+body {
+  font-size: 14px;
+  background: #0070c9;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+
+/* line 14, ../sass/login.scss */
+.text-danger {
+  color: #de0000;
+}
+
+/* line 17, ../sass/login.scss */
+.login-box {
+  position: relative;
+  width: 400px;
+  margin: 15% auto 0;
+}
+/* line 21, ../sass/login.scss */
+.login-box .logo {
+  position: absolute;
+  left: 0;
+  top: -75px;
+}
+/* line 26, ../sass/login.scss */
+.login-box .login {
+  background: #fff;
+  border-radius: 3px;
+  padding: 15px 30px;
+}
+/* line 30, ../sass/login.scss */
+.login-box .login input {
+  height: 40px;
+}
+/* line 33, ../sass/login.scss */
+.login-box .login .login-tit {
+  font-size: 18px;
+  padding: 10px 0 20px;
+}
+/* line 37, ../sass/login.scss */
+.login-box .login i {
+  font-size: 15px;
+  color: #999;
+}
+/* line 42, ../sass/login.scss */
+.login-box .login-copyright {
+  padding-top: 10px;
+  color: #fff;
+}
+/* line 46, ../sass/login.scss */
+.login-box .btn-base {
+  background: #0070c9;
+  border: 1px solid #0169bc;
+  color: #fff;
+}
+/* line 50, ../sass/login.scss */
+.login-box .btn-base:hover, .login-box .btn-base:focus {
+  background: #0169bc;
+  border: 1px solid #0163b0;
+  color: #fff;
+}

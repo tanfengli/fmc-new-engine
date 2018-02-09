@@ -1,0 +1,62 @@
+<meta charset="utf-8">
+
+<!-- 模态框（Modal）Start -->
+<div class="modal fade" id="timeWindow" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel" aria-hidden="true" align="center">
+	<div class="modal-dialog" >
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">[[#{add}]]/[[#{edit}]]工作时间</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" >
+					<table class="table table-bordered " data-bind="with: formItem">
+						<tbody>
+						<tr>
+							<th class="col-xs-2">名称<span style="color: red">*</span></th>
+							<td class="col-xs-4"><input type="text" class="form-control" data-bind="textInput: fdName"></td>
+							<th class="col-xs-2">工作日历名称</th>
+							<td class="col-xs-4">
+								<select class="form-control" data-bind="options: $parent.calendarList,
+													optionsCaption: '请选择',
+													optionsText: 'fdName',
+													optionsValue: 'fdId',
+													value: fdCalendarId">
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th class="col-xs-2">工作月份</th>
+							<td colspan="99" class="col-xs-10">
+								<!-- ko foreach: new Array(12) -->
+								<label><input type="checkbox" name="monthSel" data-bind="checked: $parent.fdMonthList,checkedValue: $index()+1+''"><span data-bind="text: $index()+1"></span>月</label>
+								<!-- /ko -->
+							</td>
+						</tr>
+						<tr>
+							<th class="col-xs-2">上下班时间</th>
+							<td colspan="99" >
+								上班&nbsp;<input type="text" data-bind="textInput: fdTimeStart"><br>
+								午休&nbsp;<input type="text" data-bind="textInput: fdTimeEnd">&nbsp;至&nbsp;<input type="text" data-bind="textInput: fdNoonStart"><br>
+								下班&nbsp;<input type="text" data-bind="textInput: fdNoonEnd">
+								<span style="color: red;">上下班时间格式： 时:分，如： 08:30</span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" data-bind="click: saveOrUpdateList">
+							<span aria-hidden="true">[[#{save}]]</span>
+						</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<!-- 模态框（Modal）End -->

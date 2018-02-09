@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+
+<table class="table table-bordered table-hover"  >
+	<thead>
+		<tr>
+			<th class="col-xs-1"><input type="checkbox"></th>
+			<th class="col-xs-1">[[#{serialNumber}]]</th>
+			<th class="col-xs-2">[[#{applyCode}]]</th>
+			<th class="col-xs-6">[[#{toReadMes}]]</th>
+			<th class="col-xs-1">[[#{status}]]</th>
+			<th class="col-xs-1">[[#{operation}]]</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach:{data:data.content,as:'one'}">
+		<tr>
+			<input type="hidden" data-bind="value:fdId">
+			<td><input type="checkbox"></td>
+			<td data-bind="text:$index()+1"></td>
+			<td data-bind="text:applyCode"></td>
+			<td data-bind="text:fdSubject"></td>
+			<td>
+				<!-- ko if:isRead()==0 -->
+				<span style="color: red;">[[#{unread}]]</span>
+				<!-- /ko -->
+				<!-- ko if:isRead()==1 -->
+				<span>[[#{read}]]</span>
+				<!-- /ko -->
+			</td>
+			<td>
+				<div class="btn-group"> 
+					<button type="button" class="btn btn-default" data-bind="click:$root.toDetail">
+						<i class="fa fa-server"></i>[[#{detail}]]
+					</button>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot data-bind="visible:!data.content().length>0">
+		<tr><td colspan="6">[[#{nodata}]]</td></tr>
+	</tfoot>
+</table>
+
+<div data-bind='visible:data.content().length>0,component:{name:"grid-pagination",params:{data:data,toPage:toPage}}'></div>

@@ -1,0 +1,142 @@
+<meta charset="utf-8" />   
+<style>
+  td {
+    text-align: center
+  } 
+  
+  .left_td{
+	  background: #f5f5f5;
+   }  
+</style>  
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"> 
+	<form class="form-horizontal" role="form" data-bind="with: formItem">
+		<div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">[[#{operationModeMaintenance}]]</h4>
+	            </div>
+	            <div class="modal-body">
+	                <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control" id="fdId">   
+	                <table id="tbUser" class="table table-striped table-bordered table-hover"> 
+                        <tbody>
+                            <tr>
+                              <td class="left_td" width="25%"> 
+			                    <label for="fdName">[[#{modeName}]]</label>  
+                              </td>
+                              <td colspan="5">
+                                 <input type="text" name="fdName" data-bind="textInput:fdName" class="form-control" id="fdName"> 
+                              </td>
+                            </tr>
+                            <tr>
+                                <td class="left_td" width="25%">
+                                    <label for="fdNodeType">[[#{nodeType}]]</label>  
+                                </td>
+                                <td width="25%">
+                                     <input id="typeRadioOne" type="radio" name="fdNodeType" value="0" data-bind="checked: fdNodeType,click: function(){$('#tbOperateTwo').show();return true;}"/> [[#{approval}]] 
+                                     <input id="typeRadioTwo" type="radio" name="fdNodeType" value="1" data-bind="checked: fdNodeType,click: function(){$('#tbOperateTwo').hide();return true;}" style="margin-left: 15px"/> [[#{sign}]] 
+                                </td>
+                                <td class="left_td" width="25%">  
+                                    <label for="fdIsDefault">[[#{isDefault}]]</label>  
+                                 </td>
+                                <td width="25%">
+                                    <input id="isDefault" type="radio" name="fdIsDefault" value="1" data-bind="checked: fdIsDefault"/> [[#{yes}]] 
+                                    <input type="radio" name="fdIsDefault" value="0" data-bind="checked: fdIsDefault" style="margin-left: 15px"/>[[#{no}]] 
+                                </td> 
+                             </tr>
+                           </tbody>
+                      </table>   
+                      <table id="tbOperateOne" class="table table-striped table-bordered table-hover"> 
+                          <thead>
+                             <tr>
+                                  <td colspan="3"> 
+                                      <label><span style="color:blue;">[[#{draftman}]]</span>[[#{draftmanExplain}]]</label>  
+                                 </td>
+                             </tr>
+                             <tr>   
+                                 <td class="left_td" width="25%">
+                                    <label>[[#{operationType}]]</label>  
+                                 </td> 
+                                  <td class="left_td" width="25%">
+                                    <label>[[#{operationName}]]</label>  
+                                 </td> 
+                                  <td class="left_td" width="25%">
+                                    <label>[[#{operation}]]</label>  
+                                    <button type="button" class="btn btn-xs btn-link" data-bind="click: addOperation" style="font-weight: bold;margin-left:25px">[[#{add}]]</button>   
+                                 </td>  
+                             </tr> 
+                          </thead> 
+                          <tbody data-bind="foreach: {data: operationsList, as: 'opertion'}"> 
+                             <tr>    
+                                 <td> 
+                                   <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control">  
+                                   <select class="form-control" name="fdOperType"  data-bind="value:fdOperType">
+							            <option value="202" selected="selected" >[[#{reminders}]]</option>
+							            <option value="203">[[#{withdraw}]]</option>
+							            <option value="204">[[#{abandoned}]]</option> 
+							        </select>   
+                                 </td> 
+                                 <td>
+                                    <input type="text" name="fdOperName" data-bind="textInput:fdOperName" class="form-control"> 
+                                 </td> 
+                                  <td>    
+                                     <a href="javascript:void(0)" data-bind="click: function(){$parent.removeOperation(this)}">[[#{delete}]]</a> 
+					                 <a href="javascript:void(0)" data-bind="click: function(){$parent.upOperation(this)}">[[#{moveUp}]]</a>
+					                 <a href="javascript:void(0)" data-bind="click: function(){$parent.downOperation(this)}">[[#{moveDown}]]</a>
+                                 </td>  
+                             </tr>
+                          </tbody>
+                      </table>  
+                      <table id="tbOperateTwo" class="table table-striped table-bordered table-hover"> 
+                          <thead>
+                             <tr>
+                                 <td colspan="3">
+                                     <label><span style="color:blue;">[[#{handler}]]</span>[[#{handlerExplain}]]</label>  
+                                 </td>
+                             </tr>
+                             <tr>   
+                                 <td class="left_td" width="25%">
+                                    <label>[[#{operationType}]]</label>  
+                                 </td> 
+                                  <td class="left_td" width="25%">
+                                    <label>[[#{operationName}]]</label>  
+                                 </td> 
+                                  <td class="left_td" width="25%">
+                                    <label>[[#{operation}]]</label>  
+                                    <button type="button" class="btn btn-xs btn-link" data-bind="click: addOperationTwo" style="font-weight: bold;margin-left:25px">[[#{add}]]</button>   
+                                 </td>  
+                             </tr> 
+                          </thead> 
+                          <tbody data-bind="foreach: {data: operationsListTwo, as: 'opertionTwo'}"> 
+                             <tr>    
+                                 <td>
+                                   <input type="hidden" name="fdId" data-bind="textInput:fdId" class="form-control">  
+                                   <select class="form-control" name="fdOperType" data-bind="value: fdOperType">
+							            <option value="101" selected="selected">[[#{pass}]]</option>
+							            <option value="102">[[#{reject}]]</option>
+							            <option value="103">[[#{turnToDo}]]</option>
+							            <option value="104">[[#{communicate}]]</option>
+							            <option value="105">[[#{abandoned}]]</option> 
+							        </select>   
+                                 </td> 
+                                 <td>
+                                    <input type="text" name="fdOperName" data-bind="textInput:fdOperName" class="form-control"> 
+                                 </td> 
+                                  <td>   
+                                     <a href="#" data-bind="click: function(){$parent.removeOperationTwo(this)}">[[#{delete}]]</a>
+                                     <a href="javascript:void(0)" data-bind="click: function(){$parent.upOperationTwo(this)}">[[#{moveUp}]]</a>
+					                 <a href="javascript:void(0)" data-bind="click: function(){$parent.downOperationTwo(this)}">[[#{moveDown}]]</a>
+                                 </td>  
+                             </tr>
+                          </tbody>
+                      </table>   
+                    <p style="font-weight: bold;margin-left:20px;">[[#{endOfDocument}]]</p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="submit" id="btn_submit" data-bind="click: $parent.saveOrUpdateList" class="btn btn-primary">[[#{save}]]</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+	            </div>
+	        </div>
+		</div>  
+	</form>
+</div>

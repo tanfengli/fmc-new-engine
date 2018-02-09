@@ -1,0 +1,25 @@
+
+<div class="modal fade" id="authorityWindow" tabindex="-1" role="dialog" data-backdrop="static"
+	aria-labelledby="myModalLabel">
+	<form class="form-horizontal" role="form">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">员工权限</h4>
+				</div>
+				<div class="modal-body">
+					<!-- 员工权限     -->
+					<div data-bind="template:{name:'authority_userAuthoritySearch_authorityDatagrid_html'}"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">[[#{close}]]</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+

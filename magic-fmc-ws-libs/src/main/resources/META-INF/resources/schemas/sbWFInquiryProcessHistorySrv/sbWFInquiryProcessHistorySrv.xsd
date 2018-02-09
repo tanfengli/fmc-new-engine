@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns="http://csb.fmc.vispractice.com/MsgHeader"
+	xmlns:tns="http://csb.fmc.vispractice.com/SB_WF_InquiryProcessHistorySrv"
+	targetNamespace="http://csb.fmc.vispractice.com/SB_WF_InquiryProcessHistorySrv"
+	attributeFormDefault="unqualified" elementFormDefault="qualified">
+	
+	<xs:import namespace="http://csb.fmc.vispractice.com/MsgHeader" schemaLocation = "../../schemas/fmcMsgHeader.xsd"  />
+	
+	<xs:element name="processRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="request" type="tns:SB_WF_InquiryProcessHistorySrvRequest" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="processResponse" >
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element form="qualified" minOccurs="0" name="return" type="tns:SB_WF_InquiryProcessHistorySrvResponse" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="Wf_Audit_Record">
+		<xs:sequence>
+			<xs:element name="WF_NODE_ID" nillable="true" type="xs:string" />
+			<xs:element name="WF_NODE_NAME" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUDIT_USER_NO" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUDIT_USER_NAME" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUDIT_MIND" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUDIT_RESULT" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUDIT_DATE" nillable="true" type="xs:dateTime" />
+			<xs:element name="WF_AUDIT_SPACING_INTERVAL" nillable="true" type="xs:decimal" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Wf_Audit_Record_Collection">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WF_AUDIT_RECORD" type="tns:Wf_Audit_Record" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_InquiryProcessHistorySrvRequest">
+		<xs:sequence>
+			<xs:element name="MsgHeader" type="ns:MsgHeader" />
+			<xs:element name="WF_INSTANCE_ID" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SB_WF_InquiryProcessHistorySrvResponse">
+		<xs:sequence>
+			<xs:element name="SERVICE_FLAG" nillable="true" type="xs:string" />
+			<xs:element name="SERVICE_MESSAGE" nillable="true" type="xs:string" />
+			<xs:element name="WF_AUDIT_RECORD_COLLECTION" type="tns:Wf_Audit_Record_Collection" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

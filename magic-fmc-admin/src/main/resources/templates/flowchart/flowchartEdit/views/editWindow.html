@@ -1,0 +1,60 @@
+<!-- 编辑弹窗 -->
+<form class="form-horizontal" role="form"  >
+   <!-- ko if: XMLNODENAME == 'line'  -->
+   <div data-bind="template:{name:'flowchart_line_lineNode_html'}"></div>  
+   <!-- /ko -->
+   
+   <!-- 人工决策节点  manualBranchNode -->	
+   <!-- ko if: XMLNODENAME == 'manualBranchNode' -->
+   <div data-bind="template:{name:'flowchart_line_manualBranchNode_html'}"></div>  
+   <!-- /ko -->
+   
+   <!-- ko if: XMLNODENAME == 'autoBranchNode' -->
+   <div data-bind="template:{name:'flowchart_node_conditionBranchNode_html'}"></div>  
+   <!-- /ko -->
+ 
+   <!-- ko if: XMLNODENAME == 'splitNode' -->
+   <div data-bind="template:{name:'flowchart_line_splitNode_html'}"></div>  
+   <!-- /ko -->	
+   
+   <!-- 并行会话节点  joinNode -->	
+   <!-- ko if: XMLNODENAME == 'joinNode' -->
+   <div data-bind="template:{name:'flowchart_line_joinNode_html'}"></div>  
+   <!-- /ko -->
+  	
+   <!-- ko if: XMLNODENAME == 'draftNode' -->
+   <div data-bind="template:{name:'flowchart_node_draftNode_html'}"></div>  
+   <!-- /ko -->	 
+            
+   <!-- 抄送节点  sendNode -->	
+   <!-- ko if: XMLNODENAME == 'sendNode' -->
+   <div data-bind="template:{name:'flowchart_node_sendNode_html'}"></div>  
+   <!-- /ko -->	 
+  
+  <!-- 审批节点  reviewNode -->
+  <!-- ko if: XMLNODENAME == 'reviewNode' -->
+  <div data-bind="template:{name:'flowchart_node_editWindow_html'}"></div>  
+  <!-- /ko -->
+  
+  <!-- 签字节点  signNode -->	
+  <!-- ko if: XMLNODENAME == 'signNode' -->
+  <div data-bind="template:{name:'flowchart_node_editWindow_html'}"></div>  
+  <!-- /ko --> 
+  
+  <!-- ko if: XMLNODENAME == 'robotNode' -->
+  <div data-bind="template:{name:'flowchart_node_robotNode_html'}"></div>  
+  <!-- /ko -->
+  
+  <!-- ko if: XMLNODENAME == 'startSubProcessNode' -->
+  <div data-bind="template:{name:'flowchart_node_startSubProcessNode_html'}"></div>  
+  <!-- /ko -->
+  
+  <!-- ko if: XMLNODENAME == 'recoverSubProcessNode' -->
+  <div data-bind="template:{name:'flowchart_node_recoverSubProcessNode_html'}"></div>  
+  <!-- /ko -->
+</form>
+
+<div class="text-center">
+	<button class="btn btn-primary" data-bind="click:function(){$parent.editWindowClose($data)}">确定</button>
+	<button class="btn btn-default" onclick="$(this).parents('.modal:first').modal('hide');return false;">取消</button>
+</div>

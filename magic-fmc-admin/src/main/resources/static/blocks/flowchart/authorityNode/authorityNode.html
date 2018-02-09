@@ -1,0 +1,37 @@
+<meta charset="UTF-8">
+
+<div class="modal fade" data-backdrop="static" id="authorityModel" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:1110;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-bind="click:function(){$('#authorityModel').modal('hide')}"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" >权限设置</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<ul id="myTab" class="nav nav-tabs" >
+					<li class="active" id="basicTabId"><a href="#basicTab" data-bind="click:function(){setTab('edit')}" data-toggle="tab">处理人修改权限 </a></li>
+					<li id="operateTabId"><a href="#operateTab" data-bind="click:function(){setTab('view')}" data-toggle="tab">意见查看权限</a></li> 
+				</ul>
+		
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade" data-bind="css:{active:getTab()=='edit','in':getTab()=='edit'}" id="basicTab"  > 
+						<div id="basic_Form" data-bind="template:{name:'flowchart_authorityNode_modifyNode_html'}"></div>  
+					</div> 
+			
+					<div class="tab-pane fade" id="operateTab" data-bind="css:{active : getTab()=='view','in':getTab()=='view'}"  >
+						 <div id="operate_Form" data-bind="template:{name:'flowchart_authorityNode_viewNode_html'}"></div> 
+					</div>
+				</div>
+		
+				<div class="text-center">
+					<button class="btn btn-default" data-bind="click:function(){confirmAuthority()}">确定</button>
+					<button class="btn btn-default" data-bind="click:function(){$('#authorityModel').modal('hide')}">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+ 
+<div data-bind='component:{name:"reviewNode",params:{data:reviewNodeForm,callFunc:selectReviewNode,width:"200px",height:"280px"}}'></div>
